@@ -1,0 +1,53 @@
+import { motion } from "framer-motion";
+import { Award, Quote } from "lucide-react";
+import { founderAchievements, founderTimeline } from "./data.js";
+import { fadeUp, staggerContainer, viewport } from "./motion.js";
+import SectionHeader from "./SectionHeader.jsx";
+
+export default function Founder() {
+  return (
+    <section className="section-pad">
+      <div className="container-page">
+        <SectionHeader eyebrow="Founder Spotlight" title="Amardeep Singh leads SOF with 25+ years of expertise." copy="From the founder's desk: SOF exists to spark courage for new inventions, rapid development, and practical startup execution." />
+        <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <motion.div className="gradient-border glass overflow-hidden rounded-[2rem] p-5" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewport}>
+            <div className="relative grid min-h-[460px] place-items-end overflow-hidden rounded-[1.45rem] bg-gradient-to-br from-primary/25 via-surface to-accent/10 p-6">
+              <div className="absolute inset-10 rounded-full border border-white/10" />
+              <div className="absolute bottom-24 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
+              <div className="relative w-full rounded-3xl border border-white/10 bg-midnight/60 p-5 backdrop-blur-xl">
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-accent">Founder & CEO</p>
+                <h3 className="mt-3 font-heading text-3xl font-bold">Amardeep Singh</h3>
+                <p className="mt-3 leading-7 text-white/66">Founder & CEO, Startup Of The Future (SOF). The public founder portrait area is ready for the official profile image.</p>
+              </div>
+            </div>
+          </motion.div>
+          <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={staggerContainer}>
+            <motion.div className="glass rounded-3xl p-6 sm:p-8" variants={fadeUp}>
+              <Quote className="h-8 w-8 text-accent" />
+              <blockquote className="mt-5 font-heading text-2xl font-bold leading-snug sm:text-3xl">"Becoming an unstoppable force with a vision to create a greater tomorrow."</blockquote>
+            </motion.div>
+            <motion.div className="mt-6 grid gap-4" variants={staggerContainer}>
+              {founderAchievements.map((achievement) => (
+                <motion.div key={achievement} className="flex gap-4 rounded-3xl border border-white/10 bg-white/[0.04] p-5" variants={fadeUp}>
+                  <Award className="mt-1 h-5 w-5 shrink-0 text-accent" />
+                  <p className="leading-7 text-white/72">{achievement}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+            <motion.div className="mt-6 rounded-3xl border border-white/10 bg-surface/60 p-6" variants={fadeUp}>
+              <h3 className="font-heading text-2xl font-bold">Experience Timeline</h3>
+              <div className="mt-5 grid gap-4">
+                {founderTimeline.map(([title, text]) => (
+                  <div key={title} className="rounded-2xl bg-white/[0.04] p-4">
+                    <p className="font-bold text-accent">{title}</p>
+                    <p className="mt-1 text-sm leading-6 text-white/62">{text}</p>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
