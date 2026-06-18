@@ -19,7 +19,7 @@ import FloatingActions from "./components/FloatingActions.jsx";
 
 export default function App() {
   return (
-    <div className="light-site min-h-screen overflow-hidden bg-midnight font-body text-white">
+    <div className="light-site min-h-screen overflow-hidden bg-transparent font-body text-white">
       <ScrollProgress />
       <Background />
       <Navbar />

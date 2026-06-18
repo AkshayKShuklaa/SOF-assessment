@@ -17,18 +17,21 @@ export default function Associations() {
         />
       </div>
       <motion.div
-        className="mt-12 flex gap-4"
+        className="mt-12 overflow-hidden flex gap-4"
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={viewport}
       >
-        <motion.div className="flex min-w-max gap-4" animate={{ x: ["0%", "-50%"] }} transition={{ duration: 28, repeat: Infinity, ease: "linear" }}>
+        <div className="flex min-w-max animate-marquee">
           {loop.map((name, index) => (
-            <div key={`${name}-${index}`} className="grid h-24 min-w-48 place-items-center rounded-3xl border border-white/10 bg-white/[0.05] px-8 font-heading text-xl font-bold text-white/74 backdrop-blur-xl">
+            <div
+              key={`${name}-${index}`}
+              className="grid h-20 min-w-44 place-items-center rounded-2xl border border-white/10 bg-white/[0.05] px-6 font-heading text-lg font-bold text-white/74 backdrop-blur-xl hover:border-accent/40 hover:bg-white/[0.08] hover:scale-105 hover:-translate-y-1 hover:shadow-cyan transition-all duration-300 cursor-pointer"
+            >
               {name}
             </div>
           ))}
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );

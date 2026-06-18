@@ -28,7 +28,12 @@ export default function FAQ() {
               </button>
               <AnimatePresence initial={false}>
                 {open === index && (
-                  <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}>
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden"
+                  >
                     <p className="border-t border-white/10 px-5 py-5 leading-8 text-white/68 sm:px-6">{item.answer}</p>
                   </motion.div>
                 )}

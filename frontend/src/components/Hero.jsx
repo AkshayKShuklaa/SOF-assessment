@@ -65,7 +65,7 @@ export default function Hero() {
             {heroStats.map((stat, index) => (
               <motion.article
                 key={stat.label}
-                className="group rounded-3xl border border-white/10 bg-surface/70 p-5"
+                className="group rounded-3xl border border-white/10 bg-surface/20 p-5"
                 whileHover={{ y: -10, scale: 1.04, rotate: index % 2 === 0 ? -1 : 1 }}
                 transition={{ type: "spring", stiffness: 240, damping: 20 }}
               >

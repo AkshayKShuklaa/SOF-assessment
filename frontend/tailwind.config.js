@@ -6,20 +6,20 @@ export default {
       colors: {
         midnight: "#050816",
         surface: "#10182B",
-        primary: "#6C63FF",
-        accent: "#00E5FF",
+        primary: "#4F46E5",
+        accent: "#0ea5e9",
       },
       fontFamily: {
         heading: ['"Space Grotesk"', "Inter", "sans-serif"],
         body: ["Inter", "sans-serif"],
       },
       boxShadow: {
-        glow: "0 0 42px rgba(108, 99, 255, 0.28)",
-        cyan: "0 0 36px rgba(0, 229, 255, 0.22)",
+        glow: "0 0 42px rgba(79, 70, 229, 0.25)",
+        cyan: "0 0 36px rgba(14, 165, 233, 0.2)",
       },
       backgroundImage: {
         "radial-grid":
-          "radial-gradient(circle at top left, rgba(108,99,255,.22), transparent 30%), radial-gradient(circle at top right, rgba(0,229,255,.16), transparent 26%)",
+          "radial-gradient(circle at top left, rgba(79,70,229,.18), transparent 30%), radial-gradient(circle at top right, rgba(14,165,233,.12), transparent 26%)",
       },
     },
   },

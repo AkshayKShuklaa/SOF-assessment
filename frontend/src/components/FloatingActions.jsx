@@ -22,7 +22,7 @@ export default function FloatingActions() {
           <motion.a
             key={action.label}
             href={action.href}
-            className="group relative grid h-11 w-11 place-items-center rounded-full text-slate-700 transition hover:bg-slate-950 hover:text-white sm:w-auto sm:grid-flow-col sm:gap-2 sm:px-4"
+            className="group relative grid h-11 w-11 place-items-center rounded-full text-slate-700 transition hover:bg-primary hover:text-white sm:w-auto sm:grid-flow-col sm:gap-2 sm:px-4"
             whileHover={{ y: -4, scale: 1.06 }}
             whileTap={{ scale: 0.94 }}
             initial={{ opacity: 0, y: 16 }}
@@ -32,7 +32,7 @@ export default function FloatingActions() {
           >
             <Icon className="h-4 w-4" />
             <span className="hidden text-xs font-bold sm:inline">{action.label}</span>
-            <span className="pointer-events-none absolute -top-9 rounded-full bg-slate-950 px-2 py-1 text-xs font-bold text-white opacity-0 shadow-lg transition group-hover:opacity-100 sm:hidden">
+            <span className="pointer-events-none absolute -top-9 rounded-full bg-primary px-2 py-1 text-xs font-bold text-white opacity-0 shadow-lg transition group-hover:opacity-100 sm:hidden">
               {action.label}
             </span>
           </motion.a>

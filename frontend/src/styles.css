@@ -6,7 +6,7 @@
 
 :root {
   color: #0b1020;
-  background: #f7faff;
+  background: transparent;
   font-family: Inter, system-ui, sans-serif;
   scroll-behavior: smooth;
 }
@@ -19,11 +19,7 @@ body {
   margin: 0;
   min-width: 320px;
   overflow-x: hidden;
-  background:
-    linear-gradient(rgba(15,23,42,.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15,23,42,.055) 1px, transparent 1px),
-    #f7faff;
-  background-size: 64px 64px;
+  background: transparent;
 }
 
 button,
@@ -49,7 +45,7 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(#6c63ff, #00e5ff);
+  background: linear-gradient(#4f46e5, #0ea5e9);
   border-radius: 999px;
   border: 2px solid #f7faff;
 }
@@ -77,7 +73,7 @@ button {
     inset: 0;
     padding: 1px;
     border-radius: inherit;
-    background: linear-gradient(135deg, rgba(108,99,255,.78), rgba(0,229,255,.48), rgba(255,255,255,.08));
+    background: linear-gradient(135deg, rgba(79,70,229,.65), rgba(14,165,233,.45), rgba(255,255,255,.08));
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
@@ -122,34 +118,44 @@ button {
 }
 
 .light-site {
-  color: #0b1020;
-  background:
-    radial-gradient(circle at 16% 12%, rgba(108, 99, 255, 0.18), transparent 28rem),
-    radial-gradient(circle at 84% 18%, rgba(0, 229, 255, 0.18), transparent 24rem),
-    linear-gradient(180deg, #ffffff 0%, #f7faff 42%, #eef5ff 100%);
+  color: #0f172a;
 }
 
 .light-site .bg-midnight {
-  background-color: #f7faff !important;
+  background-color: #ffffff !important;
 }
 
 .light-site .bg-surface {
-  background-color: rgba(255, 255, 255, 0.92) !important;
+  background-color: rgba(255, 255, 255, 0.94) !important;
 }
 
 .light-site .glass {
-  border-color: rgba(15, 23, 42, 0.1) !important;
-  background: rgba(255, 255, 255, 0.72) !important;
-  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.11), 0 0 34px rgba(108, 99, 255, 0.08) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+  background: rgba(255, 255, 255, 0.76) !important;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.05), 0 0 34px rgba(79, 70, 229, 0.03) !important;
 }
 
-.light-site .text-white {
-  color: #0b1020 !important;
+/* Headings and titles */
+.light-site .text-white,
+.light-site .section-title,
+.light-site h1,
+.light-site h2,
+.light-site h3,
+.light-site h4,
+.light-site .font-heading {
+  color: #0f172a !important; /* Slate 900 */
 }
 
+/* Muted / Sub-titles / Copy text */
+.light-site .text-white\/78,
 .light-site .text-white\/76,
 .light-site .text-white\/72,
 .light-site .text-white\/70,
+.light-site .section-copy {
+  color: #334155 !important; /* Slate 700 */
+}
+
+/* Muted secondary labels */
 .light-site .text-white\/68,
 .light-site .text-white\/66,
 .light-site .text-white\/64,
@@ -157,16 +163,20 @@ button {
 .light-site .text-white\/60,
 .light-site .text-white\/58,
 .light-site .text-white\/54,
-.light-site .text-white\/52,
+.light-site .text-white\/52 {
+  color: #64748b !important; /* Slate 500 */
+}
+
+/* Placeholders & details */
 .light-site .text-white\/50,
 .light-site .text-white\/44,
 .light-site .text-white\/38 {
-  color: rgba(15, 23, 42, 0.68) !important;
+  color: #94a3b8 !important; /* Slate 400 */
 }
 
 .light-site .border-white\/10,
 .light-site .border-white\/20 {
-  border-color: rgba(15, 23, 42, 0.1) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
 }
 
 .light-site .bg-white\/\[0\.04\],
@@ -174,25 +184,67 @@ button {
 .light-site .bg-white\/\[0\.06\],
 .light-site .bg-white\/\[0\.07\],
 .light-site .bg-white\/\[0\.1\] {
-  background-color: rgba(255, 255, 255, 0.68) !important;
+  background-color: rgba(255, 255, 255, 0.72) !important;
 }
 
 .light-site header {
-  background: rgba(255, 255, 255, 0.76) !important;
-  box-shadow: 0 12px 50px rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.05);
 }
 
 .light-site .btn-primary {
   color: #ffffff !important;
-  box-shadow: 0 18px 52px rgba(108, 99, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 12px 40px rgba(79, 70, 229, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
 }
 
 .light-site .btn-secondary {
-  color: #0b1020 !important;
-  background: rgba(255, 255, 255, 0.78) !important;
+  color: #0f172a !important;
+  background: rgba(255, 255, 255, 0.8) !important;
   border-color: rgba(15, 23, 42, 0.12) !important;
 }
 
 .light-site .gradient-border::before {
-  background: linear-gradient(135deg, rgba(108,99,255,.58), rgba(0,229,255,.72), rgba(15,23,42,.08));
+  background: linear-gradient(135deg, rgba(79,70,229,.45), rgba(14,165,233,.45), rgba(15,23,42,.05)) !important;
+}
+
+.hover-glow-grid {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle 280px at var(--mouse-x, 0px) var(--mouse-y, 0px),
+    rgba(79, 70, 229, 0.08) 0%,
+    rgba(14, 165, 233, 0.04) 40%,
+    transparent 80%
+  );
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  gap: 16px;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+.light-site .text-white-force,
+.light-site h3.text-white-force {
+  color: #ffffff !important;
+}
+
+.light-site .text-white-force-80,
+.light-site p.text-white-force-80 {
+  color: rgba(255, 255, 255, 0.8) !important;
 }

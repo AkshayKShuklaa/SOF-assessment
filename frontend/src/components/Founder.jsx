@@ -3,6 +3,7 @@ import { Award, Quote } from "lucide-react";
 import { founderAchievements, founderTimeline } from "./data.js";
 import { fadeUp, staggerContainer, viewport } from "./motion.js";
 import SectionHeader from "./SectionHeader.jsx";
+import founderImg from "./amardeep.jpg";
 
 export default function Founder() {
   return (
@@ -11,13 +12,14 @@ export default function Founder() {
         <SectionHeader eyebrow="Founder Spotlight" title="Amardeep Singh leads SOF with 25+ years of expertise." copy="From the founder's desk: SOF exists to spark courage for new inventions, rapid development, and practical startup execution." />
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div className="gradient-border glass overflow-hidden rounded-[2rem] p-5" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewport}>
-            <div className="relative grid min-h-[460px] place-items-end overflow-hidden rounded-[1.45rem] bg-gradient-to-br from-primary/25 via-surface to-accent/10 p-6">
-              <div className="absolute inset-10 rounded-full border border-white/10" />
-              <div className="absolute bottom-24 h-56 w-56 rounded-full bg-white/10 blur-2xl" />
-              <div className="relative w-full rounded-3xl border border-white/10 bg-midnight/60 p-5 backdrop-blur-xl">
+            <div className="relative flex flex-col min-h-[480px] overflow-hidden rounded-[1.45rem] bg-gradient-to-br from-primary/25 via-surface to-accent/10 border border-white/10">
+              <div className="relative h-[480px] w-full shrink-0 overflow-hidden">
+                <img src={founderImg} alt="Amardeep Singh" className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-700 hover:scale-105" />
+              </div>
+              <div className="relative flex-grow w-full bg-midnight/70 p-6 backdrop-blur-xl border-t border-white/10 flex flex-col justify-center">
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-accent">Founder & CEO</p>
-                <h3 className="mt-3 font-heading text-3xl font-bold">Amardeep Singh</h3>
-                <p className="mt-3 leading-7 text-white/66">Founder & CEO, Startup Of The Future (SOF). The public founder portrait area is ready for the official profile image.</p>
+                <h3 className="mt-2 font-heading text-2xl font-bold text-white-force">Amardeep Singh</h3>
+                <p className="mt-2.5 leading-6 text-white-force-80 text-sm">Founder & CEO, Startup Of The Future (SOF). Over two decades of startup strategy, scheme alignment, and business execution experience.</p>
               </div>
             </div>
           </motion.div>
