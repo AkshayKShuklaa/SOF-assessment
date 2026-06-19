@@ -256,3 +256,22 @@ button {
 .light-site .group:hover .partner-logo-img {
   filter: invert(1) hue-rotate(180deg) opacity(1) !important;
 }
+
+@keyframes marquee-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-right {
+  display: flex;
+  gap: 20px;
+  animation: marquee-right 45s linear infinite;
+}
+
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
