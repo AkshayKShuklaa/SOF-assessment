@@ -32,7 +32,7 @@ export default function Associations() {
                 <img
                   src={item.logo}
                   alt={`${item.name} Logo`}
-                  className="h-12 max-w-[85%] object-contain opacity-64 group-hover:opacity-100 transition-all duration-300 partner-logo-img"
+                  className="h-12 max-w-[85%] object-contain opacity-85 group-hover:opacity-100 transition-all duration-300 partner-logo-img"
                 />
               </div>
               <p className="mt-3 text-xs font-bold tracking-wider uppercase text-white/52 group-hover:text-accent transition-colors duration-300 text-center">

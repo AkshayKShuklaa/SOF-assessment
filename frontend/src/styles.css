@@ -250,9 +250,9 @@ button {
 }
 
 .light-site .partner-logo-img {
-  filter: brightness(0) opacity(0.55) !important;
+  filter: invert(1) hue-rotate(180deg) opacity(0.85) !important;
 }
 
 .light-site .group:hover .partner-logo-img {
-  filter: brightness(0) opacity(0.9) !important;
+  filter: invert(1) hue-rotate(180deg) opacity(1) !important;
 }
