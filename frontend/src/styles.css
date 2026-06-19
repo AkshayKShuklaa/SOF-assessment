@@ -248,3 +248,11 @@ button {
 .light-site p.text-white-force-80 {
   color: rgba(255, 255, 255, 0.8) !important;
 }
+
+.light-site .partner-logo-img {
+  filter: brightness(0) opacity(0.55) !important;
+}
+
+.light-site .group:hover .partner-logo-img {
+  filter: brightness(0) opacity(0.9) !important;
+}

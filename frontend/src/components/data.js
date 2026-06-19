@@ -24,6 +24,15 @@ import {
   Zap,
 } from "lucide-react";
 
+import justdialLogo from "./partners/justdial.svg";
+import indiamartLogo from "./partners/indiamart.svg";
+import lemeridienLogo from "./partners/lemeridien.svg";
+import phonepeLogo from "./partners/phonepe.svg";
+import hdfcLogo from "./partners/hdfc.svg";
+import rhgLogo from "./partners/rhg.svg";
+import awsLogo from "./partners/aws.svg";
+import futureinntechLogo from "./partners/futureinntech.svg";
+
 export const navLinks = [
   ["Index", "index"],
   ["Overview", "overview"],
@@ -180,7 +189,16 @@ export const valueCards = [
   { icon: Lightbulb, title: "Founder Promise", text: "SOF combines compliance support, branding solutions, technology consulting, and business planning into one founder support system." },
 ];
 
-export const associations = ["Justdial", "IndiaMART", "Le Meridien", "PhonePe", "HDFC", "RHG", "AWS Partner", "Future Inn-Tech Corp"];
+export const associations = [
+  { name: "Justdial", logo: justdialLogo },
+  { name: "IndiaMART", logo: indiamartLogo },
+  { name: "Le Meridien", logo: lemeridienLogo },
+  { name: "PhonePe", logo: phonepeLogo },
+  { name: "HDFC", logo: hdfcLogo },
+  { name: "RHG", logo: rhgLogo },
+  { name: "AWS Partner", logo: awsLogo },
+  { name: "Future Inn-Tech Corp", logo: futureinntechLogo },
+];
 
 export const expoStates = ["Bihar", "Maharashtra", "Gujarat", "Punjab", "Odisha", "Jharkhand", "Telangana", "Karnataka", "Tamil Nadu", "Delhi NCR", "Uttar Pradesh", "Rajasthan", "Haryana"];
 

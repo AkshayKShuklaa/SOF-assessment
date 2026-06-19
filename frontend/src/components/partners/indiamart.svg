@@ -1,0 +1,5 @@
+<svg viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+  <path d="M6 10 L22 20 L6 30 Z" fill="#00E5FF"/>
+  <circle cx="16" cy="20" r="6" fill="#FF2E93"/>
+  <text x="36" y="26" font-family="Inter, sans-serif" font-weight="900" font-size="15" fill="#FFFFFF">indiamart</text>
+</svg>
