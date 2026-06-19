@@ -25,13 +25,13 @@ import {
 } from "lucide-react";
 
 export const navLinks = [
-  ["Home", "home"],
-  ["About", "about"],
+  ["Index", "index"],
+  ["Overview", "overview"],
   ["Innovation", "innovation"],
-  ["Services", "services"],
-  ["Expo", "expo"],
-  ["Membership", "membership"],
-  ["Contact", "contact"],
+  ["Offerings", "offerings"],
+  ["Events", "events"],
+  ["Memberships", "memberships"],
+  ["Reach Us", "reach-us"],
 ];
 
 export const heroStats = [
@@ -164,7 +164,14 @@ export const testimonials = [
   },
 ];
 
-export const footerLinks = ["About", "Innovation", "Services", "Expo", "Membership", "Contact"];
+export const footerLinks = [
+  ["Overview", "overview"],
+  ["Innovation", "innovation"],
+  ["Offerings", "offerings"],
+  ["Events", "events"],
+  ["Memberships", "memberships"],
+  ["Reach Us", "reach-us"],
+];
 
 export const valueCards = [
   { icon: Target, title: "Mission", text: "To convert ideas into scalable, market-ready startups with execution, structure, sustainability, and technology-driven growth." },

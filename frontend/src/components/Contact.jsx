@@ -5,10 +5,10 @@ import SectionHeader from "./SectionHeader.jsx";
 
 export default function Contact() {
   return (
-    <section id="contact" className="section-pad">
+    <section id="reach-us" className="section-pad">
       <div className="container-page">
         <SectionHeader
-          eyebrow="Contact"
+          eyebrow="Reach Us"
           title="Bring SOF into your next founder milestone."
           copy="Share what you are building, what stage you are in, and where you need momentum. The SOF team will help map the next practical step."
         />
@@ -48,7 +48,7 @@ export default function Contact() {
               <h3 className="font-heading text-2xl font-bold">Social</h3>
               <div className="mt-5 flex gap-3">
                 {[Linkedin, Twitter, Instagram, Facebook].map((Icon, index) => (
-                  <a key={index} href="#home" className="grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-white/[0.05] text-white/70 transition hover:border-accent/60 hover:text-accent" aria-label="SOF social channel">
+                  <a key={index} href="#index" className="grid h-12 w-12 place-items-center rounded-full border border-white/10 bg-white/[0.05] text-white/70 transition hover:border-accent/60 hover:text-accent" aria-label="SOF social channel">
                     <Icon className="h-5 w-5" />
                   </a>
                 ))}

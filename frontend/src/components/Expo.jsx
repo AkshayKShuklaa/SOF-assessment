@@ -27,18 +27,18 @@ export default function Expo() {
   const countdown = useCountdown();
 
   return (
-    <section id="expo" className="section-pad">
+    <section id="events" className="section-pad">
       <div className="container-page">
         <SectionHeader
-          eyebrow="SOF Expo"
+          eyebrow="SOF Events"
           title="A future-facing event platform for founders, investors, and technology leaders."
-          copy="The SOF Expo brings live demos, expert talks, partner meetings, and startup showcases into one high-signal experience."
+          copy="The SOF Events brings live demos, expert talks, partner meetings, and startup showcases into one high-signal experience."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <motion.div className="gradient-border glass relative overflow-hidden rounded-[2rem] p-6 sm:p-8" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewport}>
             <div className="absolute right-0 top-0 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
             <div className="relative">
-              <p className="text-sm font-bold uppercase tracking-[0.24em] text-accent">SOF Expo 2026-27</p>
+              <p className="text-sm font-bold uppercase tracking-[0.24em] text-accent">SOF Events 2026-27</p>
               <h3 className="mt-4 font-heading text-4xl font-bold sm:text-5xl">India's Creative Potential of Generative AI</h3>
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
                 {countdown.map(([label, value]) => (
@@ -67,8 +67,8 @@ export default function Expo() {
                   </span>
                 ))}
               </div>
-              <a href="#contact" className="btn-primary mt-8">
-                Register for Expo <ArrowRight className="h-4 w-4" />
+              <a href="#reach-us" className="btn-primary mt-8">
+                Register for Events <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </motion.div>

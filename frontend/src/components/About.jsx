@@ -1,15 +1,56 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { ArrowUpRight, Layers3 } from "lucide-react";
 import { milestones, valueCards } from "./data.js";
 import { fadeUp, staggerContainer, viewport } from "./motion.js";
 import SectionHeader from "./SectionHeader.jsx";
+import aboutInfographic from "./about_infographic.jpg";
 
 export default function About() {
+  const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start end", "end start"]
+  });
+
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const milestoneItemVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.15,
+      }
+    }
+  };
+
+  const dotVariants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 200, damping: 12 }
+    }
+  };
+
+  const textVariants = {
+    hidden: { x: 30, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 120, damping: 15 }
+    }
+  };
+
   return (
-    <section id="about" className="section-pad relative">
+    <section id="overview" className="section-pad relative">
       <div className="container-page">
         <SectionHeader
-          eyebrow="About SOF"
+          eyebrow="SOF Overview"
           title="A premium ecosystem for founders building serious technology companies."
           copy="Startup of the Future combines practical venture guidance, technology advisory, brand strategy, and curated networks so ambitious builders can move from idea to institution."
         />
@@ -32,17 +73,27 @@ export default function About() {
                   SOF gives founders a refined operating environment: structured mentorship, clear milestones, domain expertise, and visibility through the SOF Expo.
                 </p>
               </div>
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
-                {valueCards.slice(0, 2).map((card) => {
-                  const Icon = card.icon;
-                  return (
-                    <div key={card.title} className="rounded-3xl border border-white/10 bg-surface/20 p-5">
-                      <Icon className="h-5 w-5 text-accent" />
-                      <h4 className="mt-4 font-heading text-xl font-bold">{card.title}</h4>
-                      <p className="mt-2 text-sm leading-6 text-white/62">{card.text}</p>
-                    </div>
-                  );
-                })}
+              <div className="mt-10">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {valueCards.slice(0, 2).map((card) => {
+                    const Icon = card.icon;
+                    return (
+                      <div key={card.title} className="rounded-3xl border border-white/10 bg-surface/20 p-5">
+                        <Icon className="h-5 w-5 text-accent" />
+                        <h4 className="mt-4 font-heading text-xl font-bold">{card.title}</h4>
+                        <p className="mt-2 text-sm leading-6 text-white/62">{card.text}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+                
+                <div className="mt-8 gradient-border glass overflow-hidden rounded-3xl relative h-[280px] sm:h-[450px] lg:h-[520px]">
+                  <img
+                    src={aboutInfographic}
+                    alt="SOF Refined Operating Environment - Full Startup Arc"
+                    className="absolute inset-0 w-full h-full object-cover block"
+                  />
+                </div>
               </div>
             </div>
           </motion.div>
@@ -63,23 +114,42 @@ export default function About() {
                 </motion.article>
               );
             })}
-            <div className="glass rounded-3xl p-6">
+            <div className="glass rounded-3xl p-6 overflow-hidden">
               <div className="mb-6 flex items-center justify-between gap-4">
                 <h3 className="font-heading text-2xl font-bold">Growth Milestones</h3>
-                <ArrowUpRight className="h-5 w-5 text-accent" />
+                <motion.div
+                  animate={{ y: [0, -4, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <ArrowUpRight className="h-5 w-5 text-accent" />
+                </motion.div>
               </div>
-              <div className="relative grid gap-5">
-                <div className="absolute left-[1.12rem] top-3 h-[calc(100%-1.5rem)] w-px bg-gradient-to-b from-accent via-primary to-transparent" />
+              <div ref={timelineRef} className="relative grid gap-6">
+                <motion.div
+                  className="absolute left-[1.12rem] top-3 h-[calc(100%-2.5rem)] w-px bg-gradient-to-b from-accent via-primary to-transparent origin-top"
+                  style={{ scaleY }}
+                />
                 {milestones.map((item) => (
-                  <motion.div key={item.year} className="relative grid grid-cols-[2.4rem_1fr] gap-4" variants={fadeUp}>
-                    <span className="relative z-10 mt-1 grid h-9 w-9 place-items-center rounded-full border border-accent/35 bg-midnight text-xs font-bold text-accent">
+                  <motion.div
+                    key={item.year}
+                    className="relative grid grid-cols-[2.4rem_1fr] gap-4 group cursor-pointer"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "-60px" }}
+                    variants={milestoneItemVariants}
+                  >
+                    <motion.span
+                      className="relative z-10 mt-1 grid h-9 w-9 place-items-center rounded-full border border-accent/35 bg-midnight text-xs font-bold text-accent group-hover:border-accent group-hover:shadow-[0_0_12px_rgba(0,229,255,0.4)] transition-all duration-300"
+                      variants={dotVariants}
+                      whileHover={{ scale: 1.15 }}
+                    >
                       {item.year.slice(2)}
-                    </span>
-                    <div>
-                      <p className="text-sm font-bold text-accent">{item.year}</p>
-                      <h4 className="mt-1 font-heading text-lg font-bold">{item.title}</h4>
-                      <p className="mt-1 text-sm leading-6 text-white/62">{item.text}</p>
-                    </div>
+                    </motion.span>
+                    <motion.div variants={textVariants} className="group-hover:translate-x-1 transition-transform duration-300">
+                      <p className="text-sm font-bold text-accent group-hover:text-cyan-300 transition-colors">{item.year}</p>
+                      <h4 className="mt-1 font-heading text-lg font-bold group-hover:text-white transition-colors">{item.title}</h4>
+                      <p className="mt-1 text-sm leading-6 text-white/62 group-hover:text-white/80 transition-colors">{item.text}</p>
+                    </motion.div>
                   </motion.div>
                 ))}
               </div>

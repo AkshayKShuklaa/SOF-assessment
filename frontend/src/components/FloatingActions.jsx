@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { CalendarDays, MessageCircle, Phone, Rocket } from "lucide-react";
 
 const actions = [
-  { href: "#membership", label: "Join", icon: Rocket },
-  { href: "#expo", label: "Expo", icon: CalendarDays },
-  { href: "#contact", label: "Contact", icon: MessageCircle },
+  { href: "#memberships", label: "Join", icon: Rocket },
+  { href: "#events", label: "Events", icon: CalendarDays },
+  { href: "#reach-us", label: "Reach Us", icon: MessageCircle },
   { href: "tel:+919599208798", label: "Call", icon: Phone },
 ];
 

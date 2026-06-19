@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, Rocket, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { navLinks } from "./data.js";
+import logo from "./logo.png";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -11,11 +12,8 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-midnight/70 backdrop-blur-2xl">
       <nav className="container-page flex h-20 items-center justify-between">
-        <a href="#home" className="flex items-center gap-3" aria-label="Startup of the Future home">
-          <span className="grid h-10 w-10 place-items-center rounded-xl border border-accent/30 bg-white/[0.06] shadow-cyan">
-            <Rocket className="h-5 w-5 text-accent" />
-          </span>
-          <span className="font-heading text-xl font-bold tracking-normal">SOF</span>
+        <a href="#index" className="flex items-center" aria-label="Startup of the Future home">
+          <img src={logo} alt="Startup of the Future Logo" className="h-9 w-auto" />
         </a>
 
         <div className="hidden items-center gap-7 lg:flex">
@@ -27,7 +25,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a href="#membership" className="btn-primary">
+          <a href="#memberships" className="btn-primary">
             Join SOF
           </a>
         </div>
@@ -60,7 +58,7 @@ export default function Navbar() {
                   {label}
                 </a>
               ))}
-              <a href="#membership" className="btn-primary mt-2" onClick={() => setOpen(false)}>
+              <a href="#memberships" className="btn-primary mt-2" onClick={() => setOpen(false)}>
                 Join SOF
               </a>
             </div>

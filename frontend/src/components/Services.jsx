@@ -5,10 +5,10 @@ import SectionHeader from "./SectionHeader.jsx";
 
 export default function Services() {
   return (
-    <section id="services" className="section-pad">
+    <section id="offerings" className="section-pad">
       <div className="container-page">
         <SectionHeader
-          eyebrow="Services"
+          eyebrow="Offerings"
           title="A founder support stack that feels strategic, not scattered."
           copy="From registration to funding readiness, SOF packages the work founders usually chase across multiple advisors into one premium operating system."
         />

@@ -6,10 +6,10 @@ import SectionHeader from "./SectionHeader.jsx";
 
 export default function Membership() {
   return (
-    <section id="membership" className="section-pad">
+    <section id="memberships" className="section-pad">
       <div className="container-page">
         <SectionHeader
-          eyebrow="Membership"
+          eyebrow="Memberships"
           title="Choose the level of support your next milestone requires."
           copy="Each plan is designed to give founders practical momentum, credible guidance, and access to the SOF community."
           align="center"
@@ -41,7 +41,7 @@ export default function Membership() {
                   </div>
                 ))}
               </div>
-              <a href="#contact" className={plan.popular ? "btn-primary mt-auto" : "btn-secondary mt-auto"}>
+              <a href="#reach-us" className={plan.popular ? "btn-primary mt-auto" : "btn-secondary mt-auto"}>
                 Choose Plan
               </a>
             </motion.article>
