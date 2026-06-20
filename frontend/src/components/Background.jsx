@@ -146,84 +146,168 @@ export default function Background() {
     window.addEventListener("pointerleave", handleMouseLeave);
     document.addEventListener("pointerout", handleMouseLeave);
 
-    // Create technical nodes
-    const nodeCount = 180;
-    const particles = [];
+    // Dynamic paths for AI Neural Brain silhouette relative to (cx, cy)
+    const getCircuitPaths = (cx, cy, scale) => {
+      return [
+        // Face profile outline
+        [
+          { x: cx - 40 * scale, y: cy - 140 * scale },
+          { x: cx - 70 * scale, y: cy - 100 * scale },
+          { x: cx - 70 * scale, y: cy - 70 * scale },
+          { x: cx - 90 * scale, y: cy - 50 * scale },
+          { x: cx - 80 * scale, y: cy - 40 * scale },
+          { x: cx - 95 * scale, y: cy - 20 * scale },
+          { x: cx - 85 * scale, y: cy - 10 * scale },
+          { x: cx - 90 * scale, y: cy + 10 * scale },
+          { x: cx - 75 * scale, y: cy + 30 * scale },
+          { x: cx - 50 * scale, y: cy + 50 * scale },
+          { x: cx - 10 * scale, y: cy + 70 * scale },
+          { x: cx - 10 * scale, y: cy + 140 * scale }
+        ],
+        // Back of head outline
+        [
+          { x: cx + 20 * scale, y: cy - 150 * scale },
+          { x: cx + 80 * scale, y: cy - 120 * scale },
+          { x: cx + 110 * scale, y: cy - 60 * scale },
+          { x: cx + 100 * scale, y: cy + 20 * scale },
+          { x: cx + 70 * scale, y: cy + 70 * scale },
+          { x: cx + 70 * scale, y: cy + 140 * scale }
+        ],
+        // Brain Cortex 1 (Top crown)
+        [
+          { x: cx - 10 * scale, y: cy - 120 * scale },
+          { x: cx - 10 * scale, y: cy - 140 * scale },
+          { x: cx + 30 * scale, y: cy - 140 * scale },
+          { x: cx + 60 * scale, y: cy - 110 * scale },
+          { x: cx + 60 * scale, y: cy - 80 * scale },
+          { x: cx + 30 * scale, y: cy - 50 * scale }
+        ],
+        // Brain Cortex 2 (Mid lobe)
+        [
+          { x: cx - 40 * scale, y: cy - 70 * scale },
+          { x: cx - 10 * scale, y: cy - 100 * scale },
+          { x: cx + 40 * scale, y: cy - 100 * scale },
+          { x: cx + 70 * scale, y: cy - 70 * scale },
+          { x: cx + 70 * scale, y: cy - 40 * scale },
+          { x: cx + 40 * scale, y: cy - 10 * scale },
+          { x: cx + 10 * scale, y: cy - 10 * scale }
+        ],
+        // Brain Cortex 3 (Lower lobe / center)
+        [
+          { x: cx - 50 * scale, y: cy - 20 * scale },
+          { x: cx - 20 * scale, y: cy - 50 * scale },
+          { x: cx + 30 * scale, y: cy - 50 * scale },
+          { x: cx + 50 * scale, y: cy - 20 * scale },
+          { x: cx + 30 * scale, y: cy + 10 * scale },
+          { x: cx - 10 * scale, y: cy + 10 * scale }
+        ],
+        // Center Core / Thalamus loops
+        [
+          { x: cx - 10 * scale, y: cy - 40 * scale },
+          { x: cx + 15 * scale, y: cy - 40 * scale },
+          { x: cx + 25 * scale, y: cy - 25 * scale },
+          { x: cx + 15 * scale, y: cy - 10 * scale },
+          { x: cx - 10 * scale, y: cy - 10 * scale },
+          { x: cx - 20 * scale, y: cy - 25 * scale },
+          { x: cx - 10 * scale, y: cy - 40 * scale }
+        ],
+        // Outgoing Trace 1: Front of brain to Top-Left
+        [
+          { x: cx - 40 * scale, y: cy - 110 * scale },
+          { x: cx - 100 * scale, y: cy - 110 * scale },
+          { x: cx - 150 * scale, y: cy - 160 * scale },
+          { x: 0, y: cy - 160 * scale }
+        ],
+        // Outgoing Trace 2: Mid face to Left Edge
+        [
+          { x: cx - 75 * scale, y: cy - 10 * scale },
+          { x: cx - 140 * scale, y: cy - 10 * scale },
+          { x: cx - 200 * scale, y: cy - 70 * scale },
+          { x: 0, y: cy - 70 * scale }
+        ],
+        // Outgoing Trace 3: Lower jaw to Bottom-Left
+        [
+          { x: cx - 30 * scale, y: cy + 60 * scale },
+          { x: cx - 90 * scale, y: cy + 60 * scale },
+          { x: cx - 150 * scale, y: cy + 120 * scale },
+          { x: 0, y: cy + 120 * scale }
+        ],
+        // Outgoing Trace 4: Back crown to Top-Right
+        [
+          { x: cx + 60 * scale, y: cy - 120 * scale },
+          { x: cx + 120 * scale, y: cy - 120 * scale },
+          { x: cx + 180 * scale, y: cy - 180 * scale },
+          { x: width, y: cy - 180 * scale }
+        ],
+        // Outgoing Trace 5: Mid occipital to Right Edge
+        [
+          { x: cx + 105 * scale, y: cy - 30 * scale },
+          { x: cx + 170 * scale, y: cy - 30 * scale },
+          { x: cx + 230 * scale, y: cy + 30 * scale },
+          { x: width, y: cy + 30 * scale }
+        ],
+        // Outgoing Trace 6: Lower neck to Bottom-Right
+        [
+          { x: cx + 70 * scale, y: cy + 100 * scale },
+          { x: cx + 140 * scale, y: cy + 100 * scale },
+          { x: cx + 200 * scale, y: cy + 160 * scale },
+          { x: width, y: cy + 160 * scale }
+        ]
+      ];
+    };
 
-    for (let i = 0; i < nodeCount; i++) {
-      const isArmA = Math.random() > 0.5;
-      const baseAngle = isArmA ? 0 : Math.PI;
-      const nr = Math.random() * 1.1; // normalized radius
-      const depth = 0.5 + Math.random() * 1.5;
+    // Calculate pulse coordinate along a path segment
+    const getPointOnPath = (path, progress) => {
+      if (path.length < 2) return null;
+      
+      const totalSegments = path.length - 1;
+      const segmentProgress = progress * totalSegments;
+      const index = Math.floor(segmentProgress);
+      const segmentT = segmentProgress - index;
+      
+      if (index >= totalSegments) {
+        return path[path.length - 1];
+      }
+      
+      const p1 = path[index];
+      const p2 = path[index + 1];
+      
+      return {
+        x: p1.x + (p2.x - p1.x) * segmentT,
+        y: p1.y + (p2.y - p1.y) * segmentT
+      };
+    };
 
-      particles.push({
-        type: "spiral",
-        isArmA,
-        nr,
-        baseAngle,
-        angleNoise: (Math.random() - 0.5) * 0.35,
-        nxNoise: (Math.random() - 0.5) * 0.6,
-        nyNoise: (Math.random() - 0.5) * 0.6,
-        speed: 0.0006 + Math.random() * 0.0012, // Slow technical drift
-        z: depth,
-        colorTemplate: isArmA
-          ? colorsBlue[Math.floor(Math.random() * colorsBlue.length)]
-          : colorsMagenta[Math.floor(Math.random() * colorsMagenta.length)],
-        techType: ["plus", "binary", "square", "solder"][Math.floor(Math.random() * 4)],
-        techSymbol: techSymbols[Math.floor(Math.random() * techSymbols.length)],
-        mxOffset: 0,
-        myOffset: 0,
-        vxOffset: 0,
-        vyOffset: 0,
-        lastX: 0,
-        lastY: 0,
-        isFirstFrame: true,
-      });
-    }
+    // Dynamic signal pulses array
+    const pulses = [];
+    const maxPulses = 14;
 
-    // Static ambient nodes
-    const ambientCount = 100;
+    // Static ambient stars for deep tech look
+    const ambientCount = 80;
+    const ambientNodes = [];
     for (let i = 0; i < ambientCount; i++) {
-      const angle = Math.random() * Math.PI * 2;
-      const dist = Math.sqrt(Math.random()) * 1.1;
-      const depth = 0.3 + Math.random() * 1.0;
-
-      particles.push({
-        type: "ambient",
-        nx: Math.cos(angle) * dist,
-        ny: Math.sin(angle) * dist,
-        vx: (Math.random() - 0.5) * 0.0002,
-        vy: -0.0001 - Math.random() * 0.0004,
-        z: depth,
-        colorTemplate: colorsDust[Math.floor(Math.random() * colorsDust.length)],
-        techType: ["dot", "plus"][Math.floor(Math.random() * 2)],
-        mxOffset: 0,
-        myOffset: 0,
-        vxOffset: 0,
-        vyOffset: 0,
-        lastX: 0,
-        lastY: 0,
-        isFirstFrame: true,
+      ambientNodes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        size: 0.8 + Math.random() * 1.0,
+        color: colorsDust[Math.floor(Math.random() * colorsDust.length)].replace("alpha", (0.2 + Math.random() * 0.3).toFixed(2))
       });
     }
-
-    let globalRotation = 0;
 
     // Animation Loop
     const animate = () => {
-      // Clean white canvas background
+      // Clean white background
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, width, height);
 
       const cx = width / 2;
       const cy = height / 2;
-      const maxDim = Math.max(width, height);
       const mouse = mouseRef.current;
-      const radiusOfInfluence = 135;
 
-      globalRotation += 0.0003; // Slowly rotates technical arms
+      // Scale design context for responsiveness (mobile/tablet/desktop scale)
+      const designScale = width < 768 ? 0.72 : (width < 1024 ? 0.85 : 1.0);
 
-      // 1. Draw Blueprint Alignment Grid
+      // 1. Draw Blueprint Grid
       ctx.strokeStyle = "rgba(15, 23, 42, 0.012)";
       ctx.lineWidth = 1;
       const gridSize = 100;
@@ -240,7 +324,7 @@ export default function Background() {
         ctx.stroke();
       }
 
-      // 2. Draw Blueprint Grid Intersection Crosses (+)
+      // 2. Draw Blueprint Crosses (+)
       ctx.strokeStyle = "rgba(15, 23, 42, 0.06)";
       ctx.lineWidth = 0.8;
       for (let x = gridSize; x < width; x += gridSize) {
@@ -254,32 +338,25 @@ export default function Background() {
         }
       }
 
-      // 3. Concentric coordinate degree rings (Radar Style)
+      // 3. Draw Ambient Slate Star Points
+      ambientNodes.forEach((node) => {
+        ctx.fillStyle = node.color;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 4. Draw Concentric Coordinate Rings
       ctx.strokeStyle = "rgba(15, 23, 42, 0.014)";
       ctx.lineWidth = 0.8;
       const radiusRings = [180, 360, 540];
       radiusRings.forEach((r) => {
         ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.stroke();
-        
-        ctx.fillStyle = "rgba(15, 23, 42, 0.06)";
-        ctx.font = "8px Courier New, monospace";
-        ctx.textAlign = "left";
-        ctx.fillText(`R = ${r}px`, cx + r - 32, cy - 4);
-      });
-
-      // Faint radial angle lines
-      ctx.strokeStyle = "rgba(15, 23, 42, 0.01)";
-      const radialAngles = [0, Math.PI / 4, Math.PI / 2, (3 * Math.PI) / 4, Math.PI, (5 * Math.PI) / 4, (3 * Math.PI) / 2, (7 * Math.PI) / 4];
-      radialAngles.forEach((angle) => {
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + Math.cos(angle) * 600, cy + Math.sin(angle) * 600);
+        ctx.arc(cx, cy, r * designScale, 0, Math.PI * 2);
         ctx.stroke();
       });
 
-      // 4. CAD Technical Dimension Lines (Blueprint measurements)
+      // 5. Draw CAD Technical Dimension Lines (Blueprint measurements)
       ctx.strokeStyle = "rgba(15, 23, 42, 0.02)";
       ctx.fillStyle = "rgba(15, 23, 42, 0.08)";
       ctx.lineWidth = 0.8;
@@ -307,18 +384,17 @@ export default function Background() {
       ctx.textAlign = "left";
       ctx.fillText("h = 150.00 px", dx2 + 10, dy2 + dlen2 / 2);
 
-      // 5. Draw Static Electrical Schematic Components (Circuit symbols in margins)
+      // 6. Draw Static Electrical Schematic Components (Circuit symbols in margins)
       ctx.strokeStyle = "rgba(15, 23, 42, 0.04)";
       ctx.lineWidth = 1;
       ctx.fillStyle = "rgba(15, 23, 42, 0.08)";
       ctx.font = "7px Courier New, monospace";
-      ctx.textAlign = "center";
 
-      // Resistor R1 near the top-left horizontal dimension
+      // Resistor R1 near top-left dimension
       drawResistor(ctx, 360, 80, true);
       ctx.fillText("R1=10k", 360, 72);
 
-      // Ground terminal next to bottom-left vertical dimension
+      // Ground terminal next to bottom-left dimension
       drawGround(ctx, 80, 410);
       ctx.fillText("GND", 80, 424);
 
@@ -326,170 +402,111 @@ export default function Background() {
       drawCapacitor(ctx, width - 260, 150, true);
       ctx.fillText("C1=100nF", width - 260, 142);
 
-      // Ground terminal in bottom-right near CAD title block
+      // Ground terminal in bottom-right near CAD block
       drawGround(ctx, width - 240, height - 50);
       ctx.fillText("GND", width - 240, height - 36);
 
-      // Resistor R2 and Capacitor C2 block in bottom-left/mid
-      if (height > 600) {
-        drawResistor(ctx, 220, height - 100, false);
-        ctx.fillText("R2=220R", 220, height - 118);
+      // 7. Get and Draw AI Neural Brain Circuit Traces
+      const paths = getCircuitPaths(cx, cy, designScale);
+
+      ctx.lineWidth = 1.0;
+      ctx.strokeStyle = "rgba(99, 102, 241, 0.07)";
+      paths.forEach((path) => {
+        if (path.length < 2) return;
+        ctx.beginPath();
+        ctx.moveTo(path[0].x, path[0].y);
+        for (let p = 1; p < path.length; p++) {
+          ctx.lineTo(path[p].x, path[p].y);
+        }
+        ctx.stroke();
+
+        // Draw solder donut joints at coordinates
+        path.forEach((pt) => {
+          ctx.strokeStyle = "rgba(99, 102, 241, 0.18)";
+          ctx.fillStyle = "#ffffff";
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 2.6, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        });
+      });
+
+      // 8. Pulsing central neural core (Representing Thalamus processing center)
+      const coreX = cx;
+      const coreY = cy - 25 * designScale;
+      const pulseFactor = 1.0 + Math.sin(Date.now() * 0.0035) * 0.15;
+      
+      const grad = ctx.createRadialGradient(coreX, coreY, 2, coreX, coreY, 32 * designScale * pulseFactor);
+      grad.addColorStop(0, "rgba(0, 229, 255, 0.32)");
+      grad.addColorStop(0.35, "rgba(99, 102, 241, 0.12)");
+      grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+      
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(coreX, coreY, 32 * designScale * pulseFactor, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Glowing bright inner core dot
+      ctx.fillStyle = "rgba(0, 229, 255, 0.8)";
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = "rgba(0, 229, 255, 0.9)";
+      ctx.beginPath();
+      ctx.arc(coreX, coreY, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0; // reset shadow
+
+      // 9. Update and Spawn Animated Signal Pulses
+      if (pulses.length < maxPulses && Math.random() > 0.94) {
+        const pathIdx = Math.floor(Math.random() * paths.length);
+        const color = Math.random() > 0.5 
+          ? "rgba(0, 229, 255, alpha)" 
+          : "rgba(168, 85, 247, alpha)";
         
-        drawCapacitor(ctx, 220, height - 60, false);
-        ctx.fillText("C2=22uF", 220, height - 78);
+        pulses.push({
+          pathIndex: pathIdx,
+          progress: 0,
+          speed: 0.0035 + Math.random() * 0.0055,
+          color
+        });
       }
 
-      // 6. Update particle positions
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        let baseX = 0;
-        let baseY = 0;
-        let alpha = 1.0;
+      // Draw active signal pulses
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i];
+        p.progress += p.speed;
 
-        if (p.type === "spiral") {
-          p.nr += p.speed;
-
-          if (p.nr > 1.2) {
-            p.nr = Math.random() * 0.05;
-            p.isFirstFrame = true;
-          }
-
-          const spiralFactor = 3.6;
-          const angle = p.baseAngle + p.nr * spiralFactor + globalRotation + p.angleNoise;
-          const rx = Math.cos(angle) * (p.nr * maxDim * 0.42);
-          const ry = Math.sin(angle) * (p.nr * maxDim * 0.42);
-
-          baseX = cx + rx + p.nxNoise * maxDim * 0.02;
-          baseY = cy + ry + p.nyNoise * maxDim * 0.02;
-
-          if (p.nr < 0.1) {
-            alpha = p.nr / 0.1;
-          } else if (p.nr > 0.8) {
-            alpha = Math.max(0, 1.0 - (p.nr - 0.8) / 0.4);
-          }
-        } else {
-          // Ambient drift
-          p.nx += p.vx;
-          p.ny += p.vy;
-
-          if (p.ny < -1.2 || Math.abs(p.nx) > 1.2) {
-            const angle = Math.random() * Math.PI * 2;
-            p.nx = Math.cos(angle) * 1.1;
-            p.ny = 1.1;
-            p.isFirstFrame = true;
-          }
-
-          baseX = cx + p.nx * cx * 1.2;
-          baseY = cy + p.ny * cy * 1.2;
-          alpha = 0.45;
+        if (p.progress >= 1.0) {
+          pulses.splice(i, 1);
+          continue;
         }
 
-        // Mouse Repulsion physics
-        let targetOffsetX = 0;
-        let targetOffsetY = 0;
-
-        if (mouse.active) {
-          const dx = (baseX + p.mxOffset) - mouse.x;
-          const dy = (baseY + p.myOffset) - mouse.y;
-          const distToMouse = Math.sqrt(dx * dx + dy * dy);
-
-          if (distToMouse < radiusOfInfluence && distToMouse > 0.1) {
-            const force = (radiusOfInfluence - distToMouse) / radiusOfInfluence;
-            const pushX = dx / distToMouse;
-            const pushY = dy / distToMouse;
-            targetOffsetX = pushX * force * 45 * p.z;
-            targetOffsetY = pushY * force * 45 * p.z;
-          }
-        }
-
-        const k = 0.07;
-        const damping = 0.85;
-        const ax = (targetOffsetX - p.mxOffset) * k;
-        const ay = (targetOffsetY - p.myOffset) * k;
-        p.vxOffset = (p.vxOffset + ax) * damping;
-        p.vyOffset = (p.vyOffset + ay) * damping;
-        p.mxOffset += p.vxOffset;
-        p.myOffset += p.vyOffset;
-
-        const finalX = baseX + p.mxOffset;
-        const finalY = baseY + p.myOffset;
-
-        p.lastX = finalX;
-        p.lastY = finalY;
-        p.alpha = alpha;
-      }
-
-      // 7. Draw Network Connections (PCB Trace Stepped 90-degree wiring)
-      ctx.lineWidth = 0.6;
-      const maxConnDist = 90;
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
-        if (p1.type !== "spiral") continue;
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          if (p2.type !== "spiral") continue;
-
-          const dx = p1.lastX - p2.lastX;
-          const dy = p1.lastY - p2.lastY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < maxConnDist) {
-            const connAlpha = (1.0 - dist / maxConnDist) * p1.alpha * p2.alpha * 0.16;
-            ctx.strokeStyle = `rgba(99, 102, 241, ${connAlpha.toFixed(3)})`;
-            ctx.beginPath();
-            
-            // Stepped Manhattan wiring: route horizontal mid-way, then vertically
-            const midX = (p1.lastX + p2.lastX) / 2;
-            ctx.moveTo(p1.lastX, p1.lastY);
-            ctx.lineTo(midX, p1.lastY);
-            ctx.lineTo(midX, p2.lastY);
-            ctx.lineTo(p2.lastX, p2.lastY);
-            
-            ctx.stroke();
-          }
-        }
-      }
-
-      // 8. Draw Technical Glyph Nodes & Solder Donuts
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        const finalColor = p.colorTemplate.replace("alpha", (p.alpha * 0.64).toFixed(2));
-        ctx.fillStyle = finalColor;
-        ctx.strokeStyle = finalColor;
-        ctx.lineWidth = 0.8;
-
-        if (p.techType === "plus") {
-          // Plus sign (+)
-          ctx.beginPath();
-          ctx.moveTo(p.lastX - 4, p.lastY);
-          ctx.lineTo(p.lastX + 4, p.lastY);
-          ctx.moveTo(p.lastX, p.lastY - 4);
-          ctx.lineTo(p.lastX, p.lastY + 4);
-          ctx.stroke();
-        } else if (p.techType === "binary") {
-          // Monospace Code Glyph (0, 1, FF etc)
-          ctx.font = "8px Courier New, monospace";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(p.techSymbol, p.lastX, p.lastY);
-        } else if (p.techType === "square") {
-          // Micro Square outline
-          ctx.strokeRect(p.lastX - 2, p.lastY - 2, 4, 4);
-        } else {
-          // Circular solder donut pad shape
-          ctx.beginPath();
-          ctx.arc(p.lastX, p.lastY, 2.6, 0, Math.PI * 2);
-          ctx.stroke();
+        const path = paths[p.pathIndex];
+        const pt = getPointOnPath(path, p.progress);
+        if (pt) {
+          // Fade in at start and fade out at end
+          const alpha = p.progress < 0.18 
+            ? p.progress / 0.18 
+            : (p.progress > 0.82 ? (1.0 - p.progress) / 0.18 : 1.0);
           
+          const drawColor = p.color.replace("alpha", (alpha * 0.85).toFixed(2));
+
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = drawColor;
           ctx.fillStyle = "#ffffff";
           ctx.beginPath();
-          ctx.arc(p.lastX, p.lastY, 1.0, 0, Math.PI * 2);
+          ctx.arc(pt.x, pt.y, 1.8, 0, Math.PI * 2);
           ctx.fill();
+
+          ctx.fillStyle = drawColor;
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0; // Reset shadow
         }
       }
 
-      // 9. Draw CAD Drawing Title Block (Bottom-Right Metadata Widget)
+      // 10. Draw CAD Drawing Title Block (Bottom-Right Metadata Widget)
       const blockWidth = 136;
       const blockHeight = 66;
       const bx = width - blockWidth - 24;
@@ -515,17 +532,17 @@ export default function Background() {
       ctx.fillStyle = "rgba(15, 23, 42, 0.44)";
       ctx.font = "bold 8px Courier New, monospace";
       ctx.textAlign = "left";
-      ctx.fillText("DWG: SOF-SYS-V2.0", bx + 6, by + 12);
+      ctx.fillText("DWG: SOF-BRAIN-2.0", bx + 6, by + 12);
       ctx.fillText("SCALE: 1:1 (PX)", bx + 6, by + 28);
       
       ctx.font = "7px Courier New, monospace";
       ctx.fillText("GRID: 100px", bx + 6, by + 44);
       ctx.fillText("UNITS: SEC", bx + 6, by + 56);
       
-      ctx.fillText("VRTX: ON", bx + 74, by + 44);
+      ctx.fillText("CORE: ACTIVE", bx + 74, by + 44);
       ctx.fillText("STAT: OK", bx + 74, by + 56);
 
-      // 10. Draw CAD Cursor Crosshairs & Coordinate Overlay
+      // 11. Draw CAD Cursor Crosshairs & Coordinate Overlay
       if (mouse.active) {
         ctx.strokeStyle = "rgba(99, 102, 241, 0.28)";
         ctx.lineWidth = 0.8;
@@ -554,7 +571,7 @@ export default function Background() {
         ctx.fillText(`[X:${Math.round(mouse.x)} Y:${Math.round(mouse.y)}]`, mouse.x + 12, mouse.y - 4);
       }
 
-      // 11. Draw Technical Cursor Trail Indicators
+      // 12. Draw Technical Cursor Trail Indicators
       for (let i = trailParticles.length - 1; i >= 0; i--) {
         const tp = trailParticles[i];
         tp.x += tp.vx;
