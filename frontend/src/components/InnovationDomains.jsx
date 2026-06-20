@@ -33,7 +33,7 @@ export default function InnovationDomains() {
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition group-hover:opacity-100 z-10" />
                 
                 {/* Header Image */}
-                <div className="relative h-40 w-full overflow-hidden">
+                <div className="relative w-full aspect-video overflow-hidden">
                   <img
                     src={domain.image}
                     alt={domain.title}

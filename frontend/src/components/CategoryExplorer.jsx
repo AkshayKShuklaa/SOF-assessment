@@ -92,7 +92,7 @@ export default function CategoryExplorer() {
                 </div>
 
                 {/* Bottom Section: Separated Full-Width Image */}
-                <div className="relative h-48 sm:h-56 w-full rounded-2xl overflow-hidden border border-white/10 group">
+                <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 group">
                   <img
                     src={active.explorerImage}
                     alt={active.title}
