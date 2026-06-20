@@ -61,50 +61,46 @@ export default function CategoryExplorer() {
             </motion.div>
           </motion.div>
 
-          <div className="gradient-border glass relative min-h-[520px] flex flex-col overflow-hidden rounded-[2rem] p-6 sm:p-8">
-            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
+          <div className="gradient-border glass relative min-h-[520px] flex flex-col overflow-hidden rounded-[2rem] p-6 sm:p-8 group">
+            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl z-10" />
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.title}
-                className="relative flex-1 w-full grid gap-8 lg:grid-cols-[1.25fr_0.75fr]"
+                className="relative flex-1 w-full flex flex-col justify-between z-20"
                 initial={{ opacity: 0, y: 24, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -18, scale: 0.98 }}
                 transition={{ duration: 0.35 }}
               >
-                {/* Left Column: Details */}
-                <div className="flex flex-col justify-between h-full">
-                  <div>
-                    <div className="grid h-16 w-16 place-items-center rounded-2xl border border-accent/30 bg-accent/10 shadow-cyan">
-                      <active.icon className="h-8 w-8 text-accent" />
-                    </div>
-                    <h3 className="mt-6 font-heading text-3xl font-bold sm:text-4xl">{active.title}</h3>
-                    <p className="mt-4 text-base leading-relaxed text-white/70">{active.text}</p>
-                  </div>
-                  
-                  <div className="mt-8 grid gap-3 grid-cols-3">
-                    {["Idea audit", "Market fit", "Launch path"].map((item) => (
-                      <div key={item} className="rounded-2xl border border-white/10 bg-midnight/60 p-4">
-                        <ArrowUpRight className="h-4 w-4 text-accent" />
-                        <p className="mt-3 text-sm font-bold">{item}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Right Column: Visual Image Display */}
-                <div className="relative h-64 lg:h-full min-h-[240px] rounded-3xl overflow-hidden border border-white/10 group">
+                {/* Background Image with Overlays */}
+                <div className="absolute inset-0 -m-6 sm:-m-8 -z-10 overflow-hidden">
                   <img
                     src={active.explorerImage}
                     alt={active.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
+                    className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-[2000ms]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-midnight/90 via-midnight/20 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 z-10 bg-midnight/80 backdrop-blur-md border border-white/10 rounded-2xl p-4">
-                    <span className="text-[10px] uppercase tracking-wider text-accent font-bold">SOF Live Center Node</span>
-                    <h4 className="text-white font-bold mt-1 text-xs truncate">{active.title}</h4>
+                  {/* Dark overlays to ensure excellent text readability */}
+                  <div className="absolute inset-0 bg-midnight/70 sm:bg-gradient-to-r sm:from-midnight/100 sm:via-midnight/90 sm:to-midnight/35" />
+                  <div className="absolute inset-0 bg-black/20" />
+                </div>
+
+                {/* Top Content Area */}
+                <div className="max-w-2xl">
+                  <div className="grid h-16 w-16 place-items-center rounded-2xl border border-accent/30 bg-accent/10 shadow-cyan">
+                    <active.icon className="h-8 w-8 text-accent" />
                   </div>
+                  <h3 className="mt-6 font-heading text-3xl font-bold sm:text-4xl text-white">{active.title}</h3>
+                  <p className="mt-4 text-base leading-relaxed text-white/90 drop-shadow-sm">{active.text}</p>
+                </div>
+
+                {/* Bottom Milestones / Actions Area */}
+                <div className="mt-12 grid gap-4 grid-cols-3 max-w-2xl">
+                  {["Idea audit", "Market fit", "Launch path"].map((item) => (
+                    <div key={item} className="rounded-2xl border border-white/10 bg-midnight/80 backdrop-blur-md p-4 hover:border-accent/30 transition duration-300">
+                      <ArrowUpRight className="h-4 w-4 text-accent" />
+                      <p className="mt-3 text-sm font-bold text-white">{item}</p>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             </AnimatePresence>
