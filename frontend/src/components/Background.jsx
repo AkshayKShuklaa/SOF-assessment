@@ -42,7 +42,12 @@ export default function Background() {
       "rgba(100, 116, 139, alpha)", // Slate-500
     ];
 
-    const techSymbols = ["0", "1", "0x", "FF", "+", "[]", "<>", "||", "&&", "e-"];
+    // Expanded technical and scientific formula pool
+    const techSymbols = [
+      "0", "1", "0x", "FF", "+", "[]", "<>", "||", "e-",
+      "E=mc²", "∇×E=-∂B/∂t", "Δx·Δp≥ℏ/2", "F=G(mm)/r²",
+      "f(x)=∫f(t)dt", "PV=nRT", "[X, P]=iℏ"
+    ];
     const trailParticles = [];
 
     // Track mouse position and spawn trail sparkles
@@ -55,7 +60,7 @@ export default function Background() {
       mouseRef.current.active = true;
 
       // Spawn technical indicators on mouse movement
-      if (Math.random() > 0.4) {
+      if (Math.random() > 0.45) {
         const symbol = techSymbols[Math.floor(Math.random() * techSymbols.length)];
         const isBlue = Math.random() > 0.5;
         const colorTemplate = isBlue
@@ -63,16 +68,16 @@ export default function Background() {
           : colorsMagenta[Math.floor(Math.random() * colorsMagenta.length)];
 
         trailParticles.push({
-          x: mx + (Math.random() - 0.5) * 12,
-          y: my + (Math.random() - 0.5) * 12,
-          vx: (Math.random() - 0.5) * 1.2,
-          vy: -0.4 - Math.random() * 1.2, // Float upwards slowly
+          x: mx + (Math.random() - 0.5) * 16,
+          y: my + (Math.random() - 0.5) * 16,
+          vx: (Math.random() - 0.5) * 1.4,
+          vy: -0.5 - Math.random() * 1.4, // Float upwards slowly
           symbol,
           colorTemplate,
           alpha: 1.0,
-          decay: 0.015 + Math.random() * 0.015,
-          size: 7 + Math.random() * 4,
-          type: Math.random() > 0.6 ? "symbol" : "plus",
+          decay: 0.012 + Math.random() * 0.015,
+          size: 7 + Math.random() * 5,
+          type: Math.random() > 0.5 ? "symbol" : "plus",
         });
       }
     };
@@ -86,7 +91,6 @@ export default function Background() {
     document.addEventListener("pointerout", handleMouseLeave);
 
     // Create technical nodes
-    // Reducer particle counts for buttery smooth constellation rendering
     const nodeCount = 180;
     const particles = [];
 
@@ -194,7 +198,60 @@ export default function Background() {
         }
       }
 
-      // 3. Update particle offsets and coordinates
+      // 3. Concentric coordinate degree rings (Radar Style)
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.014)";
+      ctx.lineWidth = 0.8;
+      const radiusRings = [180, 360, 540];
+      radiusRings.forEach((r) => {
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.stroke();
+        
+        ctx.fillStyle = "rgba(15, 23, 42, 0.06)";
+        ctx.font = "8px Courier New, monospace";
+        ctx.textAlign = "left";
+        ctx.fillText(`R = ${r}px`, cx + r - 32, cy - 4);
+      });
+
+      // Faint radial angle lines
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.01)";
+      const radialAngles = [0, Math.PI / 4, Math.PI / 2, (3 * Math.PI) / 4, Math.PI, (5 * Math.PI) / 4, (3 * Math.PI) / 2, (7 * Math.PI) / 4];
+      radialAngles.forEach((angle) => {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(angle) * 600, cy + Math.sin(angle) * 600);
+        ctx.stroke();
+      });
+
+      // 4. CAD Technical Dimension Lines (Blueprint measurements)
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.02)";
+      ctx.fillStyle = "rgba(15, 23, 42, 0.08)";
+      ctx.lineWidth = 0.8;
+
+      // Horizontal dimension line (Top-Left)
+      const dx1 = 120, dy1 = 80, dlen1 = 200;
+      ctx.beginPath();
+      ctx.moveTo(dx1, dy1);
+      ctx.lineTo(dx1 + dlen1, dy1);
+      ctx.moveTo(dx1, dy1 - 6); ctx.lineTo(dx1, dy1 + 6);
+      ctx.moveTo(dx1 + dlen1, dy1 - 6); ctx.lineTo(dx1 + dlen1, dy1 + 6);
+      ctx.stroke();
+      ctx.font = "8px Courier New, monospace";
+      ctx.textAlign = "center";
+      ctx.fillText("d = 200.00 px", dx1 + dlen1 / 2, dy1 - 6);
+
+      // Vertical dimension line (Bottom-Left)
+      const dx2 = 80, dy2 = 220, dlen2 = 150;
+      ctx.beginPath();
+      ctx.moveTo(dx2, dy2);
+      ctx.lineTo(dx2, dy2 + dlen2);
+      ctx.moveTo(dx2 - 6, dy2); ctx.lineTo(dx2 + 6, dy2);
+      ctx.moveTo(dx2 - 6, dy2 + dlen2); ctx.lineTo(dx2 + 6, dy2 + dlen2);
+      ctx.stroke();
+      ctx.textAlign = "left";
+      ctx.fillText("h = 150.00 px", dx2 + 10, dy2 + dlen2 / 2);
+
+      // 5. Update particle positions
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         let baseX = 0;
@@ -274,7 +331,7 @@ export default function Background() {
         p.alpha = alpha;
       }
 
-      // 4. Draw Network Constellation Connections (only between spiral nodes)
+      // 6. Draw Network Constellation Connections (only between spiral nodes)
       ctx.lineWidth = 0.6;
       const maxConnDist = 90;
       for (let i = 0; i < particles.length; i++) {
@@ -300,7 +357,7 @@ export default function Background() {
         }
       }
 
-      // 5. Draw Technical Glyph Nodes
+      // 7. Draw Technical Glyph Nodes
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         const finalColor = p.colorTemplate.replace("alpha", (p.alpha * 0.64).toFixed(2));
@@ -338,7 +395,72 @@ export default function Background() {
         }
       }
 
-      // 6. Draw Technical Cursor Trail Indicators
+      // 8. Draw CAD Drawing Title Block (Bottom-Right Metadata Widget)
+      const blockWidth = 136;
+      const blockHeight = 66;
+      const bx = width - blockWidth - 24;
+      const by = height - blockHeight - 24;
+
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.04)";
+      ctx.fillStyle = "rgba(255, 255, 255, 0.85)";
+      ctx.lineWidth = 1;
+      ctx.fillRect(bx, by, blockWidth, blockHeight);
+      ctx.strokeRect(bx, by, blockWidth, blockHeight);
+
+      // Lines inside widget
+      ctx.beginPath();
+      ctx.moveTo(bx, by + 18);
+      ctx.lineTo(bx + blockWidth, by + 18);
+      ctx.moveTo(bx, by + 34);
+      ctx.lineTo(bx + blockWidth, by + 34);
+      ctx.moveTo(bx + 68, by + 34);
+      ctx.lineTo(bx + 68, by + blockHeight);
+      ctx.stroke();
+
+      // Info Texts
+      ctx.fillStyle = "rgba(15, 23, 42, 0.44)";
+      ctx.font = "bold 8px Courier New, monospace";
+      ctx.textAlign = "left";
+      ctx.fillText("DWG: SOF-SYS-V2.0", bx + 6, by + 12);
+      ctx.fillText("SCALE: 1:1 (PX)", bx + 6, by + 28);
+      
+      ctx.font = "7px Courier New, monospace";
+      ctx.fillText("GRID: 100px", bx + 6, by + 44);
+      ctx.fillText("UNITS: SEC", bx + 6, by + 56);
+      
+      ctx.fillText("VRTX: ON", bx + 74, by + 44);
+      ctx.fillText("STAT: OK", bx + 74, by + 56);
+
+      // 9. Draw CAD Cursor Crosshairs & Coordinate Overlay
+      if (mouse.active) {
+        ctx.strokeStyle = "rgba(99, 102, 241, 0.28)";
+        ctx.lineWidth = 0.8;
+
+        // Custom CAD crosshairs centered on cursor
+        ctx.setLineDash([2, 3]);
+        ctx.beginPath();
+        // horizontal
+        ctx.moveTo(mouse.x - 50, mouse.y);
+        ctx.lineTo(mouse.x + 50, mouse.y);
+        // vertical
+        ctx.moveTo(mouse.x, mouse.y - 50);
+        ctx.lineTo(mouse.x, mouse.y + 50);
+        ctx.stroke();
+        ctx.setLineDash([]); // Reset line dash
+
+        // Central cursor circle
+        ctx.beginPath();
+        ctx.arc(mouse.x, mouse.y, 6, 0, Math.PI * 2);
+        ctx.stroke();
+
+        // Coordinate details next to mouse pointer
+        ctx.fillStyle = "rgba(99, 102, 241, 0.6)";
+        ctx.font = "9px Courier New, monospace";
+        ctx.textAlign = "left";
+        ctx.fillText(`[X:${Math.round(mouse.x)} Y:${Math.round(mouse.y)}]`, mouse.x + 12, mouse.y - 4);
+      }
+
+      // 10. Draw Technical Cursor Trail Indicators
       for (let i = trailParticles.length - 1; i >= 0; i--) {
         const tp = trailParticles[i];
         tp.x += tp.vx;
