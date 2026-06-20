@@ -61,46 +61,52 @@ export default function CategoryExplorer() {
             </motion.div>
           </motion.div>
 
-          <div className="gradient-border glass relative min-h-[520px] flex flex-col overflow-hidden rounded-[2rem] p-6 sm:p-8 group">
-            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl z-10" />
+          <div className="gradient-border glass relative min-h-[520px] flex flex-col overflow-hidden rounded-[2rem] p-6 sm:p-8">
+            <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/20 blur-3xl" />
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.title}
-                className="relative flex-1 w-full flex flex-col justify-between z-20"
+                className="relative flex-1 w-full flex flex-col justify-between gap-6"
                 initial={{ opacity: 0, y: 24, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -18, scale: 0.98 }}
                 transition={{ duration: 0.35 }}
               >
-                {/* Background Image with Overlays */}
-                <div className="absolute inset-0 -m-6 sm:-m-8 -z-10 overflow-hidden">
-                  <img
-                    src={active.explorerImage}
-                    alt={active.title}
-                    className="w-full h-full object-cover scale-[1.01] group-hover:scale-105 transition-transform duration-[2000ms]"
-                  />
-                  {/* Dark overlays to ensure excellent text readability */}
-                  <div className="absolute inset-0 bg-midnight/70 sm:bg-gradient-to-r sm:from-midnight/100 sm:via-midnight/90 sm:to-midnight/35" />
-                  <div className="absolute inset-0 bg-black/20" />
-                </div>
-
-                {/* Top Content Area */}
-                <div className="max-w-2xl">
+                {/* Top Section: Text Details */}
+                <div>
                   <div className="grid h-16 w-16 place-items-center rounded-2xl border border-accent/30 bg-accent/10 shadow-cyan">
                     <active.icon className="h-8 w-8 text-accent" />
                   </div>
                   <h3 className="mt-6 font-heading text-3xl font-bold sm:text-4xl text-white">{active.title}</h3>
-                  <p className="mt-4 text-base leading-relaxed text-white/90 drop-shadow-sm">{active.text}</p>
+                  <p className="mt-4 text-base leading-relaxed text-white/70">{active.text}</p>
                 </div>
 
-                {/* Bottom Milestones / Actions Area */}
-                <div className="mt-12 grid gap-4 grid-cols-3 max-w-2xl">
+                {/* Middle Section: Milestone / Action Cards */}
+                <div className="grid gap-3 grid-cols-3">
                   {["Idea audit", "Market fit", "Launch path"].map((item) => (
-                    <div key={item} className="rounded-2xl border border-white/10 bg-midnight/80 backdrop-blur-md p-4 hover:border-accent/30 transition duration-300">
+                    <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:border-accent/30 transition duration-300">
                       <ArrowUpRight className="h-4 w-4 text-accent" />
                       <p className="mt-3 text-sm font-bold text-white">{item}</p>
                     </div>
                   ))}
+                </div>
+
+                {/* Bottom Section: Separated Full-Width Image */}
+                <div className="relative h-48 sm:h-56 w-full rounded-2xl overflow-hidden border border-white/10 group">
+                  <img
+                    src={active.explorerImage}
+                    alt={active.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 z-10 bg-midnight/85 backdrop-blur-md border border-white/10 rounded-xl p-3 flex justify-between items-center">
+                    <div>
+                      <span className="text-[9px] uppercase tracking-wider text-accent font-bold">SOF Live Node</span>
+                      <h4 className="text-white font-bold mt-0.5 text-xs">{active.title}</h4>
+                    </div>
+                    <span className="text-[10px] text-white/52 font-semibold">Active</span>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
