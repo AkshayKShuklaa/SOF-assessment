@@ -50,6 +50,62 @@ export default function Background() {
     ];
     const trailParticles = [];
 
+    // Component drawing helpers
+    const drawResistor = (ctx, x, y, horizontal = true) => {
+      ctx.beginPath();
+      if (horizontal) {
+        ctx.moveTo(x - 14, y);
+        ctx.lineTo(x - 10, y);
+        ctx.lineTo(x - 8, y - 4);
+        ctx.lineTo(x - 4, y + 4);
+        ctx.lineTo(x, y - 4);
+        ctx.lineTo(x + 4, y + 4);
+        ctx.lineTo(x + 8, y - 4);
+        ctx.lineTo(x + 10, y);
+        ctx.lineTo(x + 14, y);
+      } else {
+        ctx.moveTo(x, y - 14);
+        ctx.lineTo(x, y - 10);
+        ctx.lineTo(x - 4, y - 8);
+        ctx.lineTo(x + 4, y - 4);
+        ctx.lineTo(x - 4, y);
+        ctx.lineTo(x + 4, y + 4);
+        ctx.lineTo(x - 4, y + 8);
+        ctx.lineTo(x, y + 10);
+        ctx.lineTo(x, y + 14);
+      }
+      ctx.stroke();
+    };
+
+    const drawCapacitor = (ctx, x, y, horizontal = true) => {
+      ctx.beginPath();
+      if (horizontal) {
+        ctx.moveTo(x - 10, y); ctx.lineTo(x - 2, y);
+        ctx.moveTo(x + 2, y); ctx.lineTo(x + 10, y);
+        ctx.moveTo(x - 2, y - 6); ctx.lineTo(x - 2, y + 6);
+        ctx.moveTo(x + 2, y - 6); ctx.lineTo(x + 2, y + 6);
+      } else {
+        ctx.moveTo(x, y - 10); ctx.lineTo(x, y - 2);
+        ctx.moveTo(x, y + 2); ctx.lineTo(x, y + 10);
+        ctx.moveTo(x - 6, y - 2); ctx.lineTo(x + 6, y - 2);
+        ctx.moveTo(x - 6, y + 2); ctx.lineTo(x + 6, y + 2);
+      }
+      ctx.stroke();
+    };
+
+    const drawGround = (ctx, x, y) => {
+      ctx.beginPath();
+      ctx.moveTo(x, y - 8);
+      ctx.lineTo(x, y);
+      ctx.moveTo(x - 8, y);
+      ctx.lineTo(x + 8, y);
+      ctx.moveTo(x - 5, y + 3);
+      ctx.lineTo(x + 5, y + 3);
+      ctx.moveTo(x - 2, y + 6);
+      ctx.lineTo(x + 2, y + 6);
+      ctx.stroke();
+    };
+
     // Track mouse position and spawn trail sparkles
     const handleMouseMove = (e) => {
       const mx = e.clientX;
@@ -113,7 +169,7 @@ export default function Background() {
         colorTemplate: isArmA
           ? colorsBlue[Math.floor(Math.random() * colorsBlue.length)]
           : colorsMagenta[Math.floor(Math.random() * colorsMagenta.length)],
-        techType: ["plus", "binary", "square", "crosshair"][Math.floor(Math.random() * 4)],
+        techType: ["plus", "binary", "square", "solder"][Math.floor(Math.random() * 4)],
         techSymbol: techSymbols[Math.floor(Math.random() * techSymbols.length)],
         mxOffset: 0,
         myOffset: 0,
@@ -251,7 +307,39 @@ export default function Background() {
       ctx.textAlign = "left";
       ctx.fillText("h = 150.00 px", dx2 + 10, dy2 + dlen2 / 2);
 
-      // 5. Update particle positions
+      // 5. Draw Static Electrical Schematic Components (Circuit symbols in margins)
+      ctx.strokeStyle = "rgba(15, 23, 42, 0.04)";
+      ctx.lineWidth = 1;
+      ctx.fillStyle = "rgba(15, 23, 42, 0.08)";
+      ctx.font = "7px Courier New, monospace";
+      ctx.textAlign = "center";
+
+      // Resistor R1 near the top-left horizontal dimension
+      drawResistor(ctx, 360, 80, true);
+      ctx.fillText("R1=10k", 360, 72);
+
+      // Ground terminal next to bottom-left vertical dimension
+      drawGround(ctx, 80, 410);
+      ctx.fillText("GND", 80, 424);
+
+      // Capacitor C1 in top-right area
+      drawCapacitor(ctx, width - 260, 150, true);
+      ctx.fillText("C1=100nF", width - 260, 142);
+
+      // Ground terminal in bottom-right near CAD title block
+      drawGround(ctx, width - 240, height - 50);
+      ctx.fillText("GND", width - 240, height - 36);
+
+      // Resistor R2 and Capacitor C2 block in bottom-left/mid
+      if (height > 600) {
+        drawResistor(ctx, 220, height - 100, false);
+        ctx.fillText("R2=220R", 220, height - 118);
+        
+        drawCapacitor(ctx, 220, height - 60, false);
+        ctx.fillText("C2=22uF", 220, height - 78);
+      }
+
+      // 6. Update particle positions
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         let baseX = 0;
@@ -331,7 +419,7 @@ export default function Background() {
         p.alpha = alpha;
       }
 
-      // 6. Draw Network Constellation Connections (only between spiral nodes)
+      // 7. Draw Network Connections (PCB Trace Stepped 90-degree wiring)
       ctx.lineWidth = 0.6;
       const maxConnDist = 90;
       for (let i = 0; i < particles.length; i++) {
@@ -347,17 +435,23 @@ export default function Background() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxConnDist) {
-            const connAlpha = (1.0 - dist / maxConnDist) * p1.alpha * p2.alpha * 0.18;
+            const connAlpha = (1.0 - dist / maxConnDist) * p1.alpha * p2.alpha * 0.16;
             ctx.strokeStyle = `rgba(99, 102, 241, ${connAlpha.toFixed(3)})`;
             ctx.beginPath();
+            
+            // Stepped Manhattan wiring: route horizontal mid-way, then vertically
+            const midX = (p1.lastX + p2.lastX) / 2;
             ctx.moveTo(p1.lastX, p1.lastY);
+            ctx.lineTo(midX, p1.lastY);
+            ctx.lineTo(midX, p2.lastY);
             ctx.lineTo(p2.lastX, p2.lastY);
+            
             ctx.stroke();
           }
         }
       }
 
-      // 7. Draw Technical Glyph Nodes
+      // 8. Draw Technical Glyph Nodes & Solder Donuts
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         const finalColor = p.colorTemplate.replace("alpha", (p.alpha * 0.64).toFixed(2));
@@ -382,20 +476,20 @@ export default function Background() {
         } else if (p.techType === "square") {
           // Micro Square outline
           ctx.strokeRect(p.lastX - 2, p.lastY - 2, 4, 4);
-        } else if (p.techType === "crosshair") {
-          // Technical micro crosshair
-          ctx.beginPath();
-          ctx.arc(p.lastX, p.lastY, 2, 0, Math.PI * 2);
-          ctx.stroke();
         } else {
-          // Ambient dot
+          // Circular solder donut pad shape
           ctx.beginPath();
-          ctx.arc(p.lastX, p.lastY, 1.2, 0, Math.PI * 2);
+          ctx.arc(p.lastX, p.lastY, 2.6, 0, Math.PI * 2);
+          ctx.stroke();
+          
+          ctx.fillStyle = "#ffffff";
+          ctx.beginPath();
+          ctx.arc(p.lastX, p.lastY, 1.0, 0, Math.PI * 2);
           ctx.fill();
         }
       }
 
-      // 8. Draw CAD Drawing Title Block (Bottom-Right Metadata Widget)
+      // 9. Draw CAD Drawing Title Block (Bottom-Right Metadata Widget)
       const blockWidth = 136;
       const blockHeight = 66;
       const bx = width - blockWidth - 24;
@@ -431,7 +525,7 @@ export default function Background() {
       ctx.fillText("VRTX: ON", bx + 74, by + 44);
       ctx.fillText("STAT: OK", bx + 74, by + 56);
 
-      // 9. Draw CAD Cursor Crosshairs & Coordinate Overlay
+      // 10. Draw CAD Cursor Crosshairs & Coordinate Overlay
       if (mouse.active) {
         ctx.strokeStyle = "rgba(99, 102, 241, 0.28)";
         ctx.lineWidth = 0.8;
@@ -460,7 +554,7 @@ export default function Background() {
         ctx.fillText(`[X:${Math.round(mouse.x)} Y:${Math.round(mouse.y)}]`, mouse.x + 12, mouse.y - 4);
       }
 
-      // 10. Draw Technical Cursor Trail Indicators
+      // 11. Draw Technical Cursor Trail Indicators
       for (let i = trailParticles.length - 1; i >= 0; i--) {
         const tp = trailParticles[i];
         tp.x += tp.vx;
