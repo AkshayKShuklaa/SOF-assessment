@@ -4,6 +4,7 @@ import { ArrowUpRight, Search } from "lucide-react";
 import { domains } from "./data.js";
 import { fadeUp, staggerContainer, viewport } from "./motion.js";
 import SectionHeader from "./SectionHeader.jsx";
+import logo from "./logo.png";
 
 export default function CategoryExplorer() {
   const [active, setActive] = useState(domains[0]);
@@ -66,27 +67,30 @@ export default function CategoryExplorer() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.title}
-                className="relative flex-1 w-full flex flex-col justify-between gap-6"
+                className="relative flex-1 w-full flex flex-col justify-between gap-5"
                 initial={{ opacity: 0, y: 24, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -18, scale: 0.98 }}
                 transition={{ duration: 0.35 }}
               >
-                {/* Top Section: Text Details */}
+                {/* Top Section: Text Details with Active Icon and Company Logo */}
                 <div>
-                  <div className="grid h-16 w-16 place-items-center rounded-2xl border border-accent/30 bg-accent/10 shadow-cyan">
-                    <active.icon className="h-8 w-8 text-accent" />
+                  <div className="flex items-center justify-between">
+                    <div className="grid h-14 w-14 place-items-center rounded-2xl border border-accent/30 bg-accent/10 shadow-cyan">
+                      <active.icon className="h-7 w-7 text-accent" />
+                    </div>
+                    <img src={logo} alt="Startup of the Future Logo" className="h-6 w-auto opacity-60" />
                   </div>
-                  <h3 className="mt-6 font-heading text-3xl font-bold sm:text-4xl text-white">{active.title}</h3>
-                  <p className="mt-4 text-base leading-relaxed text-white/70">{active.text}</p>
+                  <h3 className="mt-4 font-heading text-2xl font-bold sm:text-3xl text-white">{active.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/70">{active.text}</p>
                 </div>
 
                 {/* Middle Section: Milestone / Action Cards */}
                 <div className="grid gap-3 grid-cols-3">
                   {["Idea audit", "Market fit", "Launch path"].map((item) => (
-                    <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 hover:border-accent/30 transition duration-300">
-                      <ArrowUpRight className="h-4 w-4 text-accent" />
-                      <p className="mt-3 text-sm font-bold text-white">{item}</p>
+                    <div key={item} className="rounded-xl border border-white/10 bg-white/[0.03] p-3 hover:border-accent/30 transition duration-300">
+                      <ArrowUpRight className="h-3.5 w-3.5 text-accent" />
+                      <p className="mt-2 text-xs font-bold text-white">{item}</p>
                     </div>
                   ))}
                 </div>
