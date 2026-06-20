@@ -34,8 +34,8 @@ export default function Services() {
                 {isWide ? (
                   // Wide Card (Desktop: split side-by-side, Mobile: vertical stack)
                   <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] h-full items-center w-full">
-                    <div className="flex flex-col justify-between h-full">
-                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent/10 text-accent">
+                    <div className="flex flex-col justify-center h-full py-2">
+                      <span className="grid h-12 w-12 place-items-center rounded-2xl bg-accent/10 text-accent self-start">
                         <Icon className="h-6 w-6" />
                       </span>
                       <div className="mt-6">
@@ -43,11 +43,11 @@ export default function Services() {
                         <p className="mt-3 leading-relaxed text-sm text-white/64">{service.text}</p>
                       </div>
                     </div>
-                    <div className="relative h-44 lg:h-full min-h-[160px] rounded-2xl overflow-hidden border border-white/10 group-hover:border-accent/20 transition-all duration-300">
+                    <div className={`relative h-44 lg:h-full min-h-[160px] rounded-2xl overflow-hidden border border-white/10 group-hover:border-accent/20 transition-all duration-300 ${service.imageBg || ""}`}>
                       <img
                         src={service.image}
                         alt={service.title}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className={`absolute inset-0 w-full h-full ${service.imageFit === "contain" ? "object-contain p-4" : "object-cover"} group-hover:scale-105 transition-transform duration-700`}
                         loading="lazy"
                       />
                     </div>
@@ -64,11 +64,11 @@ export default function Services() {
                         <p className="mt-3 leading-relaxed text-sm text-white/64">{service.text}</p>
                       </div>
                     </div>
-                    <div className="relative aspect-video w-full rounded-2xl overflow-hidden border border-white/10 mt-6 group-hover:border-accent/20 transition-all duration-300">
+                    <div className={`relative aspect-video w-full rounded-2xl overflow-hidden border border-white/10 mt-6 group-hover:border-accent/20 transition-all duration-300 ${service.imageBg || ""}`}>
                       <img
                         src={service.image}
                         alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className={`w-full h-full ${service.imageFit === "contain" ? "object-contain p-4" : "object-cover"} group-hover:scale-105 transition-transform duration-700`}
                         loading="lazy"
                       />
                     </div>
