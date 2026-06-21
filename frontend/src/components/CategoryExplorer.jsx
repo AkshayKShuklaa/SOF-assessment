@@ -104,12 +104,9 @@ export default function CategoryExplorer() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 z-10 bg-midnight/85 backdrop-blur-md border border-white/10 rounded-xl p-3 flex justify-between items-center">
-                    <div>
-                      <span className="text-[9px] uppercase tracking-wider text-accent font-bold">SOF Live Node</span>
-                      <h4 className="text-white font-bold mt-0.5 text-xs">{active.title}</h4>
-                    </div>
-                    <span className="text-[10px] text-white/52 font-semibold">Active</span>
+                  {/* Company logo watermark */}
+                  <div className="absolute bottom-3 right-3 z-10 bg-midnight/70 backdrop-blur-md border border-white/10 rounded-xl px-3 py-1.5">
+                    <img src={logo} alt="SOF Logo" className="h-5 w-auto opacity-90" />
                   </div>
                 </div>
               </motion.div>

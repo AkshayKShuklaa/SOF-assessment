@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Mic2, Cpu } from "lucide-react";
 import { expoHighlights, expoStates, showcases, speakers } from "./data.js";
 import { fadeUp, staggerContainer, viewport } from "./motion.js";
 import SectionHeader from "./SectionHeader.jsx";
 import ConnectivityMap from "./ConnectivityMap.jsx";
-import expoBanner from "./sof_expo_banner.png";
+
 
 function useCountdown() {
   const target = useMemo(() => new Date("2026-12-05T09:00:00+05:30").getTime(), []);
@@ -27,6 +27,15 @@ function useCountdown() {
 
 export default function Expo() {
   const countdown = useCountdown();
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {});
+    }
+  }, []);
+
 
   return (
     <section id="events" className="section-pad">
@@ -47,11 +56,16 @@ export default function Expo() {
             >
               {/* Event Banner Image */}
               <div className="h-48 sm:h-56 overflow-hidden -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-6 relative">
-                <img 
-                  src={expoBanner} 
-                  alt="SOF Tech Expo Banner" 
-                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700" 
-                />
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                >
+                  <source src="/expo_banner_video.mp4" type="video/mp4" />
+                </video>
                 <div className="absolute inset-0 bg-gradient-to-t from-midnight/90 via-midnight/30 to-transparent" />
               </div>
 

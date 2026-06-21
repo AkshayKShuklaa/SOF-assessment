@@ -26,18 +26,13 @@ export default function Associations() {
           {loop.map((item, index) => (
             <div
               key={`${item.name}-${index}`}
-              className="group flex flex-col justify-between items-center h-36 w-56 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl hover:border-accent/40 hover:bg-white/[0.08] hover:scale-105 hover:-translate-y-1.5 hover:shadow-cyan transition-all duration-300 cursor-pointer"
+              className="group flex items-center justify-center h-24 w-44 rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 backdrop-blur-xl hover:border-accent/40 hover:bg-white/[0.08] hover:scale-105 hover:-translate-y-1.5 hover:shadow-cyan transition-all duration-300 cursor-pointer"
             >
-              <div className="flex-1 flex items-center justify-center w-full">
-                <img
-                  src={item.logo}
-                  alt={`${item.name} Logo`}
-                  className="h-12 max-w-[85%] object-contain opacity-85 group-hover:opacity-100 transition-all duration-300 partner-logo-img"
-                />
-              </div>
-              <p className="mt-3 text-xs font-bold tracking-wider uppercase text-white/52 group-hover:text-accent transition-colors duration-300 text-center">
-                {item.name}
-              </p>
+              <img
+                src={item.logo}
+                alt={`${item.name} Logo`}
+                className="h-10 max-w-[85%] object-contain opacity-85 group-hover:opacity-100 transition-all duration-300 partner-logo-img"
+              />
             </div>
           ))}
         </div>

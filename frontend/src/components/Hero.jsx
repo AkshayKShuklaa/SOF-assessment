@@ -3,7 +3,6 @@ import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { heroStats } from "./data.js";
 import { fadeUp, staggerContainer } from "./motion.js";
-import heroIllustration from "./hero_illustration.png";
 
 function Counter({ value, suffix }) {
   const count = useMotionValue(0);
@@ -89,11 +88,15 @@ export default function Hero() {
             whileHover={{ scale: 1.02, rotate: 1 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
           >
-            <img
-              src={heroIllustration}
-              alt="Startup of the Future Innovation Ecosystem"
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
               className="h-full w-full rounded-[2rem] object-cover"
-            />
+            >
+              <source src="/expo_banner_video.mp4" type="video/mp4" />
+            </video>
           </motion.div>
         </motion.div>
       </div>
