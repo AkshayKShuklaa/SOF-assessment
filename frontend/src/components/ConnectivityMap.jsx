@@ -1,167 +1,128 @@
-
-import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Network } from "lucide-react";
-import ForceGraph2D from 'react-force-graph-2d';
+import React from "react";
+import { motion } from "framer-motion";
+import { MapPin, Network, Sparkles, ArrowRight } from "lucide-react";
 
 const statesData = [
-  { name: "Delhi NCR", x: 42, y: 28, isHub: true, info: "Central SOF Innovation Hub & Expo HQ" },
-  { name: "Punjab", x: 33, y: 20, info: "Regional Agri-Tech & Smart Manufacturing" },
-  { name: "Haryana", x: 38, y: 25, info: "Industrial IoT & Automation Clusters" },
-  { name: "Rajasthan", x: 26, y: 38, info: "Solar & Clean Energy Innovation Centre" },
-  { name: "Gujarat", x: 16, y: 52, info: "EV & Green Tech Startup Hub" },
-  { name: "Maharashtra", x: 28, y: 65, info: "Fintech, SaaS & Deep Tech Network" },
-  { name: "Karnataka", x: 31, y: 82, info: "Generative AI, SpaceTech & Robotics Hub" },
-  { name: "Telangana", x: 44, y: 70, info: "Biotech & Cyber Security Platform" },
-  { name: "Tamil Nadu", x: 38, y: 92, info: "Automotive Tech & Hardware Showcases" },
-  { name: "Odisha", x: 62, y: 58, info: "Digital Infrastructure & Smart City Solutions" },
-  { name: "Bihar", x: 65, y: 35, info: "Regional Tech Empowerment & Skill Hub" },
-  { name: "Jharkhand", x: 62, y: 44, info: "Industrial Digitization & Metallurgy Innovation" },
-  { name: "Uttar Pradesh", x: 52, y: 35, info: "E-Commerce & Digital Scale Operations" }
+  { name: "Delhi NCR", isHub: true, info: "Central SOF Innovation Hub & Expo HQ" },
+  { name: "Punjab", info: "Regional Agri-Tech & Smart Manufacturing" },
+  { name: "Haryana", info: "Industrial IoT & Automation Clusters" },
+  { name: "Rajasthan", info: "Solar & Clean Energy Innovation Centre" },
+  { name: "Gujarat", info: "EV & Green Tech Startup Hub" },
+  { name: "Maharashtra", info: "Fintech, SaaS & Deep Tech Network" },
+  { name: "Karnataka", info: "Generative AI, SpaceTech & Robotics Hub" },
+  { name: "Telangana", info: "Biotech & Cyber Security Platform" },
+  { name: "Tamil Nadu", info: "Automotive Tech & Hardware Showcases" },
+  { name: "Odisha", info: "Digital Infrastructure & Smart City Solutions" },
+  { name: "Jharkhand", info: "Industrial Digitization & Metallurgy Innovation" },
+  { name: "Bihar", info: "Regional Tech Empowerment & Skill Hub" },
+  { name: "Uttar Pradesh", info: "E-Commerce & Digital Scale Operations" }
 ];
 
 export default function ConnectivityMap() {
-  // Central hub node
-  const hubNode = statesData.find(s => s.isHub);
-  const [selectedState, setSelectedState] = useState(statesData[0]);
-  const [hoveredState, setHoveredState] = useState(null);
-  const computeDistance = (node) => {
-    if (!node || !hubNode) return 0;
-    const dx = node.x - hubNode.x;
-    const dy = node.y - hubNode.y;
-    return Math.round(Math.sqrt(dx * dx + dy * dy));
-  };
-  const fgRef = useRef();
-  // Configure forces after graph mounts
-  useEffect(() => {
-    if (fgRef.current) {
-      // Increase link distance to separate close nodes
-      fgRef.current.d3Force('link').distance(link => {
-        // If link involves hub, use larger distance
-        return link.source.id === hubNode.name || link.target.id === hubNode.name ? 200 : 120;
-      });
-      // Apply repulsive charge to spread nodes
-      fgRef.current.d3Force('charge').strength(-250);
-    }
-  }, []);
+  // Split data into two rows for the marquee
+  const row1 = statesData.slice(0, 7);
+  const row2 = statesData.slice(7, 13);
+
+  // Duplicate arrays to create a seamless loop
+  const marqueeRow1 = [...row1, ...row1, ...row1];
+  const marqueeRow2 = [...row2, ...row2, ...row2];
 
   return (
-    <div className="gradient-border glass rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col justify-between h-full min-h-[500px]">
-      <div className="absolute top-0 right-0 h-40 w-40 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 h-64 w-64 rounded-full bg-cyan-500/5 blur-[100px] pointer-events-none" />
+    <div className="gradient-border glass rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col">
+      {/* Background Glows */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-indigo-500/10 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-cyan-500/10 blur-[100px] pointer-events-none" />
       
-      {/* Self-contained style block for light/dark mode map adaptation and custom animations */}
-      <style dangerouslySetInnerHTML={{__html: `
-        /* Default Dark Mode Map styles */
-        .map-outline {
-          fill: rgba(14, 165, 233, 0.03);
-          stroke: rgba(14, 165, 233, 0.3);
-          transition: all 0.3s ease;
-        }
-        .map-line {
-          stroke: rgba(255, 255, 255, 0.05);
-          transition: stroke 0.3s ease, stroke-width 0.3s ease;
-        }
-        .map-line.active {
-          stroke: rgba(14, 165, 233, 0.6);
-        }
-        .map-node {
-          fill: #0f172a;
-          stroke: rgba(14, 165, 233, 0.4);
-          transition: all 0.3s ease;
-        }
-        .map-node.hub {
-          fill: #4F46E5;
-          stroke: #ffffff;
-        }
-        .map-node.active {
-          fill: #0ea5e9;
-          stroke: #ffffff;
-        }
-        .map-label {
-          fill: rgba(255, 255, 255, 0.4);
-          transition: fill 0.3s ease, font-weight 0.3s ease;
-        }
-        .map-label.active {
-          fill: #ffffff;
-          font-weight: bold;
-        }
-      `}} />
-
       {/* Header Info */}
-      <div className="relative z-10 flex items-start justify-between gap-4">
+      <div className="relative z-10 flex items-start justify-between gap-4 mb-10">
         <div>
           <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-cyan-400">
             <Network className="h-4 w-4 animate-pulse" />
             Connectivity Hub
           </span>
-          <h3 className="mt-2 font-heading text-2xl font-bold text-white">India Innovation Circuit</h3>
-          <p className="text-xs text-white/50 mt-1">Click a node to view state-specific expo focus</p>
+          <h3 className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">India Innovation Circuit</h3>
+          <p className="text-sm text-white/50 mt-2 max-w-xl">
+            A dynamic network of state-specific expo hubs driving the future of generative AI, green tech, and industrial automation across India.
+          </p>
         </div>
       </div>
 
-      {/* SVG Canvas Map Container */}
-      <div className="relative flex-grow flex items-center justify-center my-4 min-h-[350px]">
-        
-        
-        <div className="w-full max-w-[340px] aspect-square relative flex items-center justify-center">
-          <ForceGraph2D
-              graphData={{
-                nodes: statesData.map(s => ({ id: s.name, ...s })),
-                links: statesData
-                  .filter(s => !s.isHub)
-                  .map(s => ({ source: hubNode.name, target: s.name })),
-              }}
-              width={340}
-              height={340}
-              nodeCanvasObject={(node, ctx, globalScale) => {
-                 const radius = node.isHub ? 8 : 5;
-                 const fillColor = node.isHub ? '#4F46E5' : '#0ea5e9';
-                 ctx.beginPath();
-                 ctx.arc(node.x, node.y, radius, 0, 2 * Math.PI, false);
-                 ctx.fillStyle = fillColor;
-                 ctx.fill();
-                 ctx.shadowBlur = 8;
-                 ctx.shadowColor = fillColor;
-                 // draw city name label
-                 ctx.font = `${12 / globalScale}px Sans-Serif`;
-                 ctx.fillStyle = '#fff';
-                 ctx.textAlign = 'center';
-                 ctx.fillText(node.id, node.x, node.y - radius - 4);
-               }}
-              linkWidth={2}
-              linkColor={() => 'rgba(14, 165, 233, 0.15)'}
-              linkDirectionalParticles={4}
-              linkDirectionalParticleWidth={3}
-              linkDirectionalParticleColor={() => '#0ea5e9'}
-              linkDirectionalParticleSpeed={0.008}
-              onNodeClick={node => setSelectedState(node)}
-              onNodeHover={node => setHoveredState(node)}
-            />
-        </div>
-      </div>
-
-      {/* Selected State Info Panel */}
-      <div className="relative z-10 bg-black/20 backdrop-blur-xl border border-white/10 rounded-2xl p-5 shadow-2xl">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={selectedState.name}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="flex flex-col gap-2"
+      {/* Marquee Container */}
+      <div className="relative z-10 flex flex-col gap-6 overflow-hidden -mx-6 sm:-mx-8 px-6 sm:px-8 py-4">
+        {/* Row 1 - Moving Left */}
+        <div className="flex w-[200%] sm:w-max">
+          <motion.div 
+            className="flex gap-6 min-w-max"
+            animate={{ x: ["0%", "-33.333333%"] }}
+            transition={{ duration: 30, ease: "linear", repeat: Infinity }}
           >
-            <div className="flex items-center gap-2">
-              <MapPin className={`h-4 w-4 ${selectedState.isHub ? "text-indigo-400" : "text-cyan-400"}`} />
-              <span className="font-heading text-lg font-bold text-white tracking-tight">
-                {selectedState.name} {selectedState.isHub && "(HQ)"}
-              </span>
-            </div>
-            <p className="text-sm text-white/60 leading-relaxed font-light">{selectedState.info}</p>
-            <p className="text-sm text-white/60 leading-relaxed font-light">Distance from hub: {computeDistance(selectedState)} km</p>
+            {marqueeRow1.map((state, idx) => (
+              <StateCard key={`${state.name}-${idx}`} state={state} />
+            ))}
           </motion.div>
-        </AnimatePresence>
+        </div>
+
+        {/* Row 2 - Moving Right */}
+        <div className="flex w-[200%] sm:w-max justify-end">
+          <motion.div 
+            className="flex gap-6 min-w-max"
+            animate={{ x: ["-33.333333%", "0%"] }}
+            transition={{ duration: 25, ease: "linear", repeat: Infinity }}
+          >
+            {marqueeRow2.map((state, idx) => (
+              <StateCard key={`${state.name}-${idx}`} state={state} />
+            ))}
+          </motion.div>
+        </div>
+        
+        {/* Gradient fades for the edges of the marquee container */}
+        <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#050B14] to-transparent pointer-events-none z-20" />
+        <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#050B14] to-transparent pointer-events-none z-20" />
       </div>
     </div>
+  );
+}
+
+function StateCard({ state }) {
+  const isHub = state.isHub;
+  
+  return (
+    <motion.div 
+      className={`relative w-[280px] sm:w-[320px] h-[160px] sm:h-[180px] p-5 sm:p-6 rounded-[1.5rem] border backdrop-blur-md flex flex-col justify-between group overflow-hidden transition-all duration-300 ${
+        isHub 
+          ? 'bg-indigo-500/10 border-indigo-500/30 hover:border-indigo-400 hover:bg-indigo-500/20 shadow-[0_0_20px_rgba(99,102,241,0.1)]' 
+          : 'bg-white/[0.02] border-white/10 hover:border-cyan-500/40 hover:bg-white/[0.04]'
+      }`}
+      whileHover={{ y: -5, scale: 1.02 }}
+    >
+      {/* Decorative background icon */}
+      <div className="absolute -bottom-6 -right-6 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity duration-500 transform group-hover:scale-110 group-hover:-rotate-12">
+        <MapPin size={120} />
+      </div>
+
+      <div>
+        <div className="flex items-start justify-between gap-2 mb-3">
+          <h4 className="font-heading text-lg sm:text-xl font-bold text-white flex items-center gap-2">
+            {state.name}
+          </h4>
+          {isHub ? (
+            <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-bold bg-indigo-500 text-white px-2 py-1 rounded-md shadow-[0_0_10px_rgba(99,102,241,0.5)]">
+              <Sparkles className="w-3 h-3" /> HQ
+            </span>
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-cyan-500/20 group-hover:border-cyan-500/50 group-hover:text-cyan-400 transition-colors">
+              <ArrowRight size={14} className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+            </div>
+          )}
+        </div>
+        <p className="text-sm text-white/60 leading-relaxed line-clamp-3">
+          {state.info}
+        </p>
+      </div>
+
+      {isHub && (
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 via-cyan-400 to-indigo-500 opacity-50" />
+      )}
+    </motion.div>
   );
 }

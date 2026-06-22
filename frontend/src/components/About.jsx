@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { ArrowUpRight, Layers3 } from "lucide-react";
-import { milestones, valueCards } from "./data.js";
+import { ArrowUpRight, Layers3, Sparkles } from "lucide-react";
+import { milestones, valueCards, clients, ourValues } from "./data.js";
 import { fadeUp, staggerContainer, viewport } from "./motion.js";
 import SectionHeader from "./SectionHeader.jsx";
 import aboutInfographic from "./about_infographic.jpg";
@@ -46,12 +46,14 @@ export default function About() {
     }
   };
 
+  const loopClients = [...clients, ...clients, ...clients];
+
   return (
     <section id="overview" className="section-pad relative">
       <div className="container-page">
         <SectionHeader
-          eyebrow="SOF Overview"
-          title="A premium ecosystem for founders building serious technology companies."
+          eyebrow="VISION • MISSION • VALUES"
+          title="We help our customers –"
           copy="Startup of the Future combines practical venture guidance, technology advisory, brand strategy, and curated networks so ambitious builders can move from idea to institution."
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
@@ -94,26 +96,103 @@ export default function About() {
                     className="absolute inset-0 w-full h-full object-cover block"
                   />
                 </div>
+                
+                <div className="mt-8 rounded-3xl border border-white/10 bg-surface/20 p-6 overflow-hidden">
+                  <h3 className="font-heading text-2xl font-bold mb-6">The SOF Advantage</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="glass rounded-2xl p-5 text-center">
+                      <div className="font-heading text-3xl font-bold text-cyan-400">1075<span className="text-accent">+</span></div>
+                      <div className="mt-2 text-xs font-bold uppercase tracking-wider text-white/70">Certified Experts</div>
+                    </div>
+                    <div className="glass rounded-2xl p-5 text-center">
+                      <div className="font-heading text-3xl font-bold text-purple-400">25<span className="text-accent">+</span></div>
+                      <div className="mt-2 text-xs font-bold uppercase tracking-wider text-white/70">Team Persons</div>
+                    </div>
+                    <div className="glass rounded-2xl p-5 text-center">
+                      <div className="font-heading text-3xl font-bold text-pink-400">2200<span className="text-accent">+</span></div>
+                      <div className="mt-2 text-xs font-bold uppercase tracking-wider text-white/70">Happy Clients</div>
+                    </div>
+                    <div className="glass rounded-2xl p-5 text-center">
+                      <div className="font-heading text-3xl font-bold text-green-400">99.5<span className="text-accent">%</span></div>
+                      <div className="mt-2 text-xs font-bold uppercase tracking-wider text-white/70">Success Rate</div>
+                    </div>
+                  </div>
+                  
+                  {/* Fill empty space with a glowing CTA/Promise block */}
+                  <div className="mt-4 relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 p-6 border border-white/10 group">
+                    <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-accent/30 blur-2xl transition-transform duration-700 group-hover:scale-150" />
+                    <div className="relative z-10">
+                      <h4 className="font-heading text-xl font-bold flex items-center gap-2 text-white">
+                        <Sparkles className="h-5 w-5 text-accent" /> Our Promise
+                      </h4>
+                      <p className="mt-3 text-sm leading-relaxed text-white/70">
+                        We don't just consult; we partner with you. Startup Of The Future is committed to transforming visionary ideas into market-ready businesses with complete legal, technological, and strategic support.
+                      </p>
+                      <a href="#reach-us" className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-cyan-300 transition-colors">
+                        Start your journey <ArrowUpRight className="h-4 w-4" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
-          <motion.div className="grid gap-6" initial="hidden" whileInView="visible" viewport={viewport} variants={staggerContainer}>
-            {valueCards.slice(2).map((card) => {
-              const Icon = card.icon;
-              return (
-                <motion.article key={card.title} className="glass rounded-3xl p-6" variants={fadeUp}>
-                  <div className="flex items-start gap-4">
-                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary/15 text-primary">
-                      <Icon className="h-6 w-6" />
-                    </span>
-                    <div>
-                      <h3 className="font-heading text-2xl font-bold">{card.title}</h3>
-                      <p className="mt-2 leading-7 text-white/66">{card.text}</p>
+          <motion.div className="grid gap-6" initial="hidden" animate="visible" variants={staggerContainer}>
+            <div className="glass rounded-3xl p-6 overflow-hidden">
+              <h3 className="font-heading text-2xl font-bold mb-2 flex items-center gap-3">
+                <Sparkles className="h-5 w-5 text-accent" /> Our Values
+              </h3>
+              <p className="text-white/60 text-sm mb-6 border-b border-white/10 pb-4">Empowering growth with guiding values</p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {ourValues.map((val, idx) => (
+                  <motion.div key={idx} variants={fadeUp} className="rounded-2xl border border-white/5 bg-white/[0.02] p-4 hover:bg-white/[0.05] transition-colors group">
+                    <div className="text-accent text-xs font-bold mb-2 opacity-70 group-hover:opacity-100 transition-opacity">0{idx + 1}</div>
+                    <h4 className="font-heading text-sm font-bold text-white mb-2">{val.title}</h4>
+                    <p className="text-xs leading-relaxed text-white/50 group-hover:text-white/70 transition-colors">{val.text}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Clients Rolling Pulley inside About section - Vertical and Above Milestones */}
+            <div className="glass rounded-3xl p-6 overflow-hidden h-[300px] flex flex-col relative">
+              <h3 className="font-heading text-xl font-bold mb-4 text-center shrink-0">Our Clients</h3>
+              <div className="absolute top-14 left-0 w-full h-12 bg-gradient-to-b from-[#0a0f25] to-transparent z-10" />
+              <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-[#0a0f25] to-transparent z-10" />
+              <div className="flex-1 overflow-hidden flex justify-center gap-4">
+                {/* Column 1 - Scrolling Up */}
+                <div className="flex flex-col min-h-max animate-marquee-vertical gap-4 pb-4 w-full max-w-[120px]">
+                  {[...clients.slice(0, 8), ...clients.slice(0, 8), ...clients.slice(0, 8)].map((item, index) => (
+                    <div
+                      key={`col1-${item.name}-${index}`}
+                      className="group flex items-center justify-center h-20 w-full rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xl hover:border-primary/40 hover:bg-white/[0.08] hover:scale-105 hover:-translate-y-1 hover:shadow-glow transition-all duration-300 cursor-pointer shrink-0"
+                    >
+                      <img
+                        src={item.logo}
+                        alt={`${item.name} Logo`}
+                        className="max-h-full max-w-[85%] object-contain opacity-85 group-hover:opacity-100 transition-all duration-300"
+                      />
                     </div>
-                  </div>
-                </motion.article>
-              );
-            })}
+                  ))}
+                </div>
+                {/* Column 2 - Scrolling Down */}
+                <div className="flex flex-col min-h-max animate-marquee-vertical-reverse gap-4 pb-4 w-full max-w-[120px]">
+                  {[...clients.slice(8, 15), ...clients.slice(8, 15), ...clients.slice(8, 15)].map((item, index) => (
+                    <div
+                      key={`col2-${item.name}-${index}`}
+                      className="group flex items-center justify-center h-20 w-full rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xl hover:border-primary/40 hover:bg-white/[0.08] hover:scale-105 hover:translate-y-1 hover:shadow-glow transition-all duration-300 cursor-pointer shrink-0"
+                    >
+                      <img
+                        src={item.logo}
+                        alt={`${item.name} Logo`}
+                        className="max-h-full max-w-[85%] object-contain opacity-85 group-hover:opacity-100 transition-all duration-300"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <div className="glass rounded-3xl p-6 overflow-hidden">
               <div className="mb-6 flex items-center justify-between gap-4">
                 <h3 className="font-heading text-2xl font-bold">Growth Milestones</h3>
@@ -154,6 +233,8 @@ export default function About() {
                 ))}
               </div>
             </div>
+
+
           </motion.div>
         </div>
       </div>

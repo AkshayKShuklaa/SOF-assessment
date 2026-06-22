@@ -9,7 +9,7 @@ export default function Founder() {
   return (
     <section className="section-pad">
       <div className="container-page">
-        <SectionHeader eyebrow="Founder Spotlight" title="Amardeep Singh leads SOF with 25+ years of expertise." copy="From the founder's desk: SOF exists to spark courage for new inventions, rapid development, and practical startup execution." />
+        <SectionHeader eyebrow="Founder Spotlight" title="With over 25+ Years of Expertise, We proudly empower Startups & MSME's through End-to-End Consultancy." copy="We conduct a thorough audit of your idea to understand its strengths, innovation potential, and alignment with government schemes or startup ecosystems. We progress by leveraging technology and making foresight decisions. The goal of SOF Club (Startup of Future) is to spark courage for new inventions and rapid development. Under Amardeep Singh leadership, the team focuses on building practical, scalable solutions that empower startups to move faster." />
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div className="gradient-border glass overflow-hidden rounded-[2rem] p-5 h-full flex flex-col" initial={{ opacity: 0, x: -34 }} whileInView={{ opacity: 1, x: 0 }} viewport={viewport} transition={{ duration: 0.6 }}>
             <div className="relative flex flex-col h-full flex-grow overflow-hidden rounded-[1.45rem] bg-gradient-to-br from-primary/25 via-surface to-accent/10 border border-white/10">
@@ -26,7 +26,7 @@ export default function Founder() {
           <motion.div initial="hidden" whileInView="visible" viewport={viewport} variants={staggerContainer} className="flex flex-col justify-between">
             <motion.div className="glass rounded-3xl p-6 sm:p-8" variants={fadeUp} whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
               <Quote className="h-8 w-8 text-accent" />
-              <blockquote className="mt-5 font-heading text-2xl font-bold leading-snug sm:text-3xl">"Becoming an unstoppable force with a vision to create a greater tomorrow."</blockquote>
+              <blockquote className="mt-5 font-heading text-2xl font-bold leading-snug sm:text-3xl">"Becoming an unstoppable force with a vision to create a greater tomorrow. We progress by leveraging Technology and making foresight decisions. The goal of this SOF Club (Startup of Future) is to spark the courage for new inventions and rapid development."</blockquote>
             </motion.div>
             <motion.div className="mt-6 grid gap-4" variants={staggerContainer}>
               {founderAchievements.map((achievement) => (

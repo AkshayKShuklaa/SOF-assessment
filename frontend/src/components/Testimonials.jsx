@@ -14,9 +14,14 @@ export default function Testimonials() {
             <motion.article key={item.name} className="glass rounded-3xl p-6" variants={fadeUp} whileHover={{ y: -8 }}>
               <Quote className="h-7 w-7 text-accent" />
               <p className="mt-6 min-h-[14rem] text-base leading-7 text-white/76">"{item.quote}"</p>
-              <div className="mt-6 border-t border-white/10 pt-5">
-                <p className="font-heading text-xl font-bold">{item.name}</p>
-                <p className="mt-1 text-sm text-white/54">{item.role}</p>
+              <div className="mt-6 border-t border-white/10 pt-5 flex items-center gap-4">
+                {item.image && (
+                  <img src={item.image} alt={item.name} className="w-14 h-14 rounded-full object-cover grayscale brightness-110 contrast-125 border-2 border-white/10" />
+                )}
+                <div>
+                  <p className="font-heading text-lg font-bold">{item.name}</p>
+                  <p className="mt-0.5 text-xs text-white/54">{item.role}</p>
+                </div>
               </div>
             </motion.article>
           ))}

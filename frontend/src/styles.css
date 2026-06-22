@@ -275,3 +275,30 @@ button {
 .animate-marquee-right:hover {
   animation-play-state: paused;
 }
+
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to { transform: translateY(calc(-100% - 1.5rem)); }
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical 45s linear infinite;
+}
+
+.animate-marquee-vertical:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-vertical-reverse {
+  from { transform: translateY(calc(-100% - 1.5rem)); }
+  to { transform: translateY(0); }
+}
+
+.animate-marquee-vertical-reverse {
+  animation: marquee-vertical-reverse 45s linear infinite;
+}
+
+.animate-marquee-vertical-reverse:hover {
+  animation-play-state: paused;
+}
+

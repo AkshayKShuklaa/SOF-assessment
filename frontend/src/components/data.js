@@ -72,7 +72,7 @@ export const domains = [
   { title: "E-Commerce Innovation", icon: Globe2, text: "Digital commerce experiences, customer engagement, and modern online business operations.", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=640&h=360&q=80", explorerImage: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=800&h=450&q=80" },
   { title: "Smart Solar Energy", icon: SunMedium, text: "Intelligent photovoltaic systems that maximize efficiency and support modern power grids.", image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=640&h=360&q=80", explorerImage: "https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=800&h=450&q=80" },
   { title: "Automotive Innovation", icon: Zap, text: "EVs, autonomous systems, smart connectivity, and sustainable transportation manufacturing.", image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=640&h=360&q=80", explorerImage: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&h=450&q=80" },
-  { title: "Robotics Innovation", icon: BrainCircuit, text: "Autonomous machines that increase productivity, safety, and precision across industries.", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=640&h=360&q=80", explorerImage: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&h=450&q=80" },
+  { title: "Robotics Innovation", icon: BrainCircuit, text: "Autonomous machines that increase productivity, safety, and precision across industries.", image: "https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=640&h=360&q=80", explorerImage: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=450&q=80" },
   { title: "Internet of Things", icon: Binary, text: "Connected devices for smarter homes, cities, industries, and real-time operational data.", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=640&h=360&q=80", explorerImage: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=800&h=450&q=80" },
   { title: "3D Printing", icon: Building2, text: "Layer-by-layer prototyping and production for customized, complex manufacturing.", image: "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=640&h=360&q=80", explorerImage: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&h=450&q=80" },
   { title: "Gene Tech", icon: HeartPulse, text: "Genetic technologies for medicine, agriculture, therapies, and advanced research models.", image: "https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=640&h=360&q=80", explorerImage: "https://images.unsplash.com/photo-1532187643603-ba119ca4109e?auto=format&fit=crop&w=800&h=450&q=80" },
@@ -81,13 +81,12 @@ export const domains = [
 ];
 
 export const services = [
-  { title: "Consultation & Startup Analysis", icon: Target, text: "Idea audit, innovation mapping, business model evaluation, market direction, and scheme alignment.", size: "lg:col-span-2", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=640&h=360&q=80" },
-  { title: "Planning & Strategy Development", icon: BriefcaseBusiness, text: "Market and competitor analysis, launch roadmaps, business planning, and growth strategy.", size: "", image: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=640&h=360&q=80" },
-  { title: "Design, Development & Support", icon: Cpu, text: "Website, app, brand, CRM, automation, deployment, and technical support for startup execution.", size: "", image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=640&h=360&q=80" },
-  { title: "Registration & Trademark", icon: Building2, text: "Company registration, LLP, private limited, GST, MSME, Udyam, trademark, IP, and documentation.", size: "lg:col-span-2", image: trademarkImg, imageFit: "contain", imageBg: "bg-white/95" },
-  { title: "Seed Funding & Awards", icon: ChartNoAxesCombined, text: "Pitch preparation, investor connect, government schemes, state awards, and national award recommendations.", size: "", image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=640&h=360&q=80" },
-  { title: "AI & Cyber Security Support", icon: ShieldCheck, text: "AI enablement, cyber security protection, secure systems, risk posture, and compliance readiness.", size: "", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=640&h=360&q=80" },
-  { title: "Customized CRM Management", icon: UsersRound, text: "Founder-friendly CRM setup, customer journeys, automation flows, and operational visibility.", size: "lg:col-span-4", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=640&h=360&q=80" },
+  { title: "Consultation & Analysis of Startup", icon: Target, text: "At Startup Of The Future, we understand that every startup begins with a spark — but success requires structured planning, industry insight, and strategic execution. Our Startup Consultation & Analysis service is designed to help founders validate, refine, and scale their ideas with clarity and confidence. We perform a deep 360° evaluation of your concept, model, structure, and market relevance to ensure your business is built on solid fundamentals.", size: "lg:col-span-2", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=640&h=360&q=80" },
+  { title: "Planning & Strategy Development", icon: BriefcaseBusiness, text: "Turning an idea into a successful venture requires more than inspiration — it demands clarity, planning, structure, and an actionable direction. At Startup Of The Future, we help startups move from concept to execution through a well-defined Planning & Strategy Development process designed to build strong business foundations and accelerate growth.", size: "", image: "https://images.unsplash.com/photo-1507537297725-24a1c029d3ca?auto=format&fit=crop&w=640&h=360&q=80" },
+  { title: "Design & Development Deployment & Support", icon: Cpu, text: "Building a startup requires more than an idea — it needs a solid product, user-ready design, smooth development, and continuous support to keep evolving. At Startup Of The Future, we provide end-to-end Design, Development, Deployment & Support Services to turn concepts into functional, scalable and market-ready digital solutions.", size: "", image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=640&h=360&q=80" },
+  { title: "Registration & Trademark for All Legal Compliance", icon: Building2, text: "A successful startup must not only innovate—it must operate within the legal framework that protects its business identity, intellectual property, and operational credibility. At Startup Of The Future, we help startups establish a strong legal foundation through Registration, Trademark & Complete Compliance Support from day one.", size: "lg:col-span-2", image: trademarkImg, imageFit: "contain", imageBg: "bg-white/95" },
+  { title: "Seed Funding & Recommend to State & National Award", icon: ChartNoAxesCombined, text: "Access to funding and recognition can transform a startup from an idea into a scalable business. At Startup Of The Future, we support early-stage founders and emerging startups by guiding them through Seed Funding opportunities and recommending high-potential ventures for State & National-Level Awards, Government Programs, and Entrepreneurship Honors.", size: "lg:col-span-2", image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=640&h=360&q=80" },
+  { title: "Cyber Security Protection", icon: ShieldCheck, text: "In today’s digital era, startups face increasing threats of data leaks, hacking, ransomware, and unauthorized access. At Startup Of The Future, we provide End-to-End Cyber Security Protection integrated with Secure CRM Management, ensuring your business, customer data, and digital operations remain protected 24/7. We safeguard your systems from cyber vulnerabilities, enabling you to operate confidently with zero risk of data compromise.", size: "lg:col-span-4", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=640&h=360&q=80" },
 ];
 
 export const founderAchievements = [
@@ -97,9 +96,8 @@ export const founderAchievements = [
 ];
 
 export const founderTimeline = [
-  ["Idea Audit", "Every founder journey starts with a careful review of strengths, innovation potential, and market direction."],
-  ["Technology-Led Decisions", "SOF progresses by leveraging technology, foresight, and structured business planning."],
-  ["Expo Ecosystem", "The SOF Club and Expo are designed to spark courage for new inventions and rapid development."],
+  ["Tech Solution", "Professional innovation-driven tech solutions."],
+  ["Business Strategy", "Helping startups grow with structured planning."],
 ];
 
 export const roadmap = ["Idea", "Validation", "Registration", "Branding", "Funding", "Launch", "Scale"];
@@ -156,21 +154,25 @@ export const testimonials = [
     quote: "Thanks to their structured idea audit, we clearly understood our strengths and market direction. Their insights helped us align with government schemes and secure early benefits.",
     name: "Gautam Jain",
     role: "Director, Mini Meters Manufacturing Co. Pvt. Ltd. Faridabad",
+    image: "/speaker1.png",
   },
   {
     quote: "Their expert evaluation helped us refine our concept and position it as a high-potential startup. The guidance on ecosystem opportunities was extremely valuable.",
     name: "Priyal Lokhandwala",
     role: "Gadantglobal, Ahmedabad & Delhi",
+    image: "/speaker2.png",
   },
   {
     quote: "They not only reviewed our concept but also guided us on relevant government programs. Their inputs accelerated our journey from idea to execution.",
     name: "Sonu Singh",
     role: "Director, Housing World, Faridabad",
+    image: "/speaker3.png",
   },
   {
     quote: "We had an idea but did not know how to move forward. Their audit provided clarity, innovation mapping, and strategic next steps. Highly recommended.",
     name: "Rina Aggarwal",
     role: "Director, Har Ka Hunar Foundation, Rohini, Delhi",
+    image: "/speaker4.png",
   },
 ];
 
@@ -184,10 +186,10 @@ export const footerLinks = [
 ];
 
 export const valueCards = [
-  { icon: Target, title: "Mission", text: "To convert ideas into scalable, market-ready startups with execution, structure, sustainability, and technology-driven growth." },
-  { icon: Sparkles, title: "Vision", text: "To empower entrepreneurs, innovators, startups, MSMEs, and emerging businesses through strategic guidance and ecosystem access." },
-  { icon: Flame, title: "Operating Belief", text: "AI startups need ecosystem, capital, talent, policy, market access, and practical frameworks for support in India." },
-  { icon: Lightbulb, title: "Founder Promise", text: "SOF combines compliance support, branding solutions, technology consulting, and business planning into one founder support system." },
+  { icon: Target, title: "Mission", text: "To become the foremost catalyst for innovation and entrepreneurship in India and beyond — shaping a future where bold ideas, cutting-edge solutions, and collaborative ecosystems drive global progress and sustainable development." },
+  { icon: Sparkles, title: "Vision", text: "Our Vision is to empower businesses with innovative IT solutions that drive growth, efficiency, and long-term success. We deliver scalable technology to keep you competitive and ready for the future." },
+  { icon: Flame, title: "Values", text: "We believe in delivering top-quality solutions for global businesses." },
+  { icon: Lightbulb, title: "Expertise", text: "SoF expertise lies in Agile & DevOps, ITSM, PPM, and Cloud – the very pillars that underpin digital transformation. Our clients worldwide choose SOF because of our specialization in operational delivery excellence, covering software delivery, customer service, strategy management, and business support operations." },
 ];
 
 export const associations = [
@@ -201,7 +203,36 @@ export const associations = [
   { name: "Future Inn-Tech Corp", logo: futureinntechLogo },
 ];
 
+export const clients = [
+  { name: "Startup Activate", logo: "/client1.png" },
+  { name: "Smile & Shine Dental", logo: "/client2.png" },
+  { name: "Shilp Shala", logo: "/client3.png" },
+  { name: "Savash Aviation", logo: "/client4.png" },
+  { name: "Pluto", logo: "/client5.png" },
+  { name: "Maxwell", logo: "/client6.png" },
+  { name: "Luxury Legacy", logo: "/client7.png" },
+  { name: "Jagdish Jewelry", logo: "/client8.png" },
+  { name: "Incense", logo: "/client9.png" },
+  { name: "Ideas Space Design", logo: "/client10.png" },
+  { name: "Alliance Heritage University", logo: "/client11.png" },
+  { name: "Attica Gold", logo: "/client12.png" },
+  { name: "Fashion Shop", logo: "/client13.png" },
+  { name: "Go Earnings", logo: "/client14.png" },
+  { name: "Herka Hunar", logo: "/client15.png" },
+];
+
 export const expoStates = ["Bihar", "Maharashtra", "Gujarat", "Punjab", "Odisha", "Jharkhand", "Telangana", "Karnataka", "Tamil Nadu", "Delhi NCR", "Uttar Pradesh", "Rajasthan", "Haryana"];
+
+export const ourValues = [
+  { title: "Idea-Centric Belief", text: "We believe that every idea has value. Our responsibility is to identify its potential, refine its structure, and transform it into a viable and impactful business." },
+  { title: "Innovation with Purpose", text: "Innovation must solve real problems. We support technology-driven, scalable, and future-ready solutions that contribute to sustainable growth and national development." },
+  { title: "Founder Empowerment", text: "Entrepreneurs are at the heart of everything we do. We empower founders with strategic clarity, execution support, and long-term guidance at every stage of their startup journey." },
+  { title: "Trust, Ethics & Confidentiality", text: "We operate with complete transparency, ethical practices, and strict NDA-based confidentiality, ensuring trust and security in all startup engagements." },
+  { title: "Structured Growth & Compliance", text: "We thrive on collaboration with investors, incubators, government bodies, and industry leaders to create opportunities and accelerate startup success." },
+  { title: "Ecosystem Collaboration", text: "We thrive on collaboration with investors, incubators, government bodies, and industry leaders to create opportunities and accelerate startup success." },
+  { title: "Technology-Driven Execution", text: "We leverage AI, digital tools, and modern technology frameworks to enable smarter decisions, faster execution, and scalable growth." },
+  { title: "Nation-Building Commitment", text: "We are committed to strengthening India’s startup ecosystem by supporting MSMEs, innovators, and emerging entrepreneurs across the country." }
+];
 
 export const faqItems = [
   {

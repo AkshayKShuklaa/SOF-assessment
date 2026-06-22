@@ -55,7 +55,7 @@ export default function Expo() {
               viewport={viewport}
             >
               {/* Event Banner Image */}
-              <div className="h-48 sm:h-56 overflow-hidden -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-6 relative">
+              <div className="h-64 sm:h-[350px] overflow-hidden -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-6 relative">
                 <video
                   ref={videoRef}
                   autoPlay
@@ -111,7 +111,20 @@ export default function Expo() {
               </div>
             </motion.div>
 
-            {/* Speaker & Showcase Sub-Grid */}
+          </div>
+
+          {/* Right Column: India Interactive Connectivity Map & Sub-Grid */}
+          <div className="flex flex-col gap-6">
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={viewport}
+              transition={{ duration: 0.6 }}
+            >
+              <ConnectivityMap />
+            </motion.div>
+
+            {/* Speaker & Showcase Sub-Grid moved to Right Column for balance */}
             <motion.div 
               initial="hidden" 
               whileInView="visible" 
@@ -153,16 +166,6 @@ export default function Expo() {
               </motion.div>
             </motion.div>
           </div>
-
-          {/* Right Column: India Interactive Connectivity Map */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={viewport}
-            transition={{ duration: 0.6 }}
-          >
-            <ConnectivityMap />
-          </motion.div>
         </div>
       </div>
     </section>

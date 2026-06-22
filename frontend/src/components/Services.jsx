@@ -8,8 +8,8 @@ export default function Services() {
     <section id="offerings" className="section-pad">
       <div className="container-page">
         <SectionHeader
-          eyebrow="Offerings"
-          title="A founder support stack that feels strategic, not scattered."
+          eyebrow="SOF Offerings"
+          title="Our SOF Services"
           copy="From registration to funding readiness, SOF packages the work founders usually chase across multiple advisors into one premium operating system."
         />
         <motion.div className="mt-12 grid auto-rows-[minmax(220px,auto)] gap-5 md:grid-cols-2 lg:grid-cols-4" initial="hidden" whileInView="visible" viewport={viewport} variants={staggerContainer}>
