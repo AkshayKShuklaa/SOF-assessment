@@ -21,25 +21,26 @@ export default function Background() {
     };
     window.addEventListener("resize", handleResize);
 
-    // Tech color palettes
-    const colorsBlue = [
-      "rgba(37, 99, 235, alpha)",   // Blue-600
-      "rgba(59, 130, 246, alpha)",  // Blue-500
-      "rgba(14, 165, 233, alpha)",  // Sky-500
-      "rgba(96, 165, 250, alpha)",  // Blue-400
+    // Tech color palettes (Indian Flag Theme)
+    const colorsSaffron = [
+      "rgba(210, 90, 0, alpha)",   // Saffron
+      "rgba(255, 128, 0, alpha)",    // Darker orange
+      "rgba(255, 178, 102, alpha)",  // Lighter orange
+      "rgba(255, 165, 0, alpha)",    // Orange
     ];
 
-    const colorsMagenta = [
-      "rgba(168, 85, 247, alpha)",  // Purple-500
-      "rgba(219, 39, 119, alpha)",  // Pink-600
-      "rgba(236, 72, 153, alpha)",  // Pink-500
-      "rgba(129, 140, 248, alpha)", // Indigo-400
+    const colorsGreen = [
+      "rgba(0, 90, 0, alpha)",    // Indian Green
+      "rgba(0, 128, 0, alpha)",     // Standard green
+      "rgba(34, 139, 34, alpha)",   // Forest green
+      "rgba(50, 205, 50, alpha)",   // Lime green
     ];
 
     const colorsDust = [
+      "rgba(0, 0, 128, alpha)",     // Navy blue
       "rgba(148, 163, 184, alpha)", // Slate-400
-      "rgba(203, 213, 225, alpha)", // Slate-300
-      "rgba(100, 116, 139, alpha)", // Slate-500
+      "rgba(210, 90, 0, alpha)",  // Saffron
+      "rgba(0, 90, 0, alpha)",    // Green
     ];
 
     // Expanded technical and scientific formula pool
@@ -118,10 +119,10 @@ export default function Background() {
       // Spawn technical indicators on mouse movement
       if (Math.random() > 0.45) {
         const symbol = techSymbols[Math.floor(Math.random() * techSymbols.length)];
-        const isBlue = Math.random() > 0.5;
-        const colorTemplate = isBlue
-          ? colorsBlue[Math.floor(Math.random() * colorsBlue.length)]
-          : colorsMagenta[Math.floor(Math.random() * colorsMagenta.length)];
+        const isSaffron = Math.random() > 0.5;
+        const colorTemplate = isSaffron
+          ? colorsSaffron[Math.floor(Math.random() * colorsSaffron.length)]
+          : colorsGreen[Math.floor(Math.random() * colorsGreen.length)];
 
         trailParticles.push({
           x: mx + (Math.random() - 0.5) * 16,
@@ -409,10 +410,22 @@ export default function Background() {
       // 7. Get and Draw AI Neural Brain Circuit Traces
       const paths = getCircuitPaths(cx, cy, designScale);
 
-      ctx.lineWidth = 1.0;
-      ctx.strokeStyle = "rgba(99, 102, 241, 0.07)";
-      paths.forEach((path) => {
+      ctx.lineWidth = 1.2;
+      const wireColors = [
+        "rgba(210, 90, 0, 0.25)", // Saffron
+        "rgba(0, 90, 0, 0.25)",   // Green
+        "rgba(0, 0, 128, 0.15)",    // Navy blue
+      ];
+      const jointColors = [
+        "rgba(210, 90, 0, 0.4)", // Saffron
+        "rgba(0, 90, 0, 0.4)",   // Green
+        "rgba(0, 0, 128, 0.25)",   // Navy blue
+      ];
+
+      paths.forEach((path, idx) => {
         if (path.length < 2) return;
+        
+        ctx.strokeStyle = wireColors[idx % 3];
         ctx.beginPath();
         ctx.moveTo(path[0].x, path[0].y);
         for (let p = 1; p < path.length; p++) {
@@ -422,7 +435,7 @@ export default function Background() {
 
         // Draw solder donut joints at coordinates
         path.forEach((pt) => {
-          ctx.strokeStyle = "rgba(99, 102, 241, 0.18)";
+          ctx.strokeStyle = jointColors[idx % 3];
           ctx.fillStyle = "#ffffff";
           ctx.lineWidth = 0.8;
           ctx.beginPath();
@@ -438,8 +451,8 @@ export default function Background() {
       const pulseFactor = 1.0 + Math.sin(Date.now() * 0.0035) * 0.15;
       
       const grad = ctx.createRadialGradient(coreX, coreY, 2, coreX, coreY, 32 * designScale * pulseFactor);
-      grad.addColorStop(0, "rgba(0, 229, 255, 0.32)");
-      grad.addColorStop(0.35, "rgba(99, 102, 241, 0.12)");
+      grad.addColorStop(0, "rgba(210, 90, 0, 0.32)");
+      grad.addColorStop(0.35, "rgba(0, 90, 0, 0.12)");
       grad.addColorStop(1, "rgba(255, 255, 255, 0)");
       
       ctx.fillStyle = grad;
@@ -448,9 +461,9 @@ export default function Background() {
       ctx.fill();
 
       // Glowing bright inner core dot
-      ctx.fillStyle = "rgba(0, 229, 255, 0.8)";
+      ctx.fillStyle = "rgba(0, 0, 128, 0.8)";
       ctx.shadowBlur = 8;
-      ctx.shadowColor = "rgba(0, 229, 255, 0.9)";
+      ctx.shadowColor = "rgba(0, 0, 128, 0.9)";
       ctx.beginPath();
       ctx.arc(coreX, coreY, 3, 0, Math.PI * 2);
       ctx.fill();
@@ -460,8 +473,8 @@ export default function Background() {
       if (pulses.length < maxPulses && Math.random() > 0.94) {
         const pathIdx = Math.floor(Math.random() * paths.length);
         const color = Math.random() > 0.5 
-          ? "rgba(0, 229, 255, alpha)" 
-          : "rgba(168, 85, 247, alpha)";
+          ? "rgba(210, 90, 0, alpha)" 
+          : "rgba(0, 90, 0, alpha)";
         
         pulses.push({
           pathIndex: pathIdx,
@@ -544,7 +557,7 @@ export default function Background() {
 
       // 11. Draw CAD Cursor Crosshairs & Coordinate Overlay
       if (mouse.active) {
-        ctx.strokeStyle = "rgba(99, 102, 241, 0.28)";
+        ctx.strokeStyle = "rgba(210, 90, 0, 0.28)";
         ctx.lineWidth = 0.8;
 
         // Custom CAD crosshairs centered on cursor
@@ -565,7 +578,7 @@ export default function Background() {
         ctx.stroke();
 
         // Coordinate details next to mouse pointer
-        ctx.fillStyle = "rgba(99, 102, 241, 0.6)";
+        ctx.fillStyle = "rgba(210, 90, 0, 0.6)";
         ctx.font = "9px Courier New, monospace";
         ctx.textAlign = "left";
         ctx.fillText(`[X:${Math.round(mouse.x)} Y:${Math.round(mouse.y)}]`, mouse.x + 12, mouse.y - 4);
