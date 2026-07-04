@@ -38,7 +38,7 @@ export default function Hero() {
             className="max-w-5xl font-heading text-5xl font-bold leading-[1.02] text-white sm:text-6xl lg:text-7xl"
             variants={fadeUp}
           >
-            Building the Future of Innovation
+            Building the Future of Innovation's
           </motion.h1>
           <motion.p className="mt-6 max-w-2xl text-lg leading-8 text-white/72 sm:text-xl" variants={fadeUp}>
             Empowering startups, MSMEs, innovators, entrepreneurs, and emerging businesses through end-to-end consultancy, compliance support, branding, technology, and SOF Expo access.
