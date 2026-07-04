@@ -3,8 +3,8 @@ import { Network, Sparkles } from "lucide-react";
 
 const statesData = [
   { name: "Delhi NCR", isHub: true, info: "Central SOF Innovation Hub & Expo HQ", top: "28%", left: "37%" },
-  { name: "Punjab", info: "Regional Agri-Tech & Smart Manufacturing", top: "18%", left: "30%" },
-  { name: "Haryana", info: "Industrial IoT & Automation Clusters", top: "24%", left: "33%" },
+  { name: "Punjab", info: "Regional Agri-Tech & Smart Manufacturing", top: "22%", left: "31%" },
+  { name: "Haryana", info: "Industrial IoT & Automation Clusters", top: "26%", left: "34%" },
   { name: "Rajasthan", info: "Solar & Clean Energy Innovation Centre", top: "42%", left: "22%" },
   { name: "Gujarat", info: "EV & Green Tech Startup Hub", top: "54%", left: "20%" },
   { name: "Maharashtra", info: "Fintech, SaaS & Deep Tech Network", top: "66%", left: "30%" },
