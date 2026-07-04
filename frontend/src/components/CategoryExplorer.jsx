@@ -79,7 +79,7 @@ export default function CategoryExplorer() {
                     <div className="grid h-14 w-14 place-items-center rounded-2xl border border-accent/30 bg-accent/10 shadow-cyan">
                       <active.icon className="h-7 w-7 text-accent" />
                     </div>
-                    <img src={logo} alt="Startup of the Future Logo" className="h-6 w-auto opacity-60" />
+                    <img src={logo} alt="Startup of the Future Logo" className="h-10 w-auto opacity-60" />
                   </div>
                   <h3 className="mt-4 font-heading text-2xl font-bold sm:text-3xl text-white">{active.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/70">{active.text}</p>
@@ -106,7 +106,7 @@ export default function CategoryExplorer() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                   {/* Company logo watermark */}
                   <div className="absolute bottom-3 right-3 z-10 bg-midnight/70 backdrop-blur-md border border-white/10 rounded-xl px-3 py-1.5">
-                    <img src={logo} alt="SOF Logo" className="h-5 w-auto opacity-90" />
+                    <img src={logo} alt="SOF Logo" className="h-8 w-auto opacity-90" />
                   </div>
                 </div>
               </motion.div>

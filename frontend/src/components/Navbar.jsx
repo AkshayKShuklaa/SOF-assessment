@@ -11,9 +11,9 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-midnight/70 backdrop-blur-2xl">
-      <nav className="container-page flex h-20 items-center justify-between">
+      <nav className="container-page flex h-24 items-center justify-between">
         <a href="#index" className="flex items-center" aria-label="Startup of the Future home">
-          <img src={logo} alt="Startup of the Future Logo" className="h-9 w-auto" />
+          <img src={logo} alt="Startup of the Future Logo" className="h-14 lg:h-16 w-auto" />
         </a>
 
         <div className="hidden items-center gap-7 lg:flex">
