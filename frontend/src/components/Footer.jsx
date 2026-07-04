@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Facebook, Instagram, Linkedin, Twitter, ArrowUpRight, Mail, MapPin } from "lucide-react";
 import { footerLinks } from "./data.js";
-import logo from "./logo.png";
 import { fadeUp, staggerContainer, viewport } from "./motion.js";
 
 export default function Footer() {
@@ -23,7 +22,7 @@ export default function Footer() {
           {/* Left Side: Brand and CTA */}
           <div className="flex flex-col gap-8">
             <motion.a href="#index" className="inline-block w-fit" variants={fadeUp}>
-              <img src={logo} alt="Startup of the Future Logo" className="h-24 w-auto" />
+              <img src="/logo.png" alt="Startup of the Future Logo" className="h-24 w-auto" />
             </motion.a>
             <motion.div variants={fadeUp}>
               <h2 className="font-heading text-4xl sm:text-5xl font-bold text-white leading-tight">
