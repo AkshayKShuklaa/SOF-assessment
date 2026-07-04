@@ -154,33 +154,19 @@ export default function About() {
               </div>
             </div>
 
-            {/* Clients Rolling Pulley inside About section - Vertical and Above Milestones */}
-            <div className="glass rounded-3xl p-6 overflow-hidden h-[300px] flex flex-col relative">
-              <h3 className="font-heading text-xl font-bold mb-4 text-center shrink-0">Our Clients</h3>
-              <div className="absolute top-14 left-0 w-full h-12 bg-gradient-to-b from-[#0a0f25] to-transparent z-10" />
-              <div className="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-[#0a0f25] to-transparent z-10" />
-              <div className="flex-1 overflow-hidden flex justify-center gap-4">
-                {/* Column 1 - Scrolling Up */}
-                <div className="flex flex-col min-h-max animate-marquee-vertical gap-4 pb-4 w-full max-w-[120px]">
-                  {[...clients.slice(0, 8), ...clients.slice(0, 8), ...clients.slice(0, 8)].map((item, index) => (
+            {/* Sponsors Rolling Pulley inside About section - Horizontal */}
+            <div className="glass rounded-3xl p-6 overflow-hidden flex flex-col relative">
+              <h3 className="font-heading text-xl font-bold mb-4 text-center shrink-0">Our Sponsors</h3>
+              
+              <div 
+                className="overflow-hidden py-2 flex"
+                style={{ WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)', maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)' }}
+              >
+                <div className="animate-marquee min-w-max flex items-center">
+                  {[...clients, ...clients, ...clients, ...clients].map((item, index) => (
                     <div
-                      key={`col1-${item.name}-${index}`}
-                      className="group flex items-center justify-center h-20 w-full rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xl hover:border-primary/40 hover:bg-white/[0.08] hover:scale-105 hover:-translate-y-1 hover:shadow-glow transition-all duration-300 cursor-pointer shrink-0"
-                    >
-                      <img
-                        src={item.logo}
-                        alt={`${item.name} Logo`}
-                        className="max-h-full max-w-[85%] object-contain opacity-85 group-hover:opacity-100 transition-all duration-300"
-                      />
-                    </div>
-                  ))}
-                </div>
-                {/* Column 2 - Scrolling Down */}
-                <div className="flex flex-col min-h-max animate-marquee-vertical-reverse gap-4 pb-4 w-full max-w-[120px]">
-                  {[...clients.slice(8, 15), ...clients.slice(8, 15), ...clients.slice(8, 15)].map((item, index) => (
-                    <div
-                      key={`col2-${item.name}-${index}`}
-                      className="group flex items-center justify-center h-20 w-full rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xl hover:border-primary/40 hover:bg-white/[0.08] hover:scale-105 hover:translate-y-1 hover:shadow-glow transition-all duration-300 cursor-pointer shrink-0"
+                      key={`sponsor-${item.name}-${index}`}
+                      className="group flex items-center justify-center h-20 w-32 rounded-2xl border border-white/10 bg-white/[0.03] p-3 backdrop-blur-xl hover:border-primary/40 hover:bg-white/[0.08] hover:scale-105 hover:-translate-y-1 hover:shadow-glow transition-all duration-300 cursor-pointer shrink-0"
                     >
                       <img
                         src={item.logo}

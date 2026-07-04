@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Search } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { domains } from "./data.js";
 import { fadeUp, staggerContainer, viewport } from "./motion.js";
 import SectionHeader from "./SectionHeader.jsx";
@@ -8,13 +8,6 @@ import logo from "./logo.png";
 
 export default function CategoryExplorer() {
   const [active, setActive] = useState(domains[0]);
-  const [query, setQuery] = useState("");
-
-  const filtered = useMemo(() => {
-    const value = query.trim().toLowerCase();
-    if (!value) return domains;
-    return domains.filter((domain) => `${domain.title} ${domain.text}`.toLowerCase().includes(value));
-  }, [query]);
 
   return (
     <section className="section-pad">
@@ -26,17 +19,8 @@ export default function CategoryExplorer() {
         />
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
           <motion.div className="glass rounded-[2rem] p-5" initial="hidden" whileInView="visible" viewport={viewport} variants={staggerContainer}>
-            <motion.label className="mb-4 flex items-center gap-3 rounded-2xl border border-white/10 bg-midnight/70 px-4 py-3" variants={fadeUp}>
-              <Search className="h-5 w-5 text-accent" />
-              <input
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                className="w-full bg-transparent text-sm text-white outline-none placeholder:text-white/38"
-                placeholder="Search innovation categories"
-              />
-            </motion.label>
             <motion.div className="grid max-h-[520px] gap-3 overflow-y-auto pr-1" variants={staggerContainer}>
-              {filtered.map((domain) => {
+              {domains.map((domain) => {
                 const Icon = domain.icon;
                 const selected = active.title === domain.title;
                 return (
