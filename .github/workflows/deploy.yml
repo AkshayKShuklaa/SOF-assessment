@@ -32,4 +32,4 @@ jobs:
     - name: Sync files via FTP
       run: |
         sudo apt-get update && sudo apt-get install -y lftp
-        lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; mirror -R ./frontend/dist/ ./"
+        lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; mirror -R --delete ./frontend/dist/ ./"
