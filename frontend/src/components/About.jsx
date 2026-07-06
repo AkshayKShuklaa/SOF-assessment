@@ -80,10 +80,13 @@ export default function About() {
                   {valueCards.slice(0, 2).map((card) => {
                     const Icon = card.icon;
                     return (
-                      <div key={card.title} className="glass rounded-3xl border border-white/20 bg-white/10 p-5 hover:bg-white/20 transition-colors">
-                        <Icon className="h-5 w-5 text-accent" />
-                        <h4 className="mt-4 font-heading text-xl font-bold text-white">{card.title}</h4>
-                        <p className="mt-2 text-sm leading-6 text-gray-300">{card.text}</p>
+                      <div key={card.title} className="relative overflow-hidden rounded-3xl border border-white/30 bg-white/10 p-6 hover:bg-white/20 hover:border-accent/50 hover:shadow-[0_0_30px_rgba(255,153,51,0.3)] transition-all duration-500 group">
+                        <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-accent/40 blur-3xl group-hover:bg-accent/60 transition-colors duration-500" />
+                        <div className="relative z-10">
+                          <Icon className="h-7 w-7 text-accent mb-4 drop-shadow-md group-hover:scale-110 transition-transform duration-300" />
+                          <h4 className="font-heading text-2xl font-bold text-white drop-shadow-sm">{card.title}</h4>
+                          <p className="mt-3 text-[15px] leading-relaxed text-white opacity-95">{card.text}</p>
+                        </div>
                       </div>
                     );
                   })}
