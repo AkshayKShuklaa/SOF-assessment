@@ -42,7 +42,7 @@ export default function ConnectivityMap() {
       <div className="relative z-10 w-full max-w-[500px] sm:max-w-[700px] mx-auto mb-4 flex justify-center">
         <div className="relative inline-block w-full">
           {/* Map inverted for white background */}
-          <img src="/india_map.png" alt="Map of India" className="w-full h-auto invert opacity-60 mix-blend-multiply block" />
+          <img src="/india_map.png" alt="Map of India" className="w-full h-auto invert opacity-60 block" />
           
           {/* Connecting Lines */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
