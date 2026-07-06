@@ -4,27 +4,59 @@ import { ArrowRight, Sparkles, Search, CircuitBoard } from "lucide-react";
 import { heroStats } from "./data.js";
 import { fadeUp, staggerContainer } from "./motion.js";
 
+function Digit({ value, index, isInView }) {
+  const target = parseInt(value, 10);
+  if (isNaN(target)) {
+    return <span>{value}</span>;
+  }
+  
+  const numbers = [];
+  // Add cycles of 0-9 to create the spin effect
+  for (let i = 0; i < 2; i++) {
+    for (let j = 0; j < 10; j++) {
+      numbers.push(j);
+    }
+  }
+  // Add final cycle up to the target
+  for (let j = 0; j <= target; j++) {
+    numbers.push(j);
+  }
+  
+  const targetIndex = numbers.length - 1;
+
+  return (
+    <span className="relative overflow-hidden inline-flex justify-center" style={{ height: "1em", lineHeight: "1em" }}>
+      {/* Invisible placeholder sets the proper width */}
+      <span className="invisible">{value}</span>
+      <motion.span
+        className="absolute inset-x-0 top-0 flex flex-col items-center"
+        initial={{ y: "0%" }}
+        animate={isInView ? { y: `-${(targetIndex / numbers.length) * 100}%` } : { y: "0%" }}
+        transition={{ 
+          duration: 1.5 + (index * 0.2), 
+          ease: [0.16, 1, 0.3, 1] 
+        }}
+      >
+        {numbers.map((num, i) => (
+          <span key={i} className="h-[1em] w-full flex items-center justify-center">{num}</span>
+        ))}
+      </motion.span>
+    </span>
+  );
+}
+
 function Counter({ value, suffix }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
-  const [display, setDisplay] = useState("0");
-
-  useEffect(() => {
-    if (isInView) {
-      const controls = animate(0, value, {
-        duration: 2,
-        ease: "easeOut",
-        onUpdate: (latest) => {
-          setDisplay(Math.round(latest).toString());
-        }
-      });
-      return () => controls.stop();
-    }
-  }, [value, isInView]);
+  const stringValue = value.toString();
 
   return (
     <span ref={ref} className="inline-flex items-baseline">
-      <span>{display}</span>
+      <span className="flex">
+        {stringValue.split('').map((char, index) => (
+          <Digit key={index} value={char} index={index} isInView={isInView} />
+        ))}
+      </span>
       {suffix && <span className="text-accent ml-0.5">{suffix}</span>}
     </span>
   );
