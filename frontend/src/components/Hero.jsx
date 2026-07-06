@@ -7,7 +7,7 @@ import { fadeUp, staggerContainer } from "./motion.js";
 function Counter({ value, suffix }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-20px" });
-  const [display, setDisplay] = useState(`0${suffix}`);
+  const [display, setDisplay] = useState("0");
 
   useEffect(() => {
     if (isInView) {
@@ -15,14 +15,19 @@ function Counter({ value, suffix }) {
         duration: 3,
         ease: "easeOut",
         onUpdate: (latest) => {
-          setDisplay(`${Math.round(latest)}${suffix}`);
+          setDisplay(Math.round(latest).toString());
         }
       });
       return () => controls.stop();
     }
-  }, [value, suffix, isInView]);
+  }, [value, isInView]);
 
-  return <span ref={ref}>{display}</span>;
+  return (
+    <div ref={ref} className="flex items-start tracking-tighter">
+      <span className="bg-gradient-to-br from-white via-white to-white/60 bg-clip-text text-transparent">{display}</span>
+      {suffix && <span className="text-[#FF9933] ml-1 text-3xl sm:text-4xl lg:text-5xl font-black mt-1">{suffix}</span>}
+    </div>
+  );
 }
 
 const searchHints = [
@@ -137,7 +142,7 @@ export default function Hero() {
             </motion.a>
           </motion.div>
 
-          <motion.div className="mt-12 space-y-8" variants={fadeUp}>
+          <motion.div className="mt-12 space-y-12" variants={fadeUp}>
             {/* Ecosystem Signal Glass Box */}
             <div className="gradient-border glass rounded-3xl p-5 hover:scale-[1.01] transition-transform duration-300">
               <p className="text-xs font-bold uppercase tracking-[0.24em] text-accent">Ecosystem signal</p>
@@ -146,14 +151,16 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* Stats Counter Grid */}
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 pt-2">
+            {/* Gitex Style Stats Counter Grid */}
+            <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4 pt-6 border-t border-white/10 relative">
               {heroStats.map((stat, index) => (
-                <div key={stat.label} className="border-l-2 border-accent/35 pl-4">
-                  <div className="font-heading text-3xl font-bold text-white leading-none">
+                <div key={stat.label} className="flex flex-col group relative">
+                  <div className="font-heading text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none">
                     <Counter value={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="mt-2 text-xs font-semibold text-white/62">{stat.label}</p>
+                  <p className="mt-4 text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-white/50 group-hover:text-white transition-colors duration-500 leading-snug max-w-[150px]">
+                    {stat.label}
+                  </p>
                 </div>
               ))}
             </div>
