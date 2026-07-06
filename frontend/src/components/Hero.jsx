@@ -24,7 +24,7 @@ function Counter({ value, suffix }) {
 
   return (
     <div ref={ref} className="flex items-start tracking-tighter">
-      <span className="bg-gradient-to-br from-white via-white to-white/60 bg-clip-text text-transparent">{display}</span>
+      <span>{display}</span>
       {suffix && <span className="text-[#FF9933] ml-1 text-3xl sm:text-4xl lg:text-5xl font-black mt-1">{suffix}</span>}
     </div>
   );
