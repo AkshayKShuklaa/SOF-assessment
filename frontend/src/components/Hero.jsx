@@ -1,29 +1,15 @@
-import { useEffect, useState, useRef } from "react";
-import { motion, animate, useInView } from "framer-motion";
-import { ArrowRight, Sparkles, Search, CircuitBoard } from "lucide-react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Sparkles, Search, CircuitBoard, BrainCircuit, Rocket, ShieldCheck, Globe2 } from "lucide-react";
 import { heroStats } from "./data.js";
 import { fadeUp, staggerContainer } from "./motion.js";
 
-function Counter({ value, suffix }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-20px" });
-  const [display, setDisplay] = useState(`0${suffix}`);
-
-  useEffect(() => {
-    if (isInView) {
-      const controls = animate(0, value, {
-        duration: 3,
-        ease: "easeOut",
-        onUpdate: (latest) => {
-          setDisplay(`${Math.round(latest)}${suffix}`);
-        }
-      });
-      return () => controls.stop();
-    }
-  }, [value, suffix, isInView]);
-
-  return <span ref={ref}>{display}</span>;
-}
+const creativeTags = [
+  { label: "AI & Deep Tech", icon: BrainCircuit, color: "text-cyan-400", bg: "bg-cyan-400/10", border: "border-cyan-400/20" },
+  { label: "Global Funding", icon: Rocket, color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-400/20" },
+  { label: "Zero-Trust Security", icon: ShieldCheck, color: "text-emerald-400", bg: "bg-emerald-400/10", border: "border-emerald-400/20" },
+  { label: "Ecosystem Access", icon: Globe2, color: "text-orange-400", bg: "bg-orange-400/10", border: "border-orange-400/20" },
+];
 
 const searchHints = [
   "Search for startup consultation and idea analysis...",
@@ -146,16 +132,23 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* Stats Counter Grid */}
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 pt-2">
-              {heroStats.map((stat, index) => (
-                <div key={stat.label} className="border-l-2 border-accent/35 pl-4">
-                  <div className="font-heading text-3xl font-bold text-white leading-none">
-                    <Counter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <p className="mt-2 text-xs font-semibold text-white/62">{stat.label}</p>
-                </div>
-              ))}
+            {/* Innovation Pillars */}
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 pt-2">
+              {creativeTags.map((tag, index) => {
+                const Icon = tag.icon;
+                return (
+                  <motion.div 
+                    key={tag.label} 
+                    className={`relative overflow-hidden rounded-2xl border ${tag.border} ${tag.bg} p-4 flex flex-col items-center justify-center gap-3 text-center group cursor-default backdrop-blur-md`}
+                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <Icon className={`h-7 w-7 ${tag.color} group-hover:scale-110 transition-transform duration-300`} />
+                    <span className="text-xs font-semibold text-white/90">{tag.label}</span>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </motion.div>
