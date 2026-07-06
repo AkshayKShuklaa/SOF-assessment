@@ -84,22 +84,16 @@ export default function Footer() {
           </div>
         </motion.div>
 
-        {/* Footer Image Banner & Copyright */}
-        <div className="relative mt-20 w-full rounded-3xl overflow-hidden border border-white/10 bg-white/[0.02]">
-          <div className="relative w-full h-40 sm:h-56">
-            <img src="/footer_skyline.png" alt="Futuristic Cityscape" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen grayscale-[20%]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050B14] via-[#050B14]/60 to-transparent" />
-          </div>
-          <div className="absolute bottom-0 left-0 w-full p-5 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-white/50">
-            <p>Copyright © 2026-27 Future Inn-Tech Corp. All Rights Reserved.</p>
-            <p className="flex items-center gap-2 bg-[#050B14]/80 px-3 py-1.5 rounded-full border border-white/5 backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              An ISO 9001:2015 Certified Company
-            </p>
-          </div>
+        {/* Footer Copyright */}
+        <div className="mt-20 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs font-medium text-white/50">
+          <p>Copyright © 2026-27 Future Inn-Tech Corp. All Rights Reserved.</p>
+          <p className="flex items-center gap-2 bg-white/[0.03] px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            An ISO 9001:2015 Certified Company
+          </p>
         </div>
       </div>
     </footer>
