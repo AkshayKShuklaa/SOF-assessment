@@ -6,6 +6,7 @@ import Services from "./components/Services.jsx";
 import Founder from "./components/Founder.jsx";
 import Roadmap from "./components/Roadmap.jsx";
 import Expo from "./components/Expo.jsx";
+import Templates from "./components/Templates.jsx";
 import Membership from "./components/Membership.jsx";
 import Testimonials from "./components/Testimonials.jsx";
 import Contact from "./components/Contact.jsx";
@@ -33,6 +34,7 @@ export default function App() {
         <Founder />
         <Roadmap />
         <Expo />
+        <Templates />
         <Membership />
         <Testimonials />
         <FAQ />

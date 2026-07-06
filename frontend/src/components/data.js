@@ -259,3 +259,34 @@ export const faqItems = [
     answer: "It depends on the business type, document verification, and government portal processing. LLP and Pvt Ltd registrations usually take 5 to 10 working days.",
   },
 ];
+
+export const templatesData = [
+  {
+    title: "Blogging Template",
+    link: "https://blogs-one-plum.vercel.app",
+    image: "/templates/blogging.png",
+    alt: "Insights, Design & Tech Innovations",
+    tag: "Blog"
+  },
+  {
+    title: "Digital Marketing",
+    link: "https://marketing-folio.vercel.app",
+    image: "/templates/marketing.png",
+    alt: "We help to grow your startup",
+    tag: "Marketing"
+  },
+  {
+    title: "Digital Agency",
+    link: "https://digital-template-rouge.vercel.app",
+    image: "/templates/agency.png",
+    alt: "We are a creative digital agency.",
+    tag: "Agency"
+  },
+  {
+    title: "Startup Portfolio",
+    link: "https://portfolio-template-pi-puce.vercel.app",
+    image: "/templates/startup.png",
+    alt: "DIGITAL STARTUP",
+    tag: "Startup"
+  }
+];
