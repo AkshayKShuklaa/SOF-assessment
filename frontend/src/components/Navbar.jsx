@@ -26,7 +26,7 @@ export default function Navbar() {
           <a href="#index" className="flex items-center" aria-label="Startup of the Future home">
             <img src={logo} alt="Startup of the Future Logo" className="h-14 lg:h-16 w-auto" />
           </a>
-          <div className="hidden md:block h-10 w-[1.5px] bg-white/40"></div>
+          <div className="hidden md:block h-10 w-0.5 bg-white/60"></div>
           <div className="hidden md:block relative h-6 w-48 overflow-hidden text-[15px] font-normal text-cyan-400">
             <AnimatePresence>
               <motion.span
