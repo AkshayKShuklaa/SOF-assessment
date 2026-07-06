@@ -264,28 +264,28 @@ export const templatesData = [
   {
     title: "Blogging Template",
     link: "https://blogs-one-plum.vercel.app",
-    image: "/templates/blogging.png",
+    image: "/templates/1.png",
     alt: "Insights, Design & Tech Innovations",
     tag: "Blog"
   },
   {
     title: "Digital Marketing",
     link: "https://marketing-folio.vercel.app",
-    image: "/templates/marketing.png",
+    image: "/templates/2.png",
     alt: "We help to grow your startup",
     tag: "Marketing"
   },
   {
     title: "Digital Agency",
     link: "https://digital-template-rouge.vercel.app",
-    image: "/templates/agency.png",
+    image: "/templates/3.png",
     alt: "We are a creative digital agency.",
     tag: "Agency"
   },
   {
     title: "Startup Portfolio",
     link: "https://portfolio-template-pi-puce.vercel.app",
-    image: "/templates/startup.png",
+    image: "/templates/4.png",
     alt: "DIGITAL STARTUP",
     tag: "Startup"
   }
