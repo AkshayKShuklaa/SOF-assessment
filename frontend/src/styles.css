@@ -232,7 +232,7 @@ button {
 .animate-marquee {
   display: flex;
   gap: 16px;
-  animation: marquee 25s linear infinite;
+  animation: marquee 45s linear infinite;
 }
 
 .animate-marquee:hover {
