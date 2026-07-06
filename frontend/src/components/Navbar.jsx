@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { navLinks } from "./data.js";
 import logo from "./logo.png";
 
-const tickerWords = ["Future", "Technology", "Innovations", "AiEXPO", "2070"];
+const tickerWords = ["Future", "Technology", "Innovations", "AiEXPO-2070"];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Navbar() {
           <a href="#index" className="flex items-center" aria-label="Startup of the Future home">
             <img src={logo} alt="Startup of the Future Logo" className="h-14 lg:h-16 w-auto" />
           </a>
-          <div className="hidden md:block relative h-6 w-32 overflow-hidden text-lg font-bold text-cyan-400">
+          <div className="hidden md:block relative h-6 w-48 overflow-hidden text-lg font-medium text-cyan-400">
             <AnimatePresence>
               <motion.span
                 key={wordIndex}
