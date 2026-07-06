@@ -12,7 +12,7 @@ function Counter({ value, suffix }) {
   useEffect(() => {
     if (isInView) {
       const controls = animate(0, value, {
-        duration: 3,
+        duration: 2,
         ease: "easeOut",
         onUpdate: (latest) => {
           setDisplay(Math.round(latest).toString());
@@ -23,10 +23,10 @@ function Counter({ value, suffix }) {
   }, [value, isInView]);
 
   return (
-    <div ref={ref} className="flex items-start tracking-tighter">
+    <span ref={ref} className="inline-flex items-baseline">
       <span>{display}</span>
-      {suffix && <span className="text-[#FF9933] ml-1 text-3xl sm:text-4xl lg:text-5xl font-black mt-1">{suffix}</span>}
-    </div>
+      {suffix && <span className="text-accent ml-0.5">{suffix}</span>}
+    </span>
   );
 }
 
@@ -151,16 +151,14 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* Gitex Style Stats Counter Grid */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-4 pt-6 border-t border-white/10 relative">
+            {/* Stats Counter Grid */}
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4 pt-2">
               {heroStats.map((stat, index) => (
-                <div key={stat.label} className="flex flex-col group relative">
-                  <div className="font-heading text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-none">
+                <div key={stat.label} className="border-l-2 border-accent/35 pl-4">
+                  <div className="font-heading text-3xl font-bold text-white leading-none">
                     <Counter value={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="mt-4 text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-white/50 group-hover:text-white transition-colors duration-500 leading-snug max-w-[150px]">
-                    {stat.label}
-                  </p>
+                  <p className="mt-2 text-xs font-semibold text-white/62">{stat.label}</p>
                 </div>
               ))}
             </div>
