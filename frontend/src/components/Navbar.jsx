@@ -22,11 +22,11 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-midnight/70 backdrop-blur-2xl">
       <nav className="container-page flex h-24 items-center justify-between">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <a href="#index" className="flex items-center" aria-label="Startup of the Future home">
             <img src={logo} alt="Startup of the Future Logo" className="h-14 lg:h-16 w-auto" />
           </a>
-          <div className="hidden md:block h-5 w-px bg-gray-400 rounded-full mx-2"></div>
+          <div className="hidden md:block h-5 w-px bg-gray-400 rounded-full"></div>
           <div className="hidden md:flex items-center">
             <div className="relative h-6 w-48 overflow-hidden text-[15px] font-normal text-gray-400">
               <AnimatePresence>
