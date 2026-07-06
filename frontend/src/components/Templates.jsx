@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, LayoutTemplate } from "lucide-react";
 import SectionHeader from "./SectionHeader.jsx";
 import { templatesData } from "./data.js";
-import { FADE_UP_ANIMATION_VARIANTS } from "./motion.js";
+import { fadeUp, staggerContainer, viewport } from "./motion.js";
 
 export default function Templates() {
   return (
@@ -18,14 +18,9 @@ export default function Templates() {
 
         <motion.div
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={{
-            hidden: {},
-            show: {
-              transition: { staggerChildren: 0.1 },
-            },
-          }}
+          whileInView="visible"
+          viewport={viewport}
+          variants={staggerContainer}
           className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto"
         >
           {templatesData.map((template, idx) => (
@@ -34,7 +29,7 @@ export default function Templates() {
               href={template.link}
               target="_blank"
               rel="noopener noreferrer"
-              variants={FADE_UP_ANIMATION_VARIANTS}
+              variants={fadeUp}
               className="group relative flex flex-col overflow-hidden rounded-2xl bg-white/5 border border-white/10 p-2 transition-all hover:bg-white/10 hover:border-indigo-500/30"
             >
               {/* Image Container */}
