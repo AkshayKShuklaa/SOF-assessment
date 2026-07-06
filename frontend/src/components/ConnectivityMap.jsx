@@ -19,20 +19,20 @@ const statesData = [
 
 export default function ConnectivityMap() {
   return (
-    <div className="bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col">
+    <div className="bg-gradient-to-br from-blue-900 via-indigo-900 to-slate-900 shadow-[0_20px_50px_rgba(0,0,0,0.3)] rounded-[2rem] p-6 sm:p-8 relative overflow-hidden flex flex-col">
       {/* Background Glows for White Theme */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-indigo-500/5 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-cyan-500/10 blur-[80px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-cyan-500/20 blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 right-0 h-64 w-64 rounded-full bg-indigo-500/30 blur-[80px] pointer-events-none" />
       
       {/* Header Info */}
       <div className="relative z-10 flex items-start justify-between gap-4 mb-10">
         <div>
-          <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-cyan-600">
+          <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-cyan-400">
             <Network className="h-4 w-4 animate-pulse" />
             Connectivity Hub
           </span>
-          <h3 className="mt-2 font-heading text-2xl font-bold text-slate-900 sm:text-3xl">India Innovation Circuit</h3>
-          <p className="text-sm text-slate-500 mt-2 max-w-xl">
+          <h3 className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">India Innovation Circuit</h3>
+          <p className="text-sm text-blue-100/80 mt-2 max-w-xl">
             A dynamic network of state-specific expo hubs driving the future of generative AI, green tech, and industrial automation across India.
           </p>
         </div>
@@ -41,8 +41,8 @@ export default function ConnectivityMap() {
       {/* Map Section */}
       <div className="relative z-10 w-full max-w-[500px] sm:max-w-[700px] mx-auto mb-4 flex justify-center">
         <div className="relative inline-block w-full">
-          {/* Map inverted for white background */}
-          <img src="/india_map.png" alt="Map of India" className="w-full h-auto invert opacity-60 block" />
+          {/* Map made bright/white for dark blue background */}
+          <img src="/india_map.png" alt="Map of India" className="w-full h-auto brightness-[2] contrast-[1.2] sepia-[1] hue-rotate-[180deg] saturate-[3] opacity-70 block" />
           
           {/* Connecting Lines */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none z-10">
