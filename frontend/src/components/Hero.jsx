@@ -1,24 +1,28 @@
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, animate, useInView } from "framer-motion";
 import { ArrowRight, Sparkles, Search, CircuitBoard } from "lucide-react";
 import { heroStats } from "./data.js";
 import { fadeUp, staggerContainer } from "./motion.js";
 
 function Counter({ value, suffix }) {
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => `${Math.round(latest)}${suffix}`);
-  const [display, setDisplay] = useState("0");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
+  const [display, setDisplay] = useState(`0${suffix}`);
 
   useEffect(() => {
-    const controls = animate(count, value, { duration: 2.2, ease: "easeOut" });
-    const unsubscribe = rounded.on("change", setDisplay);
-    return () => {
-      controls.stop();
-      unsubscribe();
-    };
-  }, [count, rounded, value]);
+    if (isInView) {
+      const controls = animate(0, value, {
+        duration: 3,
+        ease: "easeOut",
+        onUpdate: (latest) => {
+          setDisplay(`${Math.round(latest)}${suffix}`);
+        }
+      });
+      return () => controls.stop();
+    }
+  }, [value, suffix, isInView]);
 
-  return <span>{display}</span>;
+  return <span ref={ref}>{display}</span>;
 }
 
 const searchHints = [
