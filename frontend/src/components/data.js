@@ -34,12 +34,12 @@ import awsLogo from "./partners/aws.svg";
 import futureinntechLogo from "./partners/futureinntech.svg";
 
 export const navLinks = [
-  ["Index", "index"],
   ["Overview", "overview"],
   ["Innovation", "innovation"],
   ["Offerings", "offerings"],
   ["Events", "events"],
   ["Memberships", "memberships"],
+  ["Directory", ""],
   ["Reach Us", "reach-us"],
 ];
 

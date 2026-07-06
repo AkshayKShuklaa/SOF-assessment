@@ -18,13 +18,10 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-7 lg:flex">
           {navLinks.map(([label, id]) => (
-            <a key={id} href={`#${id}`} className={linkClass}>
+            <a key={label} href={id ? `#${id}` : undefined} className={linkClass}>
               {label}
             </a>
           ))}
-        </div>
-
-        <div className="hidden items-center gap-3 lg:flex">
           <a href="#memberships" className="btn-primary">
             Join SOF
           </a>
@@ -50,8 +47,8 @@ export default function Navbar() {
             <div className="glass grid gap-1 rounded-2xl p-3">
               {navLinks.map(([label, id]) => (
                 <a
-                  key={id}
-                  href={`#${id}`}
+                  key={label}
+                  href={id ? `#${id}` : undefined}
                   className="rounded-xl px-4 py-3 text-sm font-semibold text-white/78 hover:bg-white/[0.06]"
                   onClick={() => setOpen(false)}
                 >
