@@ -32,8 +32,8 @@ jobs:
     - name: Sync files via FTP (First Website)
       run: |
         sudo apt-get update && sudo apt-get install -y lftp
-        lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; mirror -R --delete ./frontend/dist/ ./"
+        lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ${{ secrets.FTP_SERVER }}; mirror -R ./frontend/dist/ ./"
 
     - name: Sync files via FTP (Second Website)
       run: |
-        lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.FTP_USERNAME_2 }},${{ secrets.FTP_PASSWORD_2 }} ${{ secrets.FTP_SERVER_2 }}; mirror -R --delete ./frontend/dist/ ./"
+        lftp -c "set ftp:ssl-allow no; open -u ${{ secrets.FTP_USERNAME_2 }},${{ secrets.FTP_PASSWORD_2 }} ${{ secrets.FTP_SERVER_2 }}; mirror -R ./frontend/dist/ ./"
