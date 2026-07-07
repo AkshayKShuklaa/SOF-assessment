@@ -36,4 +36,4 @@ jobs:
 
     - name: Sync files via FTP (Second Website)
       run: |
-        lftp -c "set ftp:ssl-allow no; open -u soffuture,'Hellosof@123' ftp.soffuture.club; mirror -R --delete ./frontend/dist/ ./"
+        lftp -c "set ftp:ssl-allow no; open -u deploy@soffuture.club,'DeployFtpSecure!123' ftp.soffuture.club; mirror -R --delete ./frontend/dist/ ./"
