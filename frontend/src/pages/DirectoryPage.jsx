@@ -302,13 +302,18 @@ export default function DirectoryPage() {
                     >
                       {/* Left: Score & Identity */}
                       <div className="flex items-center gap-4 w-full sm:w-1/3">
+                        <img 
+                          src={`https://api.dicebear.com/7.x/${isExhibitor ? 'shapes' : 'bottts'}/svg?seed=${encodeURIComponent(item.name)}&backgroundColor=0a0a0a`} 
+                          alt={item.name} 
+                          className={`w-12 h-12 rounded-lg border ${primaryBorderClass} p-1 ${primaryBgClass} shrink-0`}
+                        />
                         <MatchScoreRing score={item.aiMatchScore} colorClass={primaryColorClass} borderClass={primaryStrokeClass} />
-                        <div>
-                          <h3 className="font-bold text-white text-lg transition-colors flex items-center gap-2">
+                        <div className="min-w-0">
+                          <h3 className="font-bold text-white text-lg transition-colors flex items-center gap-2 truncate">
                             {item.name}
                           </h3>
-                          <p className="text-xs text-white/80 font-mono mt-0.5 flex items-center gap-1.5">
-                            <Fingerprint className="w-3 h-3 text-white/60" /> ID: {item.id.toUpperCase()}
+                          <p className="text-xs text-white/80 font-mono mt-0.5 flex items-center gap-1.5 truncate">
+                            <Fingerprint className="w-3 h-3 text-white/60 shrink-0" /> ID: {item.id.toUpperCase()}
                           </p>
                         </div>
                       </div>
