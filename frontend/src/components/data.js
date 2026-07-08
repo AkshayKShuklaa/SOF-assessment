@@ -290,3 +290,19 @@ export const templatesData = [
     tag: "Startup"
   }
 ];
+
+export const dummyExhibitors = [
+  { id: 1, name: "TechNova Solutions", category: "AI & Automation", booth: "A-12", description: "Pioneering generative AI models for enterprise." },
+  { id: 2, name: "GreenFuture Mobility", category: "EV & Automotive", booth: "B-04", description: "Sustainable battery technology for the next generation of EVs." },
+  { id: 3, name: "MedTech Pioneers", category: "Health Innovation", booth: "C-22", description: "Advanced IoT healthcare monitoring systems." },
+  { id: 4, name: "Orbit Satellite Tech", category: "Satellite & Space", booth: "A-05", description: "Nano-satellites for global fast internet access." },
+  { id: 5, name: "CyberShield Networks", category: "Cyber Security", booth: "D-18", description: "Zero-trust network architecture for modern MSMEs." },
+];
+
+export const dummyDirectoryMembers = [
+  { id: 101, name: "Amit Sharma", role: "Founder & CEO", company: "DataSync AI", type: "Startup" },
+  { id: 102, name: "Priya Patel", role: "Managing Partner", company: "Venture Catalyst Fund", type: "Investor" },
+  { id: 103, name: "Rahul Verma", role: "Chief Technology Officer", company: "RoboLogistics", type: "Startup" },
+  { id: 104, name: "Sneha Reddy", role: "Angel Investor", company: "Independent", type: "Investor" },
+  { id: 105, name: "Karan Singh", role: "Ecosystem Builder", company: "Innovate India Hub", type: "Community" },
+];

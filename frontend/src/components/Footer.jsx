@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Facebook, Instagram, Linkedin, Twitter, ArrowUpRight, Mail, MapPin } from "lucide-react";
 import { footerLinks } from "./data.js";
 import logo from "./logo.png";
@@ -22,7 +23,7 @@ export default function Footer() {
         >
           {/* Left Side: Brand and CTA */}
           <div className="flex flex-col gap-8">
-            <motion.a href="#index" className="inline-block w-fit" variants={fadeUp}>
+            <motion.a href="/#index" className="inline-block w-fit" variants={fadeUp}>
               <img src={logo} alt="Startup of the Future Logo" className="h-24 w-auto" />
             </motion.a>
             <motion.div variants={fadeUp}>
@@ -35,7 +36,7 @@ export default function Footer() {
               </p>
             </motion.div>
             <motion.div variants={fadeUp} className="flex gap-4 items-center">
-              <a href="#reach-us" className="btn-primary group">
+              <a href="/#reach-us" className="btn-primary group">
                 Start Your Journey <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
               </a>
               <a href="mailto:hello@startupofthefuture.com" className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-all hover:bg-white/10 hover:text-cyan-400 hover:scale-110 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]">
@@ -49,28 +50,31 @@ export default function Footer() {
             <motion.div variants={fadeUp} className="flex flex-col gap-4">
               <h4 className="font-bold text-white">Platform</h4>
               {footerLinks.slice(0, 4).map(([label, id]) => (
-                <a key={id} href={`#${id}`} className="text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">
+                <a key={id} href={`/#${id}`} className="text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">
                   {label}
                 </a>
               ))}
+              <Link to="/directory" className="text-left text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">
+                Directory & Exhibitors
+              </Link>
             </motion.div>
             
             <motion.div variants={fadeUp} className="flex flex-col gap-4">
               <h4 className="font-bold text-white">Company</h4>
               {footerLinks.slice(4).map(([label, id]) => (
-                <a key={id} href={`#${id}`} className="text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">
+                <a key={id} href={`/#${id}`} className="text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">
                   {label}
                 </a>
               ))}
-              <a href="#privacy" className="text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">Privacy Policy</a>
-              <a href="#terms" className="text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">Terms of Service</a>
+              <a href="/#privacy" className="text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">Privacy Policy</a>
+              <a href="/#terms" className="text-sm font-medium text-white/50 hover:text-cyan-400 hover:translate-x-1 transition-all">Terms of Service</a>
             </motion.div>
 
             <motion.div variants={fadeUp} className="col-span-2 sm:col-span-1 flex flex-col gap-4">
               <h4 className="font-bold text-white">Connect</h4>
               <div className="flex gap-3">
                 {[Linkedin, Twitter, Instagram, Facebook].map((Icon, index) => (
-                  <a key={index} href="#index" className="group relative flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.03] border border-white/10 text-white/60 overflow-hidden transition-all hover:text-white hover:border-cyan-400/50 hover:shadow-[0_0_15px_rgba(34,211,238,0.15)]" aria-label="SOF social link">
+                  <a key={index} href="/#index" className="group relative flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.03] border border-white/10 text-white/60 overflow-hidden transition-all hover:text-white hover:border-cyan-400/50 hover:shadow-[0_0_15px_rgba(34,211,238,0.15)]" aria-label="SOF social link">
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-indigo-500/20 opacity-0 transition-opacity group-hover:opacity-100" />
                     <Icon className="relative z-10 h-4 w-4 transition-transform group-hover:scale-110" />
                   </a>

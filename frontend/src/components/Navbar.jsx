@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "./data.js";
@@ -47,13 +48,19 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-7 lg:flex">
           {navLinks.map(([label, id]) => (
-            <a key={label} href={id ? `#${id}` : undefined} className={linkClass}>
-              {label}
-            </a>
+            label === "Directory" ? (
+              <Link key={label} to="/directory" className={linkClass}>
+                {label}
+              </Link>
+            ) : (
+              <a key={label} href={id ? `/#${id}` : "/"} className={linkClass}>
+                {label}
+              </a>
+            )
           ))}
-          <a href="#memberships" className="btn-primary">
+          <Link to="/register" className="btn-primary">
             Join SOF
-          </a>
+          </Link>
         </div>
 
         <button
@@ -75,18 +82,29 @@ export default function Navbar() {
           >
             <div className="glass grid gap-1 rounded-2xl p-3">
               {navLinks.map(([label, id]) => (
-                <a
-                  key={label}
-                  href={id ? `#${id}` : undefined}
-                  className="rounded-xl px-4 py-3 text-sm font-semibold text-white/78 hover:bg-white/[0.06]"
-                  onClick={() => setOpen(false)}
-                >
-                  {label}
-                </a>
+                label === "Directory" ? (
+                  <Link
+                    key={label}
+                    to="/directory"
+                    onClick={() => setOpen(false)}
+                    className="text-left rounded-xl px-4 py-3 text-sm font-semibold text-white/78 hover:bg-white/[0.06]"
+                  >
+                    {label}
+                  </Link>
+                ) : (
+                  <a
+                    key={label}
+                    href={id ? `/#${id}` : "/"}
+                    className="rounded-xl px-4 py-3 text-sm font-semibold text-white/78 hover:bg-white/[0.06]"
+                    onClick={() => setOpen(false)}
+                  >
+                    {label}
+                  </a>
+                )
               ))}
-              <a href="#memberships" className="btn-primary mt-2" onClick={() => setOpen(false)}>
+              <Link to="/register" className="btn-primary mt-2" onClick={() => setOpen(false)}>
                 Join SOF
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}
