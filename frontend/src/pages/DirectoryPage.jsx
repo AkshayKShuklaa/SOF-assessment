@@ -328,7 +328,7 @@ export default function DirectoryPage() {
                                <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest font-mono ${primaryColorClass}`}>
                                  <Zap className="w-4 h-4" /> System Diagnostics
                                </h4>
-                               <p className="text-sm text-white leading-relaxed bg-black/60 p-4 rounded-xl border border-white/10 font-mono">
+                               <p className="text-sm text-white/80 leading-relaxed p-2 font-mono">
                                  &gt; {item.aiSummary}
                                </p>
                              </div>
