@@ -62,7 +62,7 @@ const generateData = () => {
         website: `https://${companyName.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`,
         email: `hello@${companyName.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`,
         phone: `+91 99999 ${20000 + idCounter}`,
-        aiMatchScore: matchScore - 2, // Slight variation
+        aiMatchScore: matchScore - 2,
         techStack: stack,
         aiSummary: `Individual profile mapped. Key driver at ${companyName}. Expertise detected in leveraging ${stack[1]} to scale ${category} operations. High synergy with current user matrices.`,
       });
@@ -84,7 +84,7 @@ const MatchScoreRing = ({ score, colorClass, borderClass }) => {
   return (
     <div className="relative flex items-center justify-center w-12 h-12">
       <svg className="w-full h-full transform -rotate-90" viewBox="0 0 40 40">
-        <circle cx="20" cy="20" r={radius} className="fill-none stroke-white/5" strokeWidth="3" />
+        <circle cx="20" cy="20" r={radius} className="fill-none stroke-white/20" strokeWidth="3" />
         <motion.circle
           cx="20" cy="20" r={radius}
           className={`fill-none ${borderClass}`}
@@ -137,7 +137,7 @@ export default function DirectoryPage() {
     const timer = setTimeout(() => {
       setDisplayedResults(currentData);
       setIsDecoding(false);
-    }, 400); // 400ms "processing" time
+    }, 400);
     
     return () => clearTimeout(timer);
   }, [currentData, activeTab]);
@@ -162,9 +162,9 @@ export default function DirectoryPage() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
           <div className="text-center md:text-left">
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">
-              Neural <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Directory</span>
+              Neural <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500">Directory</span>
             </h1>
-            <p className="text-white/60 max-w-2xl text-lg flex items-center justify-center md:justify-start gap-2">
+            <p className="text-white/80 max-w-2xl text-lg flex items-center justify-center md:justify-start gap-2">
               <Network className="w-5 h-5 text-cyan-400" />
               Accessing global network of verified ecosystem nodes...
             </p>
@@ -176,35 +176,35 @@ export default function DirectoryPage() {
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-black/40 backdrop-blur-xl p-3 rounded-2xl border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
-          <div className="flex gap-2 p-1 bg-white/5 rounded-xl w-full sm:w-auto relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-indigo-500/10 opacity-50" />
+        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-black/60 backdrop-blur-xl p-3 rounded-2xl border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+          <div className="flex gap-2 p-1 bg-white/10 rounded-xl w-full sm:w-auto relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 opacity-50" />
             <button
               onClick={() => handleTabChange("Exhibitor")}
               className={`relative z-10 flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 activeTab === "Exhibitor"
-                  ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 shadow-[0_0_15px_rgba(34,211,238,0.2)]"
-                  : "text-white/60 hover:text-white hover:bg-white/10 border border-transparent"
+                  ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 shadow-[0_0_15px_rgba(34,211,238,0.2)]"
+                  : "text-white/80 hover:text-white hover:bg-white/20 border border-transparent"
               }`}
             >
-              Enterprise Nodes
+              Exhibitor
             </button>
             <button
               onClick={() => handleTabChange("Member")}
               className={`relative z-10 flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 activeTab === "Member"
-                  ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
-                  : "text-white/60 hover:text-white hover:bg-white/10 border border-transparent"
+                  ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
+                  : "text-white/80 hover:text-white hover:bg-white/20 border border-transparent"
               }`}
             >
-              Verified Agents
+              Directory
             </button>
           </div>
 
           <div className="relative w-full sm:w-96 group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-xl opacity-20 group-hover:opacity-40 transition duration-500 blur"></div>
-            <div className="relative flex items-center bg-black rounded-xl border border-white/10">
-              <Terminal className="absolute left-4 w-5 h-5 text-cyan-400/70" />
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-xl opacity-30 group-hover:opacity-60 transition duration-500 blur"></div>
+            <div className="relative flex items-center bg-black/80 rounded-xl border border-white/20">
+              <Terminal className="absolute left-4 w-5 h-5 text-cyan-400" />
               <input
                 type="text"
                 placeholder="Query database..."
@@ -213,10 +213,10 @@ export default function DirectoryPage() {
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full bg-transparent pl-12 pr-4 py-3.5 text-sm text-cyan-50 font-mono placeholder-cyan-500/30 focus:outline-none focus:ring-0 transition-all"
+                className="w-full bg-transparent pl-12 pr-4 py-3.5 text-sm text-white font-mono placeholder-white/50 focus:outline-none focus:ring-0 transition-all"
               />
               <div className="absolute right-4 flex items-center gap-2">
-                 <span className="text-[10px] uppercase text-cyan-500/50 font-bold tracking-widest animate-pulse">
+                 <span className="text-[10px] uppercase text-cyan-500/80 font-bold tracking-widest animate-pulse">
                    {isDecoding ? "Processing" : "Ready"}
                  </span>
               </div>
@@ -236,8 +236,8 @@ export default function DirectoryPage() {
                 className="flex flex-col items-center justify-center h-64 gap-4"
               >
                 <Activity className="w-10 h-10 text-cyan-400 animate-pulse" />
-                <p className="text-cyan-400/60 font-mono text-sm tracking-widest uppercase">Analyzing Neural Pathways...</p>
-                <div className="w-48 h-1 bg-white/5 overflow-hidden rounded-full mt-2">
+                <p className="text-cyan-400 font-bold font-mono text-sm tracking-widest uppercase">Analyzing Neural Pathways...</p>
+                <div className="w-48 h-1 bg-white/20 overflow-hidden rounded-full mt-2">
                   <div className="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 w-1/2 animate-[ping_1.5s_cubic-bezier(0,0,0.2,1)_infinite]" />
                 </div>
               </motion.div>
@@ -245,9 +245,12 @@ export default function DirectoryPage() {
               displayedResults.map((item, index) => {
                 const isExhibitor = activeTab === "Exhibitor";
                 const isExpanded = expandedId === item.id;
+                
+                // Colors matched to core theme (Cyan / Indigo)
                 const primaryColorClass = isExhibitor ? "text-cyan-400" : "text-indigo-400";
-                const primaryBorderClass = isExhibitor ? "stroke-cyan-400" : "stroke-indigo-400";
-                const primaryBgClass = isExhibitor ? "bg-cyan-500/10" : "bg-indigo-500/10";
+                const primaryBorderClass = isExhibitor ? "border-cyan-500/50" : "border-indigo-500/50";
+                const primaryStrokeClass = isExhibitor ? "stroke-cyan-400" : "stroke-indigo-400";
+                const primaryBgClass = isExhibitor ? "bg-cyan-500/20" : "bg-indigo-500/20";
 
                 return (
                   <motion.div
@@ -255,29 +258,29 @@ export default function DirectoryPage() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="relative group rounded-xl overflow-hidden"
+                    className="relative group rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]"
                   >
                     {/* Background & Borders */}
-                    <div className="absolute inset-0 bg-black/40 backdrop-blur-md border border-white/10 rounded-xl" />
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-md border border-white/20 rounded-xl" />
                     
                     {/* Laser Hover Line */}
                     <div className={`absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b ${isExhibitor ? 'from-cyan-400/0 via-cyan-400 to-cyan-400/0' : 'from-indigo-400/0 via-indigo-400 to-indigo-400/0'} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                    <div className={`absolute inset-0 bg-gradient-to-r ${isExhibitor ? 'from-cyan-500/5 to-transparent' : 'from-indigo-500/5 to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`} />
+                    <div className={`absolute inset-0 bg-gradient-to-r ${isExhibitor ? 'from-cyan-500/10 to-transparent' : 'from-indigo-500/10 to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`} />
 
                     {/* Main Row Content */}
                     <div 
-                      className="relative z-10 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 cursor-pointer"
+                      className="relative z-10 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 cursor-pointer hover:bg-white/5 transition-colors"
                       onClick={() => toggleExpand(item.id)}
                     >
                       {/* Left: Score & Identity */}
                       <div className="flex items-center gap-4 w-full sm:w-1/3">
-                        <MatchScoreRing score={item.aiMatchScore} colorClass={primaryColorClass} borderClass={primaryBorderClass} />
+                        <MatchScoreRing score={item.aiMatchScore} colorClass={primaryColorClass} borderClass={primaryStrokeClass} />
                         <div>
                           <h3 className={`font-bold text-white text-lg group-hover:${primaryColorClass} transition-colors flex items-center gap-2`}>
                             {item.name}
                           </h3>
-                          <p className="text-xs text-white/50 font-mono mt-0.5 flex items-center gap-1.5">
-                            <Fingerprint className="w-3 h-3" /> ID: {item.id.toUpperCase()}
+                          <p className="text-xs text-white/80 font-mono mt-0.5 flex items-center gap-1.5">
+                            <Fingerprint className="w-3 h-3 text-white/60" /> ID: {item.id.toUpperCase()}
                           </p>
                         </div>
                       </div>
@@ -285,8 +288,8 @@ export default function DirectoryPage() {
                       {/* Middle: Tech Stack / Details */}
                       <div className="w-full sm:w-1/3 flex flex-wrap gap-2">
                         {item.techStack.map(tech => (
-                          <span key={tech} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-[10px] uppercase font-bold text-white/70 tracking-wider flex items-center gap-1">
-                            <Cpu className="w-3 h-3 opacity-50" /> {tech}
+                          <span key={tech} className="px-2 py-1 bg-white/10 border border-white/20 rounded text-[10px] uppercase font-bold text-white tracking-wider flex items-center gap-1">
+                            <Cpu className="w-3 h-3 text-white/60" /> {tech}
                           </span>
                         ))}
                       </div>
@@ -297,12 +300,12 @@ export default function DirectoryPage() {
                            <p className={`text-sm font-bold ${primaryColorClass}`}>
                              {isExhibitor ? item.category : item.memberType}
                            </p>
-                           <p className="text-xs text-white/50">
+                           <p className="text-xs text-white/80">
                              {isExhibitor ? `Sector / Booth ${item.booth}` : item.role}
                            </p>
                          </div>
-                         <div className={`p-2 rounded-full bg-white/5 border border-white/10 transition-transform ${isExpanded ? 'rotate-180 bg-white/10' : 'group-hover:bg-white/10'}`}>
-                           <ChevronDown className="w-5 h-5 text-white/70" />
+                         <div className={`p-2 rounded-full bg-white/10 border border-white/20 transition-transform ${isExpanded ? 'rotate-180 bg-white/20' : 'group-hover:bg-white/20'}`}>
+                           <ChevronDown className="w-5 h-5 text-white" />
                          </div>
                       </div>
                     </div>
@@ -314,35 +317,35 @@ export default function DirectoryPage() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden relative z-0 border-t border-white/5"
+                          className="overflow-hidden relative z-0 border-t border-white/20 bg-black/40"
                         >
                            {/* Grid Background */}
-                           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px]" />
+                           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:24px_24px]" />
                            
                            <div className="relative z-10 p-6 sm:p-8 flex flex-col md:flex-row gap-8">
                              {/* AI Summary */}
                              <div className="flex-1 space-y-4">
-                               <h4 className="flex items-center gap-2 text-xs font-bold text-white/50 uppercase tracking-widest font-mono">
-                                 <Zap className={`w-4 h-4 ${primaryColorClass}`} /> System Diagnostics
+                               <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest font-mono ${primaryColorClass}`}>
+                                 <Zap className="w-4 h-4" /> System Diagnostics
                                </h4>
-                               <p className="text-sm text-white/80 leading-relaxed bg-black/40 p-4 rounded-xl border border-white/5 font-mono">
+                               <p className="text-sm text-white leading-relaxed bg-black/60 p-4 rounded-xl border border-white/10 font-mono">
                                  &gt; {item.aiSummary}
                                </p>
                              </div>
 
                              {/* Contact & Actions */}
                              <div className="w-full md:w-64 space-y-4">
-                                <h4 className="flex items-center gap-2 text-xs font-bold text-white/50 uppercase tracking-widest font-mono">
-                                 <Network className={`w-4 h-4 ${primaryColorClass}`} /> Establish Link
+                                <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest font-mono ${primaryColorClass}`}>
+                                 <Network className="w-4 h-4" /> Establish Link
                                </h4>
-                               <div className="flex flex-col gap-2">
-                                 <a href={item.website} target="_blank" rel="noreferrer" className={`flex items-center justify-between w-full p-3 rounded-lg ${primaryBgClass} hover:bg-opacity-20 border border-${primaryBorderClass}/30 transition-colors group/btn`}>
+                               <div className="flex flex-col gap-3">
+                                 <a href={item.website} target="_blank" rel="noreferrer" className={`flex items-center justify-between w-full p-3 rounded-lg ${primaryBgClass} hover:bg-opacity-40 border ${primaryBorderClass} transition-colors group/btn`}>
                                    <span className={`text-sm font-bold ${primaryColorClass}`}>Commence Uplink</span>
                                    <ExternalLink className={`w-4 h-4 ${primaryColorClass} group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform`} />
                                  </a>
-                                 <a href={`mailto:${item.email}`} className="flex items-center justify-between w-full p-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-colors group/btn">
-                                   <span className="text-sm font-bold text-white/70">Transmit Protocol</span>
-                                   <Mail className="w-4 h-4 text-white/50 group-hover/btn:text-white transition-colors" />
+                                 <a href={`mailto:${item.email}`} className="flex items-center justify-between w-full p-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 transition-colors group/btn">
+                                   <span className="text-sm font-bold text-white">Transmit Protocol</span>
+                                   <Mail className="w-4 h-4 text-white/80 group-hover/btn:text-white transition-colors" />
                                  </a>
                                </div>
                              </div>
@@ -357,11 +360,11 @@ export default function DirectoryPage() {
               <motion.div 
                 key="empty"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                className="flex flex-col items-center justify-center h-64 bg-black/40 backdrop-blur-md rounded-xl border border-white/10"
+                className="flex flex-col items-center justify-center h-64 bg-black/60 backdrop-blur-md rounded-xl border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)]"
               >
-                <Terminal className="w-12 h-12 text-white/20 mb-4" />
-                <h3 className="text-xl font-bold text-white/60 mb-2 font-mono">0 NODES FOUND</h3>
-                <p className="text-white/40 font-mono text-sm">Adjust search parameters and retry.</p>
+                <Terminal className="w-12 h-12 text-white/40 mb-4" />
+                <h3 className="text-xl font-bold text-white/80 mb-2 font-mono">0 NODES FOUND</h3>
+                <p className="text-white/60 font-mono text-sm">Adjust search parameters and retry.</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -373,7 +376,7 @@ export default function DirectoryPage() {
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="p-2 rounded-lg border border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="p-2 rounded-lg border border-white/20 bg-black/60 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -386,9 +389,9 @@ export default function DirectoryPage() {
                   className={`w-10 h-10 rounded-lg text-sm font-bold transition-all ${
                     currentPage === i + 1
                       ? activeTab === "Exhibitor"
-                        ? "bg-cyan-500 text-black shadow-[0_0_15px_rgba(34,211,238,0.4)]"
-                        : "bg-indigo-500 text-white shadow-[0_0_15px_rgba(99,102,241,0.4)]"
-                      : "bg-transparent text-white/50 hover:bg-white/10 hover:text-white"
+                        ? "bg-cyan-500 text-black shadow-[0_0_15px_rgba(34,211,238,0.6)]"
+                        : "bg-indigo-500 text-white shadow-[0_0_15px_rgba(99,102,241,0.6)]"
+                      : "bg-black/60 text-white/70 border border-white/10 hover:bg-white/20 hover:text-white"
                   }`}
                 >
                   {i + 1}
@@ -399,7 +402,7 @@ export default function DirectoryPage() {
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="p-2 rounded-lg border border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="p-2 rounded-lg border border-white/20 bg-black/60 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
