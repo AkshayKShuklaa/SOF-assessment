@@ -75,6 +75,32 @@ const generateData = () => {
 const allData = generateData();
 const ITEMS_PER_PAGE = 10;
 
+// Reusable SVG Circuit Pattern
+const CircuitPattern = ({ colorClass, idSuffix }) => (
+  <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none mix-blend-plus-lighter" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id={`circuit-pattern-${idSuffix}`} x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
+        <circle cx="20" cy="20" r="2.5" fill="currentColor" />
+        <circle cx="80" cy="40" r="2" fill="currentColor" />
+        <circle cx="40" cy="80" r="3" fill="currentColor" />
+        <circle cx="100" cy="90" r="2" fill="currentColor" />
+        <circle cx="15" cy="70" r="2" fill="currentColor" />
+        <circle cx="60" cy="15" r="1.5" fill="currentColor" />
+        
+        <path d="M 20 20 L 40 40 L 80 40" stroke="currentColor" strokeWidth="0.5" fill="none" />
+        <path d="M 40 40 L 40 80 L 15 70" stroke="currentColor" strokeWidth="0.5" fill="none" />
+        <path d="M 80 40 L 100 60 L 100 90" stroke="currentColor" strokeWidth="0.5" fill="none" />
+        <path d="M 20 20 L 20 15 L 60 15" stroke="currentColor" strokeWidth="0.5" fill="none" />
+        <path d="M 40 80 L 60 100 L 60 120" stroke="currentColor" strokeWidth="0.5" fill="none" />
+        <path d="M 15 70 L 0 55" stroke="currentColor" strokeWidth="0.5" fill="none" />
+        <path d="M 100 90 L 120 90" stroke="currentColor" strokeWidth="0.5" fill="none" />
+        <path d="M 60 15 L 75 0" stroke="currentColor" strokeWidth="0.5" fill="none" />
+      </pattern>
+    </defs>
+    <rect x="0" y="0" width="100%" height="100%" fill={`url(#circuit-pattern-${idSuffix})`} className={colorClass} />
+  </svg>
+);
+
 // Reusable Circular Progress for AI Match
 const MatchScoreRing = ({ score, colorClass, borderClass }) => {
   const radius = 16;
@@ -261,7 +287,9 @@ export default function DirectoryPage() {
                     className="relative group rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]"
                   >
                     {/* Background & Borders */}
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-md border border-white/20 rounded-xl" />
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden">
+                       <CircuitPattern colorClass={primaryColorClass} idSuffix={item.id} />
+                    </div>
                     
                     {/* Laser Hover Line */}
                     <div className={`absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b ${isExhibitor ? 'from-cyan-400/0 via-cyan-400 to-cyan-400/0' : 'from-indigo-400/0 via-indigo-400 to-indigo-400/0'} opacity-0 group-hover:opacity-100 transition-opacity`} />
@@ -276,7 +304,7 @@ export default function DirectoryPage() {
                       <div className="flex items-center gap-4 w-full sm:w-1/3">
                         <MatchScoreRing score={item.aiMatchScore} colorClass={primaryColorClass} borderClass={primaryStrokeClass} />
                         <div>
-                          <h3 className={`font-bold text-white text-lg group-hover:${primaryColorClass} transition-colors flex items-center gap-2`}>
+                          <h3 className="font-bold text-white text-lg transition-colors flex items-center gap-2">
                             {item.name}
                           </h3>
                           <p className="text-xs text-white/80 font-mono mt-0.5 flex items-center gap-1.5">
