@@ -1,6 +1,6 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronLeft, ChevronRight, PlusCircle, ExternalLink, Mail, Terminal, Activity, Cpu, Fingerprint, Zap, Network, ChevronDown } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, PlusCircle, ExternalLink, Mail, Building2, User, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Real companies data mapping
@@ -14,15 +14,6 @@ const industryCompanies = {
   "EdTech": ["Coursera", "Duolingo", "Byju's", "Udemy", "Khan Academy", "MasterClass", "Quizlet"],
 };
 
-const techStacks = [
-  ["Neural Networks", "LLMs", "Python"],
-  ["Quantum Compute", "Rust", "C++"],
-  ["Web3", "Solidity", "React"],
-  ["Biotech", "CRISPR", "Data Science"],
-  ["IoT", "Edge Computing", "5G"],
-  ["Computer Vision", "TensorFlow", "CUDA"]
-];
-
 const categories = Object.keys(industryCompanies);
 
 const generateData = () => {
@@ -32,9 +23,6 @@ const generateData = () => {
   categories.forEach((category) => {
     const companies = industryCompanies[category];
     companies.forEach((companyName, idx) => {
-      const matchScore = Math.floor(Math.random() * (99 - 85 + 1)) + 85;
-      const stack = techStacks[Math.floor(Math.random() * techStacks.length)];
-      
       // Exhibitor
       data.push({
         id: `ex-${idCounter++}`,
@@ -46,9 +34,6 @@ const generateData = () => {
         website: `https://${companyName.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`,
         email: `contact@${companyName.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`,
         phone: `+91 98765 ${10000 + idCounter}`,
-        aiMatchScore: matchScore,
-        techStack: stack,
-        aiSummary: `System scan complete. ${companyName} exhibits a highly optimized trajectory in ${category} utilizing advanced ${stack[0]} paradigms. Strong probability of exponential ecosystem integration.`,
       });
       
       // Member (Startup or Investor)
@@ -62,9 +47,7 @@ const generateData = () => {
         website: `https://${companyName.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`,
         email: `hello@${companyName.toLowerCase().replace(/[^a-z0-9]/g, '')}.com`,
         phone: `+91 99999 ${20000 + idCounter}`,
-        aiMatchScore: matchScore - 2,
-        techStack: stack,
-        aiSummary: `Individual profile mapped. Key driver at ${companyName}. Expertise detected in leveraging ${stack[1]} to scale ${category} operations. High synergy with current user matrices.`,
+        description: `Key driver at ${companyName}. Leading efforts to scale ${category} operations.`,
       });
     });
   });
@@ -75,69 +58,11 @@ const generateData = () => {
 const allData = generateData();
 const ITEMS_PER_PAGE = 10;
 
-// Reusable SVG Circuit Pattern
-const CircuitPattern = ({ colorClass, idSuffix }) => (
-  <svg className="absolute inset-0 w-full h-full opacity-30 pointer-events-none mix-blend-plus-lighter" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id={`circuit-pattern-${idSuffix}`} x="0" y="0" width="120" height="120" patternUnits="userSpaceOnUse">
-        <circle cx="20" cy="20" r="2.5" fill="currentColor" />
-        <circle cx="80" cy="40" r="2" fill="currentColor" />
-        <circle cx="40" cy="80" r="3" fill="currentColor" />
-        <circle cx="100" cy="90" r="2" fill="currentColor" />
-        <circle cx="15" cy="70" r="2" fill="currentColor" />
-        <circle cx="60" cy="15" r="1.5" fill="currentColor" />
-        
-        <path d="M 20 20 L 40 40 L 80 40" stroke="currentColor" strokeWidth="0.5" fill="none" />
-        <path d="M 40 40 L 40 80 L 15 70" stroke="currentColor" strokeWidth="0.5" fill="none" />
-        <path d="M 80 40 L 100 60 L 100 90" stroke="currentColor" strokeWidth="0.5" fill="none" />
-        <path d="M 20 20 L 20 15 L 60 15" stroke="currentColor" strokeWidth="0.5" fill="none" />
-        <path d="M 40 80 L 60 100 L 60 120" stroke="currentColor" strokeWidth="0.5" fill="none" />
-        <path d="M 15 70 L 0 55" stroke="currentColor" strokeWidth="0.5" fill="none" />
-        <path d="M 100 90 L 120 90" stroke="currentColor" strokeWidth="0.5" fill="none" />
-        <path d="M 60 15 L 75 0" stroke="currentColor" strokeWidth="0.5" fill="none" />
-      </pattern>
-    </defs>
-    <rect x="0" y="0" width="100%" height="100%" fill={`url(#circuit-pattern-${idSuffix})`} className={colorClass} />
-  </svg>
-);
-
-// Reusable Circular Progress for AI Match
-const MatchScoreRing = ({ score, colorClass, borderClass }) => {
-  const radius = 16;
-  const circumference = 2 * Math.PI * radius;
-  const strokeDashoffset = circumference - (score / 100) * circumference;
-
-  return (
-    <div className="relative flex items-center justify-center w-12 h-12">
-      <svg className="w-full h-full transform -rotate-90" viewBox="0 0 40 40">
-        <circle cx="20" cy="20" r={radius} className="fill-none stroke-white/20" strokeWidth="3" />
-        <motion.circle
-          cx="20" cy="20" r={radius}
-          className={`fill-none ${borderClass}`}
-          strokeWidth="3"
-          strokeLinecap="round"
-          initial={{ strokeDashoffset: circumference }}
-          animate={{ strokeDashoffset }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          style={{ strokeDasharray: circumference }}
-        />
-      </svg>
-      <div className="absolute flex flex-col items-center justify-center">
-        <span className={`text-[10px] font-bold ${colorClass}`}>{score}%</span>
-      </div>
-    </div>
-  );
-};
-
 export default function DirectoryPage() {
   const [activeTab, setActiveTab] = useState("Exhibitor");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [expandedId, setExpandedId] = useState(null);
-  
-  // Cybernetic Search State
-  const [isDecoding, setIsDecoding] = useState(false);
-  const [displayedResults, setDisplayedResults] = useState([]);
 
   const filteredData = useMemo(() => {
     let filtered = allData.filter((item) => item.type === activeTab);
@@ -156,22 +81,11 @@ export default function DirectoryPage() {
     return filteredData.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
   }, [filteredData, currentPage]);
 
-  // Decoding effect
-  useEffect(() => {
-    setIsDecoding(true);
-    setExpandedId(null);
-    const timer = setTimeout(() => {
-      setDisplayedResults(currentData);
-      setIsDecoding(false);
-    }, 400);
-    
-    return () => clearTimeout(timer);
-  }, [currentData, activeTab]);
-
   const handleTabChange = (tab) => {
     setActiveTab(tab);
     setCurrentPage(1);
     setSearchQuery("");
+    setExpandedId(null);
   };
 
   const toggleExpand = (id) => {
@@ -188,157 +102,119 @@ export default function DirectoryPage() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
           <div className="text-center md:text-left">
             <h1 className="font-heading text-4xl sm:text-5xl font-bold text-white mb-4">
-              Neural <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500">Directory</span>
+              Directory
             </h1>
-            <p className="text-white/80 max-w-2xl text-lg flex items-center justify-center md:justify-start gap-2">
-              <Network className="w-5 h-5 text-cyan-400" />
-              Accessing global network of verified ecosystem nodes...
+            <p className="text-white/80 max-w-2xl text-lg">
+              Browse our verified ecosystem of companies and members.
             </p>
           </div>
-          <Link to="/register" className="btn-primary whitespace-nowrap shadow-[0_0_20px_rgba(34,211,238,0.2)] hover:shadow-[0_0_30px_rgba(34,211,238,0.4)] flex items-center gap-2">
+          <Link to="/register" className="btn-primary whitespace-nowrap flex items-center gap-2">
             <PlusCircle className="w-5 h-5" />
-            Initialize Node
+            Add Entry
           </Link>
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-black/60 backdrop-blur-xl p-3 rounded-2xl border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
-          <div className="flex gap-2 p-1 bg-white/10 rounded-xl w-full sm:w-auto relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 opacity-50" />
+        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center bg-white/10 backdrop-blur-lg p-3 rounded-2xl border border-white/20 shadow-lg">
+          <div className="flex gap-2 p-1 bg-white/10 rounded-xl w-full sm:w-auto">
             <button
               onClick={() => handleTabChange("Exhibitor")}
-              className={`relative z-10 flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+              className={`flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 activeTab === "Exhibitor"
-                  ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/50 shadow-[0_0_15px_rgba(34,211,238,0.2)]"
-                  : "text-white/80 hover:text-white hover:bg-white/20 border border-transparent"
+                  ? "bg-white/20 text-white"
+                  : "text-white/60 hover:text-white hover:bg-white/10"
               }`}
             >
               Exhibitor
             </button>
             <button
               onClick={() => handleTabChange("Member")}
-              className={`relative z-10 flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
+              className={`flex-1 sm:flex-none px-6 py-2.5 rounded-lg text-sm font-bold transition-all ${
                 activeTab === "Member"
-                  ? "bg-indigo-500/20 text-indigo-400 border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
-                  : "text-white/80 hover:text-white hover:bg-white/20 border border-transparent"
+                  ? "bg-white/20 text-white"
+                  : "text-white/60 hover:text-white hover:bg-white/10"
               }`}
             >
               Directory
             </button>
           </div>
 
-          <div className="relative w-full sm:w-96 group">
-            <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-indigo-500 rounded-xl opacity-30 group-hover:opacity-60 transition duration-500 blur"></div>
-            <div className="relative flex items-center bg-black/80 rounded-xl border border-white/20">
-              <Terminal className="absolute left-4 w-5 h-5 text-cyan-400" />
+          <div className="relative w-full sm:w-96">
+            <div className="relative flex items-center bg-black/40 rounded-xl border border-white/10">
+              <Search className="absolute left-4 w-5 h-5 text-white/50" />
               <input
                 type="text"
-                placeholder="Query database..."
+                placeholder="Search by name or category..."
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full bg-transparent pl-12 pr-4 py-3.5 text-sm text-white font-mono placeholder-white/50 focus:outline-none focus:ring-0 transition-all"
+                className="w-full bg-transparent pl-12 pr-4 py-3.5 text-sm text-white placeholder-white/40 focus:outline-none focus:ring-0 transition-all"
               />
-              <div className="absolute right-4 flex items-center gap-2">
-                 <span className="text-[10px] uppercase text-cyan-500/80 font-bold tracking-widest animate-pulse">
-                   {isDecoding ? "Processing" : "Ready"}
-                 </span>
-              </div>
             </div>
           </div>
         </div>
 
-        {/* Data Nodes List */}
+        {/* Data List */}
         <div className="mt-4 flex flex-col gap-4 min-h-[600px]">
           <AnimatePresence mode="wait">
-            {isDecoding ? (
-              <motion.div
-                key="loader"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="flex flex-col items-center justify-center h-64 gap-4"
-              >
-                <Activity className="w-10 h-10 text-cyan-400 animate-pulse" />
-                <p className="text-cyan-400 font-bold font-mono text-sm tracking-widest uppercase">Analyzing Neural Pathways...</p>
-                <div className="w-48 h-1 bg-white/20 overflow-hidden rounded-full mt-2">
-                  <div className="h-full bg-gradient-to-r from-cyan-400 to-indigo-500 w-1/2 animate-[ping_1.5s_cubic-bezier(0,0,0.2,1)_infinite]" />
-                </div>
-              </motion.div>
-            ) : displayedResults.length > 0 ? (
-              displayedResults.map((item, index) => {
+            {currentData.length > 0 ? (
+              currentData.map((item, index) => {
                 const isExhibitor = activeTab === "Exhibitor";
                 const isExpanded = expandedId === item.id;
-                
-                // Colors matched to core theme (Cyan / Indigo)
-                const primaryColorClass = isExhibitor ? "text-cyan-400" : "text-indigo-400";
-                const primaryBorderClass = isExhibitor ? "border-cyan-500/50" : "border-indigo-500/50";
-                const primaryStrokeClass = isExhibitor ? "stroke-cyan-400" : "stroke-indigo-400";
-                const primaryBgClass = isExhibitor ? "bg-cyan-500/20" : "bg-indigo-500/20";
 
                 return (
                   <motion.div
                     key={item.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="relative group rounded-xl overflow-hidden shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+                    className="relative bg-white/10 border border-white/20 rounded-xl overflow-hidden hover:bg-white/20 transition-all shadow-lg backdrop-blur-sm"
                   >
-                    {/* Background & Borders */}
-                    <div className="absolute inset-0 bg-black/60 backdrop-blur-md border border-white/20 rounded-xl overflow-hidden">
-                       <CircuitPattern colorClass={primaryColorClass} idSuffix={item.id} />
-                    </div>
-                    
-                    {/* Laser Hover Line */}
-                    <div className={`absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-b ${isExhibitor ? 'from-cyan-400/0 via-cyan-400 to-cyan-400/0' : 'from-indigo-400/0 via-indigo-400 to-indigo-400/0'} opacity-0 group-hover:opacity-100 transition-opacity`} />
-                    <div className={`absolute inset-0 bg-gradient-to-r ${isExhibitor ? 'from-cyan-500/10 to-transparent' : 'from-indigo-500/10 to-transparent'} opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`} />
-
                     {/* Main Row Content */}
                     <div 
-                      className="relative z-10 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 cursor-pointer hover:bg-white/5 transition-colors"
+                      className="relative z-10 p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 cursor-pointer"
                       onClick={() => toggleExpand(item.id)}
                     >
-                      {/* Left: Score & Identity */}
                       <div className="flex items-center gap-4 w-full sm:w-1/3">
                         <img 
-                          src={`https://api.dicebear.com/7.x/${isExhibitor ? 'shapes' : 'bottts'}/svg?seed=${encodeURIComponent(item.name)}&backgroundColor=0a0a0a`} 
+                          src={`https://logo.clearbit.com/${item.website.replace('https://', '').replace('http://', '').split('/')[0]}`} 
                           alt={item.name} 
-                          className={`w-12 h-12 rounded-lg border ${primaryBorderClass} p-1 ${primaryBgClass} shrink-0`}
+                          className="w-12 h-12 rounded-lg shrink-0 object-contain border border-white/20 bg-white"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.name)}&background=random`;
+                          }}
                         />
-                        <MatchScoreRing score={item.aiMatchScore} colorClass={primaryColorClass} borderClass={primaryStrokeClass} />
                         <div className="min-w-0">
-                          <h3 className="font-bold text-white text-lg transition-colors flex items-center gap-2 truncate">
+                          <h3 className="font-bold text-white text-lg truncate">
                             {item.name}
                           </h3>
-                          <p className="text-xs text-white/80 font-mono mt-0.5 flex items-center gap-1.5 truncate">
-                            <Fingerprint className="w-3 h-3 text-white/60 shrink-0" /> ID: {item.id.toUpperCase()}
+                          <p className="text-sm text-white/60 truncate mt-0.5">
+                            {isExhibitor ? item.category : item.company}
                           </p>
                         </div>
                       </div>
 
-                      {/* Middle: Tech Stack / Details */}
-                      <div className="w-full sm:w-1/3 flex flex-wrap gap-2">
-                        {item.techStack.map(tech => (
-                          <span key={tech} className="px-2 py-1 bg-white/10 border border-white/20 rounded text-[10px] uppercase font-bold text-white tracking-wider flex items-center gap-1">
-                            <Cpu className="w-3 h-3 text-white/60" /> {tech}
-                          </span>
-                        ))}
+                      {/* Middle: Description */}
+                      <div className="hidden sm:block w-full sm:w-1/3 px-4">
+                        <p className="text-sm text-white/70 line-clamp-2">
+                          {item.description}
+                        </p>
                       </div>
 
-                      {/* Right: Category & Expand */}
                       <div className="w-full sm:w-1/3 flex justify-between sm:justify-end items-center gap-6">
-                         <div className="text-right">
-                           <p className={`text-sm font-bold ${primaryColorClass}`}>
-                             {isExhibitor ? item.category : item.memberType}
+                         <div className="text-left sm:text-right">
+                           <p className="text-sm font-medium text-white">
+                             {isExhibitor ? `Booth ${item.booth}` : item.memberType}
                            </p>
-                           <p className="text-xs text-white/80">
-                             {isExhibitor ? `Sector / Booth ${item.booth}` : item.role}
+                           <p className="text-xs text-white/60 mt-0.5">
+                             {isExhibitor ? "Exhibitor" : item.role}
                            </p>
                          </div>
-                         <div className={`p-2 rounded-full bg-white/10 border border-white/20 transition-transform ${isExpanded ? 'rotate-180 bg-white/20' : 'group-hover:bg-white/20'}`}>
-                           <ChevronDown className="w-5 h-5 text-white" />
+                         <div className={`p-2 rounded-full bg-white/5 transition-transform ${isExpanded ? 'rotate-180 bg-white/10' : ''}`}>
+                           <ChevronDown className="w-5 h-5 text-white/70" />
                          </div>
                       </div>
                     </div>
@@ -350,35 +226,26 @@ export default function DirectoryPage() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="overflow-hidden relative z-0 border-t border-white/20 bg-black/40"
+                          className="overflow-hidden border-t border-white/10 bg-black/20"
                         >
-                           {/* Grid Background */}
-                           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff10_1px,transparent_1px),linear-gradient(to_bottom,#ffffff10_1px,transparent_1px)] bg-[size:24px_24px]" />
-                           
-                           <div className="relative z-10 p-6 sm:p-8 flex flex-col md:flex-row gap-8">
-                             {/* AI Summary */}
-                             <div className="flex-1 space-y-4">
-                               <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest font-mono ${primaryColorClass}`}>
-                                 <Zap className="w-4 h-4" /> System Diagnostics
-                               </h4>
-                               <p className="text-sm text-white/80 leading-relaxed p-2 font-mono">
-                                 &gt; {item.aiSummary}
+                           <div className="p-6 flex flex-col md:flex-row gap-8">
+                             {/* Description */}
+                             <div className="flex-1 space-y-3">
+                               <h4 className="text-sm font-semibold text-white/80">About</h4>
+                               <p className="text-sm text-white/70 leading-relaxed">
+                                 {item.description}
                                </p>
                              </div>
 
-                             {/* Contact & Actions */}
-                             <div className="w-full md:w-64 space-y-4">
-                                <h4 className={`flex items-center gap-2 text-xs font-bold uppercase tracking-widest font-mono ${primaryColorClass}`}>
-                                 <Network className="w-4 h-4" /> Establish Link
-                               </h4>
-                               <div className="flex flex-col gap-3">
-                                 <a href={item.website} target="_blank" rel="noreferrer" className={`flex items-center justify-between w-full p-3 rounded-lg ${primaryBgClass} hover:bg-opacity-40 border ${primaryBorderClass} transition-colors group/btn`}>
-                                   <span className={`text-sm font-bold ${primaryColorClass}`}>Commence Uplink</span>
-                                   <ExternalLink className={`w-4 h-4 ${primaryColorClass} group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform`} />
+                             {/* Contact */}
+                             <div className="w-full md:w-64 space-y-3">
+                               <h4 className="text-sm font-semibold text-white/80">Contact Information</h4>
+                               <div className="flex flex-col gap-2">
+                                 <a href={item.website} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+                                   <ExternalLink className="w-4 h-4" /> Website
                                  </a>
-                                 <a href={`mailto:${item.email}`} className="flex items-center justify-between w-full p-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 transition-colors group/btn">
-                                   <span className="text-sm font-bold text-white">Transmit Protocol</span>
-                                   <Mail className="w-4 h-4 text-white/80 group-hover/btn:text-white transition-colors" />
+                                 <a href={`mailto:${item.email}`} className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
+                                   <Mail className="w-4 h-4" /> {item.email}
                                  </a>
                                </div>
                              </div>
@@ -393,23 +260,23 @@ export default function DirectoryPage() {
               <motion.div 
                 key="empty"
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                className="flex flex-col items-center justify-center h-64 bg-black/60 backdrop-blur-md rounded-xl border border-white/20 shadow-[0_0_30px_rgba(0,0,0,0.8)]"
+                className="flex flex-col items-center justify-center h-64 bg-white/5 rounded-xl border border-white/10"
               >
-                <Terminal className="w-12 h-12 text-white/40 mb-4" />
-                <h3 className="text-xl font-bold text-white/80 mb-2 font-mono">0 NODES FOUND</h3>
-                <p className="text-white/60 font-mono text-sm">Adjust search parameters and retry.</p>
+                <Search className="w-12 h-12 text-white/20 mb-4" />
+                <h3 className="text-lg font-bold text-white/80 mb-1">No results found</h3>
+                <p className="text-white/50 text-sm">Try adjusting your search query.</p>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
 
         {/* Pagination */}
-        {totalPages > 1 && !isDecoding && (
+        {totalPages > 1 && (
           <div className="flex items-center justify-center gap-2 mt-8">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={currentPage === 1}
-              className="p-2 rounded-lg border border-white/20 bg-black/60 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="p-2 rounded-lg border border-white/10 bg-white/5 text-white hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -419,12 +286,10 @@ export default function DirectoryPage() {
                 <button
                   key={i}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-10 h-10 rounded-lg text-sm font-bold transition-all ${
+                  className={`w-10 h-10 rounded-lg text-sm font-medium transition-all ${
                     currentPage === i + 1
-                      ? activeTab === "Exhibitor"
-                        ? "bg-cyan-500 text-black shadow-[0_0_15px_rgba(34,211,238,0.6)]"
-                        : "bg-indigo-500 text-white shadow-[0_0_15px_rgba(99,102,241,0.6)]"
-                      : "bg-black/60 text-white/70 border border-white/10 hover:bg-white/20 hover:text-white"
+                      ? "bg-white/20 text-white"
+                      : "text-white/60 hover:bg-white/10 hover:text-white"
                   }`}
                 >
                   {i + 1}
@@ -435,7 +300,7 @@ export default function DirectoryPage() {
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={currentPage === totalPages}
-              className="p-2 rounded-lg border border-white/20 bg-black/60 text-white hover:bg-white/20 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="p-2 rounded-lg border border-white/10 bg-white/5 text-white hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
