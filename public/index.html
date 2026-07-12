@@ -35,12 +35,24 @@
             margin: 0 auto 1.5rem auto;
         }
 
+        @keyframes warningPulse {
+            0% { color: #dc2626; opacity: 1; transform: scale(1); }
+            50% { color: #ef4444; opacity: 0.8; transform: scale(1.02); }
+            100% { color: #dc2626; opacity: 1; transform: scale(1); }
+        }
+
         p.message {
             font-size: 1.125rem;
-            color: #374151;
+            color: #dc2626;
             line-height: 1.6;
             margin: 0;
             text-align: justify;
+            font-weight: bold;
+            animation: warningPulse 1.5s infinite ease-in-out;
+            border: 2px dashed #ef4444;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: #fef2f2;
         }
     </style>
 </head>
